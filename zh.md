@@ -55,23 +55,34 @@ We need a way for the payee to know that the previous owners did not sign any ea
 
 ## 3. 时间戳服务器 (Timestamp Server)
 
+
 The solution we propose begins with a timestamp server. A timestamp server works by taking a hash of a block of items to be timestamped and widely publishing the hash, such as in a newspaper or Usenet post[^2] [^3] [^4] [^5]. The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash. Each timestamp includes the previous timestamp in its hash, forming a chain, with each additional timestamp reinforcing the ones before it.
 
-我们的解决方案从时间戳服务器开始。时间戳服务器对一组待时间戳的数据进行哈希运算，然后广泛发布这个哈希值，比如在报纸或Usenet帖子上[^2] [^3] [^4] [^5]。时间戳证明数据在那个时间必须存在，否则无法生成哈希。每个时间戳在其哈希中包含前一个时间戳，形成链条，每个新时间戳都加强了前面的时间戳。
+
+我们的解决方案从一种“时间戳服务器”开始。它的做法是：为一组（block）记录（items）的哈希打上时间戳，然后把哈希广播出去，就像登在报纸上或发到新闻组（Usenet）的帖子上[^2] [^3] [^4] [^5]。显然，时间戳能证明这些数据在那个时间点之前就存在，否则也无法生成哈希。每个时间戳在其哈希中都包含之前的时间戳，因此形成了一条链；而每个新增的时间戳不断加固之前的记录。
+
 
 ![](images/timestamp-server.svg)
 
+
 ## 4. 工作证明 (Proof-of-Work)
+
 
 To implement a distributed timestamp server on a peer-to-peer basis, we will need to use a proof-of-work system similar to Adam Back's Hashcash[^6], rather than newspaper or Usenet posts. The proof-of-work involves scanning for a value that when hashed, such as with SHA-256, the hash begins with a number of zero bits. The average work required is exponential in the number of zero bits required and can be verified by executing a single hash.
 
-要实现点对点的分布式时间戳服务器，我们需要使用类似亚当·伯克哈希现金[^6]的工作证明系统，而不是报纸或Usenet帖子。工作证明是寻找一个值，当用SHA-256等算法哈希时，哈希值以一定数量的零开头。所需的平均工作量随零的数量指数级增长，但验证只需执行一次哈希运算。
+
+为了实现一个基于点对点的分布式时间戳服务器，我们需要使用类似 Adam Back 提出的哈希现金[^6]的工作证明系统，而不是报纸或新闻组帖子那样。所谓的工作证明，就是搜索一个数，使得被哈希时，让得到的值（比如用 SHA-256 计算）以一定数量的零开头。随着所需零的数量的增加，所需的平均工作量会呈指数级增长，并且，这个工作量的验证只需通过算一次哈希。
+
 
 For our timestamp network, we implement the proof-of-work by incrementing a nonce in the block until a value is found that gives the block's hash the required zero bits. Once the CPU effort has been expended to make it satisfy the proof-of-work, the block cannot be changed without redoing the work. As later blocks are chained after it, the work to change the block would include redoing all the blocks after it.
 
-在我们的时间戳网络中，工作证明通过不断增加区块中的随机数来实现，直到找到使区块哈希满足所需零开头的值。一旦CPU算力满足了工作证明，区块就不能更改，除非重做工作。随着后续区块链接，修改区块需要重做它之后的所有区块。
+
+在我们的时间戳网络中，我们是这样实现工作证明的：在区块中不断增加一个随机数（Nonce），直至找到使这个区块的哈希值以特定数量的 0 开头的数值。一旦所投入的 CPU 算力，使其满足了工作量证明，那么这个区块就无法再被改动，除非重做所有计算。
+随着后续区块一层层被链接上，想改动这个区块，就得重做它之后所有区块的工作。
+
 
 ![](images/proof-of-work.svg)
+
 
 The proof-of-work also solves the problem of determining representation in majority decision making. If the majority were based on one-IP-address-one-vote, it could be subverted by anyone able to allocate many IPs. Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes. We will show later that the probability of a slower attacker catching up diminishes exponentially as subsequent blocks are added.
 
