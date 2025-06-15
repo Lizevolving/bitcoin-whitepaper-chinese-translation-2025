@@ -1,10 +1,147 @@
 # proof-of-work
 
-6.13：
+## 6.13：
 1430-1610，1740-1620，1920-2030
 
-6.14：
+Abstract  概要
+1. 简介 (Introduction)
+2. 交易 (Transactions)
+
+## 6.14：
 1010-1200，1440-1545
+
+3. 时间戳服务器 (Timestamp Server)
+4. 工作证明 (Proof-of-Work)
+
+
+## 6.15：
+1045-1155，1435-1545
+
+
+
+
+
+
+
+
+# 6.15，翻译
+
+If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes. We will show later that the probability of a slower attacker catching up diminishes exponentially as subsequent blocks are added.
+
+如果大多数 CPU 算力被诚实的节点所控制，那么诚实链成长最为迅速，其速度会远超其他竞争链。为了更改一个已经产生的区块，攻击者将不得不重新完成那个区块以及所有其后区块的的工作证明，而后还要追上并超过诚实节点的工作。后文展示为什么一个被拖延了的攻击者能够追上的可能性将随着区块的不断增加而指数级降低。
+
+如果大多数 CPU 算力掌握在诚实节点手中，那么诚实链就增长得最快，速度上会远超任何其他竞争链。想要修改历史区块，攻击者必须重新完成该区块以及其后所有区块的全部工作量证明，而后还要追上并超过诚实节点的工作。我们稍后会证明，随着后续区块的增加，一个算力更落后的攻击者能够追上诚实链的概率，会呈指数级下降。
+
+> 说实话，其实这一段我不大确定，是否做到了真的把李笑来的翻译版本做得更加的：直接、简洁、朴素、有效，真的长期有用。因为你仔细一看，他这个版本其实已经相当优秀了。很多修改我都是觉得有点模棱两可，不大确定的但再仔细一看，好像确实就是我这个第二个版本能说的更清晰。
+> 比如说，仔细对比一下，还能是能发现很多小区别，但我觉得就是表述的更OK。比如说，称为历史区块。再比如说，那有一个很明显的断句，说成是我们稍后会证明。
+> 最后一句话，其实我自己是加了更多的东西。原文中其实是没有这样的说明。这个slower，也确实就指的是算力，但原文中并没有说到。以及我甚至想着，能不能用更加直接的方式来说明。比如说“攻击者算力越落后，追上诚实链的概率就越低，且概率呈指数级下降。”
+> 总之至少是我自己更好理解。所以现在我打算跟AI来讨论一下。
+
+
+你的思考非常深刻，这正是在追求“信、达、雅”的更高境界。你指出的几个点，完全正确。
+我们来把这个问题彻底掰开。
+
+
+关于你最后那个更大胆的想法
+> “攻击者算力越落后，追上诚实链的概率就越低，且概率呈指数级下降。”
+
+这个句子，从 **“为读者服务”** 的角度看，是 100 分的。它把原文的陈述句，变成了一个清晰的、描述相关性的因果句，读者一看就懂。
+但它是不是一个“翻译”？这就涉及到翻译的哲学了。它更像一个“意译”或“释义”。它牺牲了一点对原文句式结构的忠实度，换取了极致的清晰度。
+这没有绝对的对错，取决于你的目标。
+
+
+综合一下，打造一个“既忠实又清晰”的终极版本
+
+我们可以尝试在**不根本改变句式结构**的前提下，吸收你所有的洞见，做到极致的清晰。
+
+**打磨后的版本：**
+
+> 只要多数算力由诚实节点掌握，诚实链的增长速度就会最快，并超越任何竞争链。
+>
+> 攻击者若想修改一个历史区块，就必须重做该区块及其之后所有区块的工作量证明，然后追上并反超诚实链的总工作量。
+>
+> 我们稍后会证明：一个算力落后的攻击者，他能追上的概率，会随着新区块的增加而呈指数级下降。
+
+
+
+Nodes always consider the longest chain to be the correct one and will keep working on extending it. 
+
+节点始终认为最长链是正确的，且会不断向其添加新数据。
+节点始终认为最长链是正确的，会继续扩展它。
+节点总是默认最长的链是正确的那个，并在此基础上继续工作。
+
+> 你难道能说，这几个版本哪个是错的吗？我觉得各有优劣。
+> 比如说always，你翻译做始终或者总是，其实都行，只是程度上稍微有些差异。而同时那个one，我觉得你又要把它表现出来。再者就是，他这里的继续工作，工作是什么呢？
+> 工作本来就是添加新数据，那所以说到底用哪个更合适呢？你也不知道。而原文说的又是“扩展它”。最后，我觉得那个额外增加的“在此基础上”是OK的。
+
+New transaction broadcasts do not necessarily need to reach all nodes. As long as they reach many nodes, they will get into a block before long. Block broadcasts are also tolerant of dropped messages. If a node does not receive a block, it will request it when it receives the next block and realizes it missed one.
+
+
+新的交易不见得一定要广播到达所有的节点。只要到达足够多的节点，那么没多久这些交易就会被打包进一个区块。区块广播也容许一些消息被丢弃。如果一个节点并未接收到某个区块，那么这个节点会在它接收到下一个区块的时候意识到自己错失了之前的区块，因此会发出补充那个遗失区块的请求。
+
+新交易的广播不必抵达所有节点，只要能触达足够多的节点，它们迟早会被打包进区块。区块的广播也同样容忍消息丢失。如果一个节点没收到某个区块，它会在收到下一个区块时发现自己漏掉了一环，并主动请求补上这个缺失的区块。
+
+> 在这一段里，你同样可以看到特别多的差异，但无论差异如何，他们都是为了尽可能好的表达好原意。翻译的哲学并不是,完整的把结构表示出来。我觉得还是:得其意，忘其形。
+> 比如说这里。其实第一句的动词是reach，所以说把广播放在主语位置，可能是更合适的。而其实本就这样，也是更好理解的。
+> 然后reach，翻译做触达也OK。漏掉了一环，看似是个大胆的动作，但其实后面跟上的那一句，就恰好补充说明了，这一环是什么，就是那个缺失区块。而同时，加上这个主动的形容词，也没错，虽然说原文里没有。
+
+
+
+“有些节点会先接收到其中一个，而另外一些节点会先接收到另外一个”
+
+> 这一句话特别臃肿，有没有更好的翻译方式呢？可不可以直接浓缩成一句话：各节点率先接收到的新区块不同。 而总体上，有没有更加直接、长期有用的翻译呢？
+> 它这里还行，省掉了很多原意表达的内容，但其实省掉了本身也没什么。然后同时加上了很多东西你看，比如说统一切换，一定是统一的吗？但从利益角度出发，大概率会是统一的。因为只有这有好处，在好处这么明确的情况下，应该很少有人转头干无用功吧？
+
+
+当然可以。这段话的核心逻辑并不复杂，可以高度浓缩、直击本质。
+这是经过打磨后的简洁、长期有效版本：
+
+节点始终认为最长链才是正确的，并持续在其上延展。若有两个新区块同时被广播，不同节点可能先接收到不同的版本。它们会优先在先收到的区块上继续挖矿，同时保留另一分支。一旦某一分支领先，所有节点便统一切换到更长的链。
+
+整段翻译的优化目标是三点：
+1. **还原原意，不遗漏逻辑。**
+2. **语言简练直接，去除口语化和冗词。**
+3. **具备长期通用性，利于理解和复述。**
+
+
+
+
+
+By convention, the first transaction in a block is a special transaction that starts a new coin owned by the creator of the block. This adds an incentive for nodes to support the network, and provides a way to initially distribute coins into circulation, since there is no central authority to issue them. The steady addition of a constant of amount of new coins is analogous to gold miners expending resources to add gold to circulation. In our case, it is CPU time and electricity that is expended.
+
+按照约定，每个区块的第一笔交易是一个特殊的交易，它会生成一枚新的硬币，所属权是这个区块的生成者。这么做，使得节点支持网络有所奖励，也提供了一种将硬币发行到流通之中的方式 —— 在这个系统中，反正也没有一个中心化的权威方去发行那些硬币。如此这般稳定地增加一定数量的新硬币进入流通，就好像是黄金开采者不断耗用他们的资源往流通之中增加黄金一样。在我们的系统中，被耗用的资源是 CPU 工作时间和它们所用的电力。
+
+按照规则，每个区块的第一笔交易是笔特殊交易：它会创造一枚新币，奖励给该区块的创建者。这既激励了节点维护网络，也解决了在没有中心机构的情况下如何发行初始货币的问题。新币以稳定的速率进入流通，就像矿工消耗资源挖出黄金一样。在我们的系统里，被消耗的资源是 CPU 时间和电力。
+
+> 第一小句就让我觉得有点不对劲。肯定是翻译做约定。一旦你用什么规则、规定，其实在中文语境内，我总感觉后面这两个词又会有一种权力集中的感觉。
+> 翻译到后面我更多的感受是什么呢？我觉得很多情况下都仅仅只是表达方式的不同，但所指向的，依然是同一个东西。你比如说在它的版本里，他就很显性的表达出了own这个词。但Gemini给出的翻译，那就直接说是奖励给了。再比如说这个，发行到流通之中，你说有没有必要刻意的显示出来呢？其实发行这个词本身就已经暗含了这层概念，因为你发行本身，就是让它进入到流通之中。而同时Gemini这个翻译里面，后面他已经说了进入流通。
+> 然后到了后面那一段，很明显就是过于臃肿，没必要这么说。当然是为了完整的复现原意。但很明显，我们这个表达式更清爽。稳定，增加一定数量的新硬币那。不就相当于说是，新币以稳定速率进入吗？
+
+
+
+The incentive can also be funded with transaction fees. If the output value of a transaction is less than its input value, the difference is a transaction fee that is added to the incentive value of the block containing the transaction. Once a predetermined number of coins have entered circulation, the incentive can transition entirely to transaction fees and be completely inflation free.
+
+奖励还可以来自交易费用。如果一笔交易的输出值小于它的输入值，那么其中的差额就是交易费；而该交易费就是用来奖励节点把该交易打包进此区块的。一旦既定数量的硬币已经进入流通，那么奖励将全面交由交易手续费来完成，且绝对不会有通货膨胀。
+激励也可能来源于交易费。如果一笔交易的输出总额小于输入总额，其差额就是交易费，这笔费用会一并奖励给打包该交易的区块创建者。当货币发行量达到预设上限后，系统的激励将完全来自交易费，从而实现零通货膨zhang。
+
+
+> 其他的都是些微小差异，后面这一段，值得来说说。他这一句关于交易费的说明，他是个主系表结构,用来解释这个交易费的性质，对吧？就说它是用来干嘛的.当然在原句里，也确实就是因为这个从句本身，就是放在这个交易费身上的。而到了我们这句，这里就更顺畅。而节点，本就是那个区块创建者，所以也没什么好搞分歧的。
+> 后面一句，很明显你就可以看到，它是很强硬的，把整个结构照搬了过来。但我们这里就是按照更加简洁的原则、得其意忘其形的原则。他那个读起来比较生涩的句子，想表达的意思，跟我们这个是一样。
+> 既定数量的硬币进入流通，那不就相当于是，发行量达到预设的上限吗？奖励将全面由手续费来完成，那不就相当于是，奖励完全来自于手续费吗？就，表达的是一个东西，只不过他那表达方式是为了遵循原文的结构。
+
+
+The incentive may help encourage nodes to stay honest. If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments, or using it to generate new coins. He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.
+
+奖励机制也可能会鼓励节点保持诚实。如果一个贪婪的攻击者能够网罗比所有诚实节点都更多的 CPU 算力，他必须做出一个选择：是用这些算力通过把自己花出去的钱偷回来去欺骗别人呢？还是用这些算力去生成新的硬币？他应该能够发现按照规则行事是更划算的，当前规则使得他能够获得比所有其他人加起来都更多的硬币，这显然比暗中摧毁系统并使自己的财富化为虚无更划算。
+
+这种激励机制也能鼓励节点保持诚实。一个掌握了超过半数算力的贪婪攻击者，将面临一个选择：是利用算力偷回自己刚花掉的钱来行骗，还是用它来创造新币？他会发现，遵守规则对他更有利——因为这能让他挖到比所有人加起来都多的新币，这远比破坏系统、让自己财富的根基不保要划算得多。
+
+
+> 一样的道理，他尽量尊重了原作者的一字一句的原文。但我这里，可能就更强调翻译含义，而不是翻译形态。大致一看，表达的都是一个东西。
+> 比如说，比所有诚实节点都更多，那不就是半数以上吗？这是个数学问题。我知道他那里又有一个by，就是说通过什么方式来行骗，然后李笑来那里就非常显性的点出了。
+> 但最后一句，这个地方，我这有点误差。比如说这个“这”，到底指代的是前面的什么呢？是遵守规则这个动作还是指规则本身呢？别人原文中想说的，就是这些规则对他更利好。
+> 然后李笑来的版本里，他把那个undermine，翻译的比较drama。我们这可能就更朴素。
+> 这个validity，你说怎么翻译呢？根基不保，勉强还行。如果生硬翻译的话，那可能叫做，有效性，对吧？就是说，你把系统破坏了，那你在这个系统中的财富的有效性没了，但纯直接翻译成有效性，肯定不行。
 
 
 
