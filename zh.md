@@ -86,11 +86,29 @@ For our timestamp network, we implement the proof-of-work by incrementing a nonc
 
 The proof-of-work also solves the problem of determining representation in majority decision making. If the majority were based on one-IP-address-one-vote, it could be subverted by anyone able to allocate many IPs. Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes. We will show later that the probability of a slower attacker catching up diminishes exponentially as subsequent blocks are added.
 
-工作证明还解决了多数决策中的代表性问题。如果多数基于"一个IP一票"，任何能分配大量IP的人都可以颠覆它。工作证明本质上是"一个CPU一票"。多数决策由最长链代表，因为它投入了最多的工作证明。如果大多数CPU算力由诚实节点控制，诚实链会增长最快，超过任何竞争链。要修改过去的区块，攻击者必须重做该区块及其后所有区块的工作证明，然后追上并超过诚实节点的工作。我们稍后会证明，随着后续区块的增加，较慢攻击者追上的概率会指数级下降。
+
+工作量证明，也解决了集体决策中的“代表权”问题，也就是“如何决定谁能代表大多数来做决定”。如果我们用“一个 IP 地址一票”的方式来决定谁是“大多数”，那么任何能控制大量 IP 的人都能操控结果。而工作量证明，本质是“一个 CPU 一票”。在这里，“大多数”的决定，就体现在那条投入了最多算力、因此也最长的链上。
+
+
+
+
+
+如果大多数 CPU 算力被诚实的节点所控制，那么诚实链成长最为迅速，其速度会远超其他竞争链。为了更改一个已经产生的区块，攻击者将不得不重新完成那个区块以及所有其后区块的的工作证明，而后还要追上并超过诚实节点的工作。后文展示为什么一个被拖延了的攻击者能够追上的可能性将随着区块的不断增加而指数级降低。
+如果大多数CPU算力由诚实节点控制，诚实链会增长最快，超过任何竞争链。要修改过去的区块，攻击者必须重做该区块及其后所有区块的工作证明，然后追上并超过诚实节点的工作。我们稍后会证明，随着后续区块的增加，较慢攻击者追上的概率会指数级下降。
+如果大多数算力在诚实节点手里，诚实链会越拉越长，超过所有竞争链。想要改历史，攻击者得重做所有区块的工作，还要追上诚实节点。后面我们会证明，攻击者越落后，追上的概率就越低。
+
+
+> 只要大部分算力掌握在诚实的人手中，诚实的链就会增长得最快，把其他任何竞争的链都甩在身后。
+攻击者如果想修改历史，就必须重新完成那个区块及之后所有区块的全部工作量证明，并最终在算力上超过所有诚实节点之和。我们稍后会证明，随着新区块不断加入，一个算力落后的攻击者追上诚实链的概率，会呈指数级下降。
+只要大多数算力掌握在诚实节点手里，诚实链就会越长，最终胜出。想要篡改历史区块，攻击者必须重做所有区块的工作量，并追上诚实节点的进度。后面我们会证明，攻击者越慢，追上的概率就会指数级下降。
+
+
 
 To compensate for increasing hardware speed and varying interest in running nodes over time, the proof-of-work difficulty is determined by a moving average targeting an average number of blocks per hour. If they're generated too fast, the difficulty increases.
 
-为了应对硬件速度的提升和节点运行兴趣的变化，工作证明难度由移动平均值决定，目标是每小时平均区块数。如果生成太快，难度就会增加。
+
+为了应对硬件算力的提升，以及随着时间推移可能产生的节点数量的变化，工作证明的难度会根据每小时平均区块数的移动平均值来决定。如果区块生成过快，难度就会提高。
+
 
 ## 5. 网络 (Network)
 
