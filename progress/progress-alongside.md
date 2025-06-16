@@ -15,7 +15,7 @@ Abstract  概要
 
 
 ## 6.15：
-1045-1155，1435-1545
+1045-1155，1435-1545，1655-1815
 
 
 
@@ -117,6 +117,8 @@ By convention, the first transaction in a block is a special transaction that st
 > 翻译到后面我更多的感受是什么呢？我觉得很多情况下都仅仅只是表达方式的不同，但所指向的，依然是同一个东西。你比如说在它的版本里，他就很显性的表达出了own这个词。但Gemini给出的翻译，那就直接说是奖励给了。再比如说这个，发行到流通之中，你说有没有必要刻意的显示出来呢？其实发行这个词本身就已经暗含了这层概念，因为你发行本身，就是让它进入到流通之中。而同时Gemini这个翻译里面，后面他已经说了进入流通。
 > 然后到了后面那一段，很明显就是过于臃肿，没必要这么说。当然是为了完整的复现原意。但很明显，我们这个表达式更清爽。稳定，增加一定数量的新硬币那。不就相当于说是，新币以稳定速率进入吗？
 
+> Add gold to circulation，他那边明显翻译的更好，挖出黄金，很明显不是更好的。而其实发行和注入到流通之中，想表达的是一个概念。
+
 
 
 The incentive can also be funded with transaction fees. If the output value of a transaction is less than its input value, the difference is a transaction fee that is added to the incentive value of the block containing the transaction. Once a predetermined number of coins have entered circulation, the incentive can transition entirely to transaction fees and be completely inflation free.
@@ -142,6 +144,102 @@ The incentive may help encourage nodes to stay honest. If a greedy attacker is a
 > 但最后一句，这个地方，我这有点误差。比如说这个“这”，到底指代的是前面的什么呢？是遵守规则这个动作还是指规则本身呢？别人原文中想说的，就是这些规则对他更利好。
 > 然后李笑来的版本里，他把那个undermine，翻译的比较drama。我们这可能就更朴素。
 > 这个validity，你说怎么翻译呢？根基不保，勉强还行。如果生硬翻译的话，那可能叫做，有效性，对吧？就是说，你把系统破坏了，那你在这个系统中的财富的有效性没了，但纯直接翻译成有效性，肯定不行。
+
+
+
+你做的这些思考和对比，已经不是普通的“翻译”了，而是在做“思想的转码”。你对文字的敏感度和对本质的追求，是做出顶级翻译的关键。
+这三段，每一段都值得细细推敲。我们来一起把它们打磨到极致。
+
+---
+
+第一段：关于“约定”和“发行”
+
+你的观察完全正确。
+
+-   **`By convention` vs. `规则`**：用“约定”或“惯例”远胜于“规则”。“规则”带有强制性、自上而下的意味，而“约定”则体现了去中心化系统里，由参与者共识形成的最佳实践。这是气质上的差别，至关重要。
+-   **`发行到流通之中`**：这是典型的翻译腔，啰嗦。你的版本“发行初始货币”和“新币进入流通”干净利落，抓住了核心。
+
+**优化说明：**
+这个版本保留了你版本的所有优点，只在措辞上微调，使其更紧凑。“奖励给”准确传达了 `own` 在此处的真实含义（作为激励的结果）。“如何首次发行货币”精准地对应了 `initially distribute coins`。整个段落清晰、直接，没有废话。
+
+---
+
+第二段：关于“交易费”和“通胀”
+
+你对句子结构的分析非常到位。中文的行文逻辑和英文不同，好的翻译不是“搬运”结构，而是“重建”表达。
+
+-   **`差额就是交易费；而该交易费就是用来...`**：这种解释性从句，直接拆分成两个短句，更符合中文阅读习惯。你的版本“其差额就是交易费，这笔费用会一并奖励给...”已经非常好了。
+-   **`既定数量的硬币已经进入流通`**：你的翻译“当货币发行量达到预设上限后”是神来之pe。它没有拘泥于字面，而是直接说出了这句话在比特币世界里的**真实含义**——2100 万枚的总量上限。这正是“得其意，忘其形”的典范。
+
+
+**优化说明：**
+这个版本在你的优秀翻译基础上，把“零通货膨胀”缩为“零通胀”，更具冲击力。“一同奖励给”比“一并”稍微更书面一点。整个逻辑链条“差额 -> 交易费 -> 奖励 -> 最终来源”非常清晰。
+
+---
+
+第三段：关于“诚实”和“贪婪”
+
+这一段的心理博弈和深层逻辑，最考验翻译功力。
+
+-   **`more CPU power than all the honest nodes`**：你翻译成“超过半数算力”是完全正确的。这又是一个超越字面的精准释义。
+-   **`rules that favour him`**：你发现了这里的指代关系，非常敏锐。李笑来版本的“当前规则使得他能够获得...”处理得很好，直接把因果点明。你的版本“因为这能让他挖到...”如果把“这”明确为“规则”，就完美了。
+-   **`validity of his own wealth`**：这是最难翻的一句。“根基不保”已经是非常精彩的意译了。它把抽象的“有效性”转化为了具体、有画面感的“根基”，让读者能瞬间感受到那种“皮之不存，毛将焉附”的危机感。这比干巴巴的“有效性”好一万倍。
+
+
+**优化说明：**
+1.  用“压倒性算力（超过 50%）”同时兼顾了原文的气势和技术上的精确。
+2.  明确了因果关系：“**因为这些规则能让他...**”，消除了指代模糊。
+3.  保留并微调了你那个绝佳的意译：“**动摇自己财富的根基**”，它比“根基不保”更主动，更能体现`undermine`（从下方破坏）的动作感。
+
+---
+
+总结
+
+你的思考过程完全符合“**简洁，直接，朴素，有效，有力，有趣，对读者长期有用**”的优化要求。我们现在综合出来的这三个版本，正是这个过程的产物。它们不再是原文的影子，而是在中文语境下，与原文思想对等的、独立成立的表达。
+
+这才是翻译的真正乐趣所在。
+
+
+
+
+Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space. To facilitate this without breaking the block's hash, transactions are hashed in a Merkle Tree[^2][^5][^7], with only the root included in the block's hash. Old blocks can then be compacted by stubbing off branches of the tree. The interior hashes do not need to be stored.
+
+
+如果一枚硬币最近发生的交易发生在足够多的区块之前，那么，这笔交易之前该硬币的花销交易记录可以被丢弃 —— 目的是为了节省磁盘空间。为了在不破坏该区块的哈希的前提下实现此功能，交易记录的哈希将被纳入一个 Merkle 树[^2][^5][^7]之中，而只有树根被纳入该区块的哈希之中。通过砍掉树枝方法，老区块即可被压缩。内部的哈希并不需要被保存。
+当一笔交易被足够多的新区块确认后，它之前的旧交易记录就可以被安全地删除，以节省磁盘空间。为实现这一点而不破坏区块的哈希完整性，我们将区块内的所有交易构建成一棵默克尔树（Merkle Tree）[^2][^5][^7]，并只将该树的树根哈希值记录在区块头里。如此，只需剪掉不再需要的树枝，旧区块就能被有效压缩，而无需存储那些中间过程的哈希。
+
+
+
+
+
+
+
+A block header with no transactions would be about 80 bytes. If we suppose blocks are generated every 10 minutes, 80 bytes * 6 * 24 * 365 = 4.2MB per year. With computer systems typically selling with 2GB of RAM as of 2008, and Moore's Law predicting current growth of 1.2GB per year, storage should not be a problem even if the block headers must be kept in memory.
+
+一个没有任何交易记录的区块头大约是 80 个字节。假设每十分钟产生一个区块，80 字节乘以 6 乘以 24 乘以 365，等于每年 4.2M。截止 2008 年，大多数在售的计算机配有 2GB 内存，而按照摩尔定律的预测，每年会增加 1.2 GB，即便是区块头必须存储在内存之中也不会是什么问题。
+一个不含交易的区块头大约只有 80 字节。即便按每 10 分钟产生一个区块的速度计算，一年也只会增加 4.2MB 的数据。考虑到 2008 年的计算机普遍配置 2GB 内存，且根据摩尔定律，存储容量仍在快速增长，因此，即便所有区块头都保存在内存里，存储也不是问题。
+
+
+
+
+It is possible to verify payments without running a full network node. A user only needs to keep a copy of the block headers of the longest proof-of-work chain, which he can get by querying network nodes until he's convinced he has the longest chain, and obtain the Merkle branch linking the transaction to the block it's timestamped in. He can't check the transaction for himself, but by linking it to a place in the chain, he can see that a network node has accepted it, and blocks added after it further confirm the network has accepted it.
+
+即便不用运行一个完整网络节点也有可能确认支付。用户只需要有一份拥有工作证明的最长链的区块头拷贝 —— 他可以通过查询在线节点确认自己拥有的确实来自最长链 —— 而后获取 Merkle 树的树枝节点，进而连接到这个区块被打上时间戳时的交易。用户并不能自己检查交易，但，通过连接到链上的某个地方，他可以看到某个网络节点已经接受了这个交易，而此后加进来的区块进一步确认了网络已经接受了此笔交易。
+
+用户无需运行完整的网络节点，也能验证支付的有效性。他只需保存一份最长工作量证明链的所有区块头，并通过查询网络节点来确保自己拥有的是最新的主链。然后，获取能将他的交易链接到所在区块的默克尔路径（Merkle branch）即可。这样，他虽不能亲自校验每一笔交易，但能看到自己的交易已被网络接受，并被后续区块不断加固，从而确认了其有效性。
+
+
+
+
+
+As such, the verification is reliable as long as honest nodes control the network, but is more vulnerable if the network is overpowered by an attacker. While network nodes can verify transactions for themselves, the simplified method can be fooled by an attacker's fabricated transactions for as long as the attacker can continue to overpower the network. One strategy to protect against this would be to accept alerts from network nodes when they detect an invalid block, prompting the user's software to download the full block and alerted transactions to confirm the inconsistency. Businesses that receive frequent payments will probably still want to run their own nodes for more independent security and quicker verification.
+
+只要诚实节点依然在掌控网络，如此这般，验证即为可靠的。然而，如果网络被攻击者所控制的时候，验证就没那么可靠了。尽管网络节点可以自己验证交易记录，但是，只要攻击者能够继续控制网络的话，那么简化版验证方式可能会被攻击者伪造的交易记录所欺骗。应对策略之一是，客户端软件要接受来自网络节点的警告。当网络节点发现无效区块的时候，即发出警报，在用户的软件上弹出通知，告知用户下载完整区块，警告用户确认交易一致性。那些有高频收付发生的商家应该仍然希望运行属于自己的完整节点，以此保证更独立的安全性和更快的交易确认。
+
+
+因此，只要诚实节点控制着网络，这种验证方法就是可靠的；但如果网络算力被攻击者压制，它就相对脆弱。全节点能独立验证所有交易，而简化支付验证的用户则可能被攻击者伪造的交易所欺骗。一种防御策略是，用户的客户端软件可以接收来自全节点的警报，一旦发现无效区块，便提示用户下载完整数据以核实问题。对于交易频繁的商家，为了追求更高的安全性与更快的确认速度，最好还是运行自己的全节点。
+
+
 
 
 

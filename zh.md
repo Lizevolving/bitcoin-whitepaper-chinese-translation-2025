@@ -137,19 +137,19 @@ New transaction broadcasts do not necessarily need to reach all nodes. As long a
 By convention, the first transaction in a block is a special transaction that starts a new coin owned by the creator of the block. This adds an incentive for nodes to support the network, and provides a way to initially distribute coins into circulation, since there is no central authority to issue them. The steady addition of a constant of amount of new coins is analogous to gold miners expending resources to add gold to circulation. In our case, it is CPU time and electricity that is expended.
 
 
-按照约定，每个区块的第一笔交易是笔特殊交易：它会生成一枚新币，奖励给该区块的创建者。这么做，既激励了节点来维护网络，也解决了在没有中心机构的情况下如何发行初始货币到流通之中的问题。新币以稳定的速率进入流通，就像金矿工人消耗资源挖出黄金一样。在我们的系统里，被消耗的资源是 CPU 时间和电力。
+按照约定，每个区块的第一笔交易是笔特殊交易：它会生成一枚新币，奖励给该区块的创建者。这么做，既激励了节点来维护网络，也解决了在没有中心机构时如何首次发行货币的问题。这种以稳定速率发行新币的方式，就好比矿工消耗资源将黄金注入流通。在我们的系统里，被消耗的资源是 CPU 时间和电力。
 
 
 The incentive can also be funded with transaction fees. If the output value of a transaction is less than its input value, the difference is a transaction fee that is added to the incentive value of the block containing the transaction. Once a predetermined number of coins have entered circulation, the incentive can transition entirely to transaction fees and be completely inflation free.
 
 
-奖励还可以来自交易费用。如果一笔交易的输出值小于它的输入值，那么其中的差额就是交易费；这笔费用会一并奖励给打包该交易的区块创建者。当硬币发行量达到预设上限后，系统的奖励将完全来自交易费，从而实现零通货膨胀。
+奖励还可以来自交易费。如果一笔交易的输出值小于它的输入值，那么其中的差额就成了交易费；这笔费用会一同奖励给打包该交易的区块创建者。一旦硬币发行总量达到预设的上限，系统的奖励将完全来自交易费，从而实现零通货膨胀。
 
 
 The incentive may help encourage nodes to stay honest. If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments, or using it to generate new coins. He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.
 
 
-这种奖励机制也能鼓励节点保持诚实。如果一个贪婪的攻击者，能够掌握超过半数算力（即，比所有诚实节点的都更多），他将面临一个选择：是利用这些算力偷回自己刚花掉的钱来行骗，还是用它来生成新币？他会发现，按规则行事对他更有利 —— 当前规则能让他获得比所有人加起来都多的新币，这远比破坏系统、让自己财富的根基不保要划算得多。
+这种奖励机制也能鼓励节点保持诚实。如果一个贪婪的攻击者，能够掌握超半数的算力（即，比所有诚实节点的都更多），他将面临一个选择：是利用这些算力偷回自己花掉的钱来行骗，还是用它来生成新币？他会发现，按规则行事对他更有利，因为这些规则能让他获得比其他所有人加起来都多的新币 —— 这远比破坏系统、动摇自己财富的根基要划算得多。
 
 
 ## 7. 回收硬盘空间 (Reclaiming Disk Space)
@@ -157,23 +157,42 @@ The incentive may help encourage nodes to stay honest. If a greedy attacker is a
 
 Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space. To facilitate this without breaking the block's hash, transactions are hashed in a Merkle Tree[^2][^5][^7], with only the root included in the block's hash. Old blocks can then be compacted by stubbing off branches of the tree. The interior hashes do not need to be stored.
 
-如果一枚硬币最近发生的交易发生在足够多的区块之前，那么，这笔交易之前该硬币的花销交易记录可以被丢弃 —— 目的是为了节省磁盘空间。为了在不破坏该区块的哈希的前提下实现此功能，交易记录的哈希将被纳入一个 Merkle 树[^2][^5][^7]之中，而只有树根被纳入该区块的哈希之中。通过砍掉树枝方法，老区块即可被压缩。内部的哈希并不需要被保存。
+
+当一枚币最近发生的一次交易被足够多的新区块确认后，它之前的旧交易记录就可以被安全地删除，以节省磁盘空间。为实现这一点而不破坏区块的哈希完整性，我们将区块内的所有交易构建成一棵默克尔树（Merkle Tree）[^2][^5][^7]，并只将树根的哈希值记录在区块的哈希之中。如此，只需剪掉不再需要的树枝，旧区块即可被压缩，而无需存储那些中间过程的哈希。
+
 
 ![](images/reclaiming-disk-space.svg)
 
-一个空区块头约80字节。假设每10分钟一个区块，80字节×6×24×365=每年4.2MB。2008年大多数电脑有2GB内存，按摩尔定律每年增加1.2GB，即使区块头必须存在内存中也没问题。
+
+A block header with no transactions would be about 80 bytes. If we suppose blocks are generated every 10 minutes, 80 bytes * 6 * 24 * 365 = 4.2MB per year. With computer systems typically selling with 2GB of RAM as of 2008, and Moore's Law predicting current growth of 1.2GB per year, storage should not be a problem even if the block headers must be kept in memory.
+
+
+一个不含交易记录的区块头大约只有 80 字节。即便按每十分钟产生一个区块的速度计算，80 字节乘以 6 乘以 24 乘以 365，一年也只会增加 4.2MB 的数据。截止 2008 年，在售的计算机普遍配有 2GB 的内存，且按照摩尔定律的预测，存储容量仍在快速增长（每年增加 1.2 GB）。因此，即便区块头都必须存储在内存里，也不是问题。
+
 
 ## 8. 简化版支付确认 (Simplified Payment Verification)
 
+
 It is possible to verify payments without running a full network node. A user only needs to keep a copy of the block headers of the longest proof-of-work chain, which he can get by querying network nodes until he's convinced he has the longest chain, and obtain the Merkle branch linking the transaction to the block it's timestamped in. He can't check the transaction for himself, but by linking it to a place in the chain, he can see that a network node has accepted it, and blocks added after it further confirm the network has accepted it.
 
-不运行完整节点也能验证支付。用户只需保存最长工作证明链的区块头副本（通过查询网络节点确认是最长链），然后获取连接交易到区块的Merkle分支。用户虽然不能自己检查交易，但通过连接到链上的位置，可以看到网络节点已接受了这个交易，后续加入的区块进一步确认网络接受了它。
+
+
+即便不用运行完整网络节点也有可能确认支付。用户只需要有一份拥有工作证明的最长链的区块头 —— 他可以通过查询节点确认自己拥有的确实来自最长链 —— 而后获取 Merkle 树的树枝节点，进而连接到这个区块被打上时间戳时的交易。用户并不能自己检查交易，但，通过连接到链上的某个地方，他可以看到某个网络节点已经接受了这个交易，而此后加进来的区块进一步确认了网络已经接受了此笔交易。
+
+用户无需运行一个完整的网络节点，也能验证支付的有效性。他只需保存一份最长工作量证明链的区块头副本，并通过查询在线节点来确保自己拥有的确实来自最长链。然后，获取能将他的交易链接到所在区块（即，为交易打上时间戳）的默克尔路径（Merkle branch）即可。这样，虽然不能亲自校验每一笔交易，但通过连接到链上的某个位置，他能看到自己的交易已被某个网络节点接受，并被后续区块不断加固，从而确认了其有效性（即，网络已接受了此笔交易）。
+
 
 ![](images/simplified-payment-verification.svg)
 
+
 As such, the verification is reliable as long as honest nodes control the network, but is more vulnerable if the network is overpowered by an attacker. While network nodes can verify transactions for themselves, the simplified method can be fooled by an attacker's fabricated transactions for as long as the attacker can continue to overpower the network. One strategy to protect against this would be to accept alerts from network nodes when they detect an invalid block, prompting the user's software to download the full block and alerted transactions to confirm the inconsistency. Businesses that receive frequent payments will probably still want to run their own nodes for more independent security and quicker verification.
 
-只要诚实节点控制网络，这种验证就可靠。但如果网络被攻击者控制，就会变脆弱。虽然网络节点能自己验证交易，但只要攻击者继续控制网络，简化方法就可能被伪造交易欺骗。一个防护策略是接受网络节点的警告：当它们发现无效区块时发出警报，提示用户软件下载完整区块和相关交易来确认不一致性。频繁收款的商家可能仍想运行自己的节点，以获得更独立的安全性和更快的验证。
+
+只要诚实节点网络，如此这般，验证即为可靠的。然而，如果网络被攻击者所控制的时候，验证就没那么可靠了。尽管网络节点可以自己验证交易，那么简化版验证方式可能会被攻击者伪造的交易所欺骗。应对策略之一是，客户端软件要接受来自网络节点的警告。当网络节点发现无效区块的时候，即发出警报，在用户的软件上弹出通知，告知用户下载完整区块，警告用户确认交易一致性。那些有高频收付发生的商家应该仍然希望运行属于自己的完整节点，以此保证更独立的安全性和更快的交易确认。
+
+
+因此，只要诚实节点依然掌控着网络，这种验证方法就是可靠的；但如果网络算力被攻击者压制，它就没那么可靠。尽管网络节点能独立验证所有交易，但是，只要攻击者能继续控制网络，简化支付验证的用户就可能被攻击者伪造的交易记录所欺骗。一种应对策略是，用户的客户端软件可以接收来自全节点的警报，一旦发现无效区块，便提示用户下载完整数据以核实交易的一致性。对于交易频繁的商家，为了追求更高的安全性与更快的验证，最好还是运行自己的全节点。
+
 
 ## 9. 价值的组合与分割 (Combining and Splitting Value)
 
