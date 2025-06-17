@@ -179,7 +179,7 @@ It is possible to verify payments without running a full network node. A user on
 
 即便不用运行完整网络节点也有可能确认支付。用户只需要有一份拥有工作证明的最长链的区块头 —— 他可以通过查询节点确认自己拥有的确实来自最长链 —— 而后获取 Merkle 树的树枝节点，进而连接到这个区块被打上时间戳时的交易。用户并不能自己检查交易，但，通过连接到链上的某个地方，他可以看到某个网络节点已经接受了这个交易，而此后加进来的区块进一步确认了网络已经接受了此笔交易。
 
-用户无需运行一个完整的网络节点，也能验证支付的有效性。他只需保存一份最长工作量证明链的区块头副本，并通过查询在线节点来确保自己拥有的确实来自最长链。然后，获取能将他的交易链接到所在区块（即，为交易打上时间戳）的默克尔路径（Merkle branch）即可。这样，虽然不能亲自校验每一笔交易，但通过连接到链上的某个位置，他能看到自己的交易已被某个网络节点接受，并被后续区块不断加固，从而确认了其有效性（即，网络已接受了此笔交易）。
+用户无需运行一个完整的网络节点，也能验证支付的有效性。他只需保存一份最长工作量证明链的区块头副本，并通过查询在线节点来确保自己拥有的确实来自最长链。然后，获取能将他的交易链接到所在区块（即，为交易打上时间戳）的默克尔路径（Merkle branch）即可。这样，虽然不能亲自校验每一笔交易，但通过连接到链上的某个位置，用户能看到自己的交易已被某个网络节点接受，并被后续区块不断加固，从而确认了其有效性（即，网络已接受了此笔交易）。
 
 
 ![](images/simplified-payment-verification.svg)
@@ -191,52 +191,71 @@ As such, the verification is reliable as long as honest nodes control the networ
 只要诚实节点网络，如此这般，验证即为可靠的。然而，如果网络被攻击者所控制的时候，验证就没那么可靠了。尽管网络节点可以自己验证交易，那么简化版验证方式可能会被攻击者伪造的交易所欺骗。应对策略之一是，客户端软件要接受来自网络节点的警告。当网络节点发现无效区块的时候，即发出警报，在用户的软件上弹出通知，告知用户下载完整区块，警告用户确认交易一致性。那些有高频收付发生的商家应该仍然希望运行属于自己的完整节点，以此保证更独立的安全性和更快的交易确认。
 
 
-因此，只要诚实节点依然掌控着网络，这种验证方法就是可靠的；但如果网络算力被攻击者压制，它就没那么可靠。尽管网络节点能独立验证所有交易，但是，只要攻击者能继续控制网络，简化支付验证的用户就可能被攻击者伪造的交易记录所欺骗。一种应对策略是，用户的客户端软件可以接收来自全节点的警报，一旦发现无效区块，便提示用户下载完整数据以核实交易的一致性。对于交易频繁的商家，为了追求更高的安全性与更快的验证，最好还是运行自己的全节点。
+因此，只要诚实节点依然掌控着网络，这种验证方法就是可靠的；但如果网络算力被攻击者压制，验证就没那么可靠。尽管网络节点能独立验证所有交易，但是，只要攻击者能继续控制网络，简化支付验证的用户就可能被攻击者伪造的交易记录所欺骗。一种应对策略是，用户的客户端软件可以接收来自全节点的警报，一旦发现无效区块，便提示用户下载完整数据以核实交易的一致性。对于交易频繁的商家，为了追求更高的安全性与更快的验证，最好还是运行自己的全节点。
 
 
 ## 9. 价值的组合与分割 (Combining and Splitting Value)
 
+
 Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer. To allow value to be split and combined, transactions contain multiple inputs and outputs. Normally there will be either a single input from a larger previous transaction or multiple inputs combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender.
 
-虽然可以逐个处理硬币，但为每分钱创建单独交易会很笨拙。为了分割和合并价值，交易包含多个输入和输出。通常要么是来自较大之前交易的单个输入，要么是组合较小金额的多个输入；最多两个输出：一个用于支付，一个用于找零（如果需要）。
+
+尽管可以逐个地处理硬币，但为每分钱设置单独的记录，既不现实也效率低下。为了让价值能够自由地拆分与组合，每笔交易都支持包含多个输入和输出。通常，一笔交易的输入要么来自一笔更大的历史交易，要么是几笔较小金额的合并；同时，其输出最多有两个：一笔用于支付（指向收款方），另一笔用于找零（如有），即退还给付款方。
+
 
 ![](images/combining-splitting-value.svg)
 
+
 It should be noted that fan-out, where a transaction depends on several transactions, and those transactions depend on many more, is not a problem here. There is never the need to extract a complete standalone copy of a transaction's history.
 
-值得注意的是，"扇出"（一笔交易依赖多笔交易，这些交易又依赖更多交易）在这里不是问题。永远不需要提取交易历史的完整独立副本。
+
+值得注意的是，“扇出”效应（一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易）在这里不成问题。因为系统在任何时候都无需去追溯一笔交易的完整历史记录。
+
 
 ## 10. 隐私 (Privacy)
 
+
 The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party. The necessity to announce all transactions publicly precludes this method, but privacy can still be maintained by breaking the flow of information in another place: by keeping public keys anonymous. The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone. This is similar to the level of information released by stock exchanges, where the time and size of individual trades, the "tape", is made public, but without telling who the parties were.
 
-传统银行通过限制交易各方和可信第三方的信息访问来保护隐私。公开所有交易的必要性排除了这种方法，但隐私仍可通过在另一处切断信息流来维护：保持公钥匿名。公众可以看到某人向某人转账一定金额，但没有信息将交易链接到任何人。这类似于股票交易所发布的信息水平：交易时间和规模（"tape"）公开，但不说明交易方是谁。
+
+传统的银行模型，通过限制他人获取交易各方和可信第三方的信息来达成一定程度的隐私保护。而我们的系统要求将所有交易公开，因此这种方法被排除。但隐私保障可通过从另一个环节切断信息流来实现：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法将这笔交易与任何人的真实身份关联起来。这种水平的信息发布，类似于证券交易所的做法：交易的时间和数额是公开的，但交易双方的身份是保密的。
+
 
 ![](images/privacy.svg)
 
+
 As an additional firewall, a new key pair should be used for each transaction to keep them from being linked to a common owner. Some linking is still unavoidable with multi-input transactions, which necessarily reveal that their inputs were owned by the same owner. The risk is that if the owner of a key is revealed, linking could reveal other transactions that belonged to the same owner.
 
-作为额外防火墙，每笔交易都应使用新的密钥对，防止它们被链接到同一所有者。多输入交易仍然不可避免地会暴露其输入属于同一所有者。风险是如果某个密钥的所有者被揭露，链接可能会暴露属于同一所有者的其他交易。
+
+还有一道额外的“防火墙”。用户应为每笔交易启用一对新的公私钥，以防它们被溯源到同一个所有者身上。然而，在包含多个输入的交易中，一定程度的关联是不可避免的，因为这些输入必然会被识别出来自同一个所有者。其风险在于：一旦某个公钥的所有者，其身份暴露，那么与之相关的其他交易也可能随之暴露。
+
 
 ## 11. 计算 (Calculations)
 
+
 We consider the scenario of an attacker trying to generate an alternate chain faster than the honest chain. Even if this is accomplished, it does not throw the system open to arbitrary changes, such as creating value out of thin air or taking money that never belonged to the attacker. Nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them. An attacker can only try to change one of his own transactions to take back money he recently spent.
 
-考虑攻击者试图生成比诚实链更快的替代链的场景。即使成功了，也不会让系统开放给任意修改，比如凭空创造价值或获取从未属于攻击者的钱。节点不会接受无效交易作为支付，诚实节点永远不会接受一个包含这些交易的区块。攻击者最多只能修改自己的交易，试图收回最近花出去的钱。
+
+假设一个场景，某个攻击者正在试图生成一条比诚实链增长更快的“替代链”。即便他成功了，也无法对系统肆意篡改，比如凭空创造价值，或获取从未属于他的钱。因为网络中的节点不会把一笔无效交易当作支付，而诚实节点也绝不会认可包含这类交易的区块。攻击者唯一能尝试的，是篡改自己的某笔交易，以收回他最近花掉的钱。
+
 
 The race between the honest chain and an attacker chain can be characterized as a Binomial Random Walk. The success event is the honest chain being extended by one block, increasing its lead by +1, and the failure event is the attacker's chain being extended by one block, reducing the gap by -1.
 
-诚实链和攻击者链之间的竞争可以描述为二项随机游走。成功事件是诚实链延长一个区块，领先优势+1；失败事件是攻击者链延长一个区块，差距-1。
+
+诚实链与攻击者链之间的竞争，可以看作一个“二项式随机漫步”模型。诚实链每成功生成一个新区块，其领先优势就加 1；反之，攻击者链每成功一次，差距就减 1。
+
 
 The probability of an attacker catching up from a given deficit is analogous to a Gambler's Ruin problem. Suppose a gambler with unlimited credit starts at a deficit and plays potentially an infinite number of trials to try to reach breakeven. We can calculate the probability he ever reaches breakeven, or that an attacker ever catches up with the honest chain, as follows[^8]:
 
-攻击者从落后追平的概率类似于赌徒破产问题。假设一个拥有无限信用的赌徒从亏损开始，进行无限次尝试以达到盈亏平衡。我们可以计算他最终能填补亏空的概率，也就是攻击者能够赶上诚实链的概率[^8]，如下：
+
+攻击者从落后状态追平的概率，类似于经典的“赌徒破产问题”。假设，一个拥有无限资本的赌徒，从亏损开始，允许他赌无限次，以达到盈亏平衡。我们能计算出他最终填补亏空的概率，也就是攻击者能够追上诚实链的概率[^8]，如下：
+
 
 $$
 \begin{eqnarray*}
       \large p &=& \text{ 诚实节点找到下一个区块的概率}\\
       \large q &=& \text{ 攻击者找到下一个区块的概率}\\
-      \large q_z &=& \text{ 攻击者落后 $z$ 个区块却依然能够赶上的概率}
+      \large q_z &=& \text{ 攻击者落后 $z$ 个区块、最终依然追上的概率}
 \end{eqnarray*}
 $$
 
@@ -249,27 +268,38 @@ $$
 
 Given our assumption that $p \gt q​$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. With the odds against him, if he doesn't make a lucky lunge forward early on, his chances become vanishingly small as he falls further behind.
 
-基于我们的假设$p > q$，随着攻击者需要追赶的区块数量增加，概率呈指数下降。在胜算不利的情况下，如果他没有在早期幸运冲刺，随着进一步落后，他的机会变得微乎其微。
+
+基于我们 $p > q$ 的假设，攻击者需要追赶的区块越多，其成功概率便呈指数级下降。由于胜算本就不利，如果他不能在初期就幸运地大幅度追近，那么随着差距拉大，他的胜率将变得微乎其微。
+
 
 We now consider how long the recipient of a new transaction needs to wait before being sufficiently certain the sender can't change the transaction. We assume the sender is an attacker who wants to make the recipient believe he paid him for a while, then switch it to pay back to himself after some time has passed. The receiver will be alerted when that happens, but the sender hopes it will be too late.
 
-现在考虑新交易的收款人需要等多久才能充分确定发款人无法更改交易。我们假设发款人是攻击者，想让收款人暂时相信他已付款，然后在一段时间后将钱转回给自己。这种情况发生时收款人会收到警告，但发款人希望为时已晚。
+
+现在，我们来考虑一个问题：一笔新交易的收款人需要等待多久，才能足够确信付款方无法更改这笔交易？我们假设付款方是一个攻击者，他想让收款方在一段时间内相信自己已经付款，随后将这笔钱再转回给自己。当这发生时，虽然收款人最终会收到警报，但攻击者寄希望于到那时为时已晚。
+
 
 The receiver generates a new key pair and gives the public key to the sender shortly before signing. This prevents the sender from preparing a chain of blocks ahead of time by working on it continuously until he is lucky enough to get far enough ahead, then executing the transaction at that moment. Once the transaction is sent, the dishonest sender starts working in secret on a parallel chain containing an alternate version of his transaction.
 
-收款人生成新密钥对，在签名前不久将公钥给发款人。这防止发款人提前准备区块链：持续工作直到幸运地足够领先，然后在那时执行交易。交易发送后，不诚实的发款人开始秘密在包含其交易替代版本的并行链上工作。
+
+收款人应在签署交易前不久，才生成一对新的公私钥并将公钥交给付款方。这能防止一种情形：付款方提前通过连续运算秘密准备一条链，并一直等到自己幸运地足够领先，直到那时才执行交易。一旦交易被发出，这个不诚实的付款方就会立即开始秘密地构建一条平行链，其中包含他那笔交易的替代版本。
+
 
 The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
 
-收款人等到交易被添加到区块中，并且后续链接了$z$个区块。他不知道攻击者的确切进展，但假设诚实区块按每个区块的平均预期时间，攻击者的潜在进展将是泊松分布，期望值为：
+
+收款人需要等到此笔交易被打包进区块，并且后续又链接了 $z$ 个区块之后。他虽然不知道攻击者的确切进度，但可以假设诚实区块按预期的平均时间生成，那么攻击者在此期间的潜在进展，可以用一个期望值如下的泊松分布来描述：
+
 
 $$
 \large \lambda = z \frac qp
 $$
 
+
 To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
 
-要得到攻击者现在仍能追上的概率，我们将他可能取得的每个进展量的泊松密度乘以他从那一点追上的概率：
+
+为了算出攻击者此刻依然能够追上的总概率，我们需要将他在这个时间段内可能追赶上的每个进度（k 个区块）的泊松分布概率密度，乘以他在那个特定进度下最终能够成功的概率，然后将所有可能情况的概率求和：
+
 
 $$
 \large \sum_{k=0}^{\infty} \frac{\lambda^k e^{-\lambda}}{k!} \cdot
@@ -279,18 +309,24 @@ $$
 				\end{Bmatrix}
 $$
 
+
 Rearranging to avoid summing the infinite tail of the distribution...
 
-重新整理以避免对分布的无限尾部求和...
+
+为了便于计算，我们重新整理公式，以避免对分布的无限长尾进行求和：
+
 
 $$
 \large 1 - \sum_{k=0}^{z} \frac{\lambda^k e^{-\lambda}}{k!}
 				\left ( 1-(q/p)^{(z-k)} \right )
 $$
 
+
 Converting to C code...
 
-转换为C代码...
+
+将其转化为 C 语言代码...
+
 
 ```c
 #include <math.h>
@@ -311,9 +347,12 @@ double AttackerSuccessProbability(double q, int z)
 }
 ```
 
+
 Running some results, we can see the probability drop off exponentially with $z$.
 
-运行一些结果，我们可以看到概率随$z$呈指数下降：
+
+运行后得到部分结果，可以看出，随着确认区块数 $z$ 的增加，攻击者成功的概率呈指数级下降：
+
 
 ```
    q=0.1
@@ -343,9 +382,12 @@ Running some results, we can see the probability drop off exponentially with $z$
    z=50   P=0.0000006
 ```
 
+
 Solving for P less than 0.1%...
 
-求解P小于0.1%的情况...
+
+计算要使攻击成功率 P 低于 0.1% 所需的确认数 z：
+
 
 ```
    P < 0.001
@@ -362,11 +404,27 @@ Solving for P less than 0.1%...
 
 ## 12. 结论 (Conclusion)
 
+
 We have proposed a system for electronic transactions without relying on trust. We started with the usual framework of coins made from digital signatures, which provides strong control of ownership, but is incomplete without a way to prevent double-spending. To solve this, we proposed a peer-to-peer network using proof-of-work to record a public history of transactions that quickly becomes computationally impractical for an attacker to change if honest nodes control a majority of CPU power. The network is robust in its unstructured simplicity. Nodes work all at once with little coordination. They do not need to be identified, since messages are not routed to any particular place and only need to be delivered on a best effort basis. Nodes can leave and rejoin the network at will, accepting the proof-of-work chain as proof of what happened while they were gone. They vote with their CPU power, expressing their acceptance of valid blocks by working on extending them and rejecting invalid blocks by refusing to work on them. Any needed rules and incentives can be enforced with this consensus mechanism.
 
-我们提出了一个无需信任的电子交易系统。我们从数字签名硬币的常规框架开始，它提供强大的所有权控制，但没有防止双重支付的方法就不完整。为解决这个问题，我们提出了使用工作证明的点对点网络，记录公开的交易历史，如果诚实节点控制大部分CPU算力，攻击者要改变它在计算上很快变得不现实。网络在其无结构的简单性中是健壮的。节点几乎不需要协调就能同时工作。它们不需要被辨认，因为消息不路由到任何特定地方，只需要尽力传递。节点可以随意离开和重新加入网络，接受工作证明链作为它们离线时发生的事情的证明。它们用CPU算力投票，通过努力扩展有效区块来表达接受，通过拒绝在无效区块上工作来表达拒绝。任何必要的规则和激励都可以通过这种共识机制来执行。
+
+我们提出了一个不必依赖信任的电子交易系统；起点是一个普通的使用数字签名的硬币框架开始，虽然它提供了健壮的所有权控制，却无法避免双重支付。为了解决这个问题，我们提出一个使用工作证明的点对点网络去记录公开的交易历史，只要诚实节点能够控制大多数 CPU 算力，那么攻击者就仅从算力方面就不可能成功篡改系统。这个网络的健壮在于它的无结构的简单。
+
+我们提出了一个无需信任的电子交易系统。我们从常规的使用数字签名的货币框架出发，它能强力保障所有权，但缺少防止“双重支付”的机制。为此，我们提出了一个点对点网络，通过“工作量证明”机制来记录一个公开的交易记录历史。只要诚实节点控制了大部分 CPU 算力，攻击者就几乎不可能在计算上篡改记录。这个网络的强大，正在于其无结构的简洁性。
+
+
+节点们几乎无需协调即可共同工作，也无需身份识别，因为消息的路径并非取决于特定的终点；消息只需尽力广播即可。节点可以自由地离开和重返网络，重新加入时，只需将最长的工作量证明链作为它们离线期间所发生之一切的证明。
+
+
+它们通过它们的算力投票，通过不断为链添加新的有效区块、拒绝无效区块，去表示它们对有效交易的接受与否。任何必要的规则和奖励都可以通过共识机制来
+
+它们用 CPU 算力投票：在有效区块上继续工作即是投赞成票，拒绝在无效区块上工作即是投反对票。任何必要的规则和激励，都可通过这个共识机制来强制实施。
+
+它们用CPU算力投票，通过努力扩展有效区块来表达接受，通过拒绝在无效区块上工作来表达拒绝。必要的规则和激励都可以通过这种共识机制来执行。
+
 
 -----
+
 
 ## 参考文献 (References)
 

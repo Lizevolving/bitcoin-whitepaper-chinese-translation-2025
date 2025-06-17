@@ -17,8 +17,172 @@ Abstract  概要
 ## 6.15：
 1045-1155，1435-1545，1655-1815
 
+5. 网络 (Network)
+6. 奖励 (Incentive)
+7. 回收硬盘空间 (Reclaiming Disk Space)
+8. 简化版支付确认 (Simplified Payment Verification)
 
 
+## 6.16
+1040-1200，1430-1545，1600-1700
+
+9.  价值的组合与分割 (Combining and Splitting Value)
+10. 隐私 (Privacy)
+11. 计算 (Calculations)
+12. 结论 (Conclusion)
+
+
+
+
+## 6.16，翻译
+
+
+Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer. To allow value to be split and combined, transactions contain multiple inputs and outputs. Normally there will be either a single input from a larger previous transaction or multiple inputs combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender.
+
+尽管逐个地处理硬币是可能的，但为每分钱设置一个单独的记录是很笨拙的。为了允许价值的分割与合并，交易记录包含多个输入和输出。一般情况下，要么是一个单独的来自于一个相对大的之前的交易的输入，要么是很多个输入来自于更小金额的组合；与此同时，最多有两个输出：一个是支付（指向收款方），如果必要的话，另外一个是找零（指向发款方）。
+单独处理每一分钱既不现实也效率低下。因此，为了让价值能够自由地组合与拆分，每笔交易都支持包含多个输入和多个输出。通常，一笔交易的输入要么来自一笔更大的历史交易，要么是几笔较小金额的合并；而其输出最多有两个：一笔用于支付，另一笔是找零（如有）退还给付款方。
+
+
+
+It should be noted that fan-out, where a transaction depends on several transactions, and those transactions depend on many more, is not a problem here. There is never the need to extract a complete standalone copy of a transaction's history.
+
+值得注意的是，“扇出”在这里并不是问题 —— 所谓“扇出”，就是指一笔交易依赖于数笔交易，且这些交易又依赖于更多笔交易。从来就没有必要去提取任何一笔交易的完整独立的历史拷贝。
+
+
+需要指出的是，一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易的“扇出”效应，在这里不成问题。因为系统在任何时候都无需去追溯一笔交易的完整历史记录。
+
+
+
+
+The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party. The necessity to announce all transactions publicly precludes this method, but privacy can still be maintained by breaking the flow of information in another place: by keeping public keys anonymous. The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone. This is similar to the level of information released by stock exchanges, where the time and size of individual trades, the "tape", is made public, but without telling who the parties were.
+
+传统的银行模型通过限制他人获取交易者和可信第三方的信息而达成一定程度的隐私保护。出于对将所有交易记录公开的需求否决了这种方法。但是，维持隐私可通过于另一处的切断信息流来实现——公钥匿名。公众可以看到某某向某某转账了一定的金额，但是，没有任何信息指向某个确定的人。这种水平的信息发布有点像股市交易，只有时间和各个交易的金额被公布，但是，没有人知道交易双方都是谁。
+传统银行通过将信息限制在交易方和第三方机构内部来保护隐私。由于我们的系统要求所有交易公开，这种方法不再适用。但隐私依然可以得到保障，诀窍在于从另一个环节切断信息流：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法将这笔交易与任何人的真实身份关联起来。这类似于证券交易所的做法：交易的时间和数额是公开的，但交易双方的身份是保密的。
+
+As an additional firewall, a new key pair should be used for each transaction to keep them from being linked to a common owner. Some linking is still unavoidable with multi-input transactions, which necessarily reveal that their inputs were owned by the same owner. The risk is that if the owner of a key is revealed, linking could reveal other transactions that belonged to the same owner.
+
+还有另外一层防火墙。交易者应该针对每一笔交易启用一对新的公私钥，以便他人无法将这些交易追溯到同一个所有者身上。有些多输入的交易依然难免被追溯，因为那些输入必然会被识别出来自于同一个所有者。危险在于，如果一个公钥的所有者被曝光之后，与之相关的所有其他交易都会被曝光。
+作为一道额外的“防火墙”，用户应为每笔交易使用一对新的密钥，以防它们被关联到同一所有者。然而，在包含多个输入的交易中，一定程度的关联是不可避免的，因为这些输入必然来自同一所有者。其风险在于：一旦某个密钥的所有者身份暴露，那么与该所有者相关的其他交易也可能随之暴露。
+
+
+
+
+
+We consider the scenario of an attacker trying to generate an alternate chain faster than the honest chain. Even if this is accomplished, it does not throw the system open to arbitrary changes, such as creating value out of thin air or taking money that never belonged to the attacker. Nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them. An attacker can only try to change one of his own transactions to take back money he recently spent.
+
+假设一个场景，某个攻击者正在试图生成一个比诚实链更快的替代链。就算他成功了，也不能对系统做任意的修改，即，他不可能凭空制造出价值，也无法获取从未属于他的钱。网络节点不会把一笔无效交易当作支付，而诚实节点也永远不会接受一个包含这种支付的区块。攻击者最多只能修改属于他自己的交易，进而试图取回他已经花出去的钱。
+设想一个攻击者试图生成一条比诚实链增长更快的“替代链”。即便他成功了，也无法对系统肆意篡改，比如凭空创造价值，或盗取不属于他的钱。这是因为网络中的节点不会接受无效交易，诚实节点也绝不会认可包含这类交易的区块。攻击者唯一能尝试的，是篡改自己的某笔交易，以收回他刚刚花掉的钱。
+
+
+
+The race between the honest chain and an attacker chain can be characterized as a Binomial Random Walk. The success event is the honest chain being extended by one block, increasing its lead by +1, and the failure event is the attacker's chain being extended by one block, reducing the gap by -1.
+
+诚实链和攻击者之间的竞争可以用二项式随机漫步来描述。成功事件是诚实链刚刚被添加了一个新的区块，使得它的优势增加了 $1$；而失败事件是攻击者的链刚刚被增加了一个新的区块，使得诚实链的优势减少了 $1$。
+诚实链与攻击者链之间的竞赛，可以看作一个“二项随机游走”模型。诚实链每成功生成一个新区块，其领先优势就加 1；反之，攻击者链每成功一次，差距就减 1。
+
+
+
+The probability of an attacker catching up from a given deficit is analogous to a Gambler's Ruin problem. Suppose a gambler with unlimited credit starts at a deficit and plays potentially an infinite number of trials to try to reach breakeven. We can calculate the probability he ever reaches breakeven, or that an attacker ever catches up with the honest chain, as follows[^8]:
+
+攻击者能够从落后局面追平的概率类似于赌徒破产问题。假设，一个拿着无限筹码的赌徒，从亏空开始，允许他赌无限次，目标是填补上已有的亏空。我们能算出他最终能填补亏空的概率，也就是攻击者能够赶上诚实链的概率[^8]，如下：
+
+攻击者从落后状态追上的概率，类似于经典的“赌徒破产问题”。设想一个拥有无限资本的赌徒，从亏损开始，进行无数次尝试，力图回到收支平衡。我们可以计算出他最终达成目标的概率，也就是攻击者追上诚实链的概率[^8]，如下：
+
+
+
+Given our assumption that $p \gt q​$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. With the odds against him, if he doesn't make a lucky lunge forward early on, his chances become vanishingly small as he falls further behind.
+
+既然我们已经假定 $p > q$, 既然攻击者需要赶超的区块数量越来越多，那么其成功概率就会指数级下降。于赢面不利时，如果攻击者没有在起初就能幸运地向前猛跨一步，那么他的胜率将在他进一步落后的同时消弭殆尽。
+基于我们 $p > q$ 的假设，攻击者需要追赶的区块越多，其成功概率便呈指数级下降。由于胜算本就不利，如果他不能在初期幸运地大幅追近，那么随着差距拉大，他成功的机会将变得微乎其微。
+
+
+We now consider how long the recipient of a new transaction needs to wait before being sufficiently certain the sender can't change the transaction. We assume the sender is an attacker who wants to make the recipient believe he paid him for a while, then switch it to pay back to himself after some time has passed. The receiver will be alerted when that happens, but the sender hopes it will be too late.
+
+现在考虑一下一笔新交易的收款人需要等多久才能充分确定发款人不能更改这笔交易。我们假定发款人是个攻击者，妄图让收款人在一段时间里相信他已经支付对付款项，随后将这笔钱再转回给自己。发生这种情况时，收款人当然会收到警告，但发款人希望那时木已成舟。
+现在，我们来考虑一个问题：一笔新交易的收款人需要等待多久，才能足够确信付款方无法撤销这笔交易？我们假设付款方是一个攻击者，他想让收款方在一段时间内相信自己已经付款，然后在某个时刻将这笔钱转回给自己。虽然收款人最终会收到警报，但攻击者寄希望于到那时为时已晚。
+
+The receiver generates a new key pair and gives the public key to the sender shortly before signing. This prevents the sender from preparing a chain of blocks ahead of time by working on it continuously until he is lucky enough to get far enough ahead, then executing the transaction at that moment. Once the transaction is sent, the dishonest sender starts working in secret on a parallel chain containing an alternate version of his transaction.
+
+收款人生成了一对新的公私钥，而后在签署之前不久将公钥告知发款人。这样可以防止一种情形：发款人提前通过连续运算去准备一条链上的区块，并且只要有足够的运气就会足够领先，直到那时再执行交易。一旦款项已被发出，那个不诚实的发款人开始秘密地在另一条平行链上开工，试图在其中加入一个反向版本的交易。
+为防范这种情况，收款人应在签署交易前不久，才生成一对新密钥并将公钥交给付款方。这能防止付款方提前秘密开挖一条链，并一直等到自己足够领先后才执行交易。一旦交易被发出，这个不诚实的付款方就会立即开始秘密地构建一条平行链，其中包含他那笔交易的替代版本。
+
+
+
+
+The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
+
+收款人等到此笔交易被打包进区块，并已经有 $z$ 个区块随后被加入。他并不知道攻击者的工作进展究竟如何，但是可以假定诚实区块在每个区块生成过程中耗费的平均时间；攻击者的潜在进展符合泊松分布，其期望值为：
+收款人需要等到交易被打包进区块，并且后面又连接了 z 个区块之后。他虽然不知道攻击者的确切进度，但可以假设诚实区块按预期的平均时间生成，那么攻击者在此期间的潜在进展，可以用一个期望值如下的泊松分布来描述：
+
+
+To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
+
+为了算出攻击者依然可以赶上的概率，我们要把攻击者需要追赶的区块数目的帕松分布概率密度，乘以在落后该区块数目下能够追上来的概率：
+为了算出攻击者此刻依然能够追上的总概率，我们需要将他在这个时间段内可能追赶上的每个进度（k 个区块）的泊松分布概率，乘以他在那个特定进度下最终能够成功的概率，然后将所有可能情况的概率求和：
+
+
+
+
+
+To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
+
+为了算出攻击者依然可以赶上的概率，我们要把攻击者需要追赶的区块数目的帕松分布概率密度，乘以在落后该区块数目下能够追上来的概率：
+
+为了算出攻击者此刻依然能够追上的总概率，我们需要将他在这个时间段内可能追赶上的每个进度（k 个区块）的泊松分布概率，乘以他在那个特定进度下最终能够成功的概率，然后将所有可能情况的概率求和：
+
+
+
+
+
+
+
+Rearranging to avoid summing the infinite tail of the distribution...
+
+为了避免对密度分布的无穷级数求和重新整理…
+
+为了便于计算，我们重新整理公式，以避免对分布的无限长尾进行求和：
+
+Converting to C code...
+
+转换为 C 语言程序……
+将其转化为 C 语言代码：
+
+
+Running some results, we can see the probability drop off exponentially with $z$.
+
+获取部分结果，我们可以看到概率随着 $z$ 的增加指数级下降：
+
+运行后得到部分结果，可以看出，随着确认区块数 z 的增加，攻击者成功的概率呈指数级下降：
+
+
+Solving for P less than 0.1%...
+
+若是 P 小于 0.1%……
+
+计算要使攻击成功率 P 低于 0.1% 所需的确认数 z：
+
+
+
+
+
+We have proposed a system for electronic transactions without relying on trust. We started with the usual framework of coins made from digital signatures, which provides strong control of ownership, but is incomplete without a way to prevent double-spending. To solve this, we proposed a peer-to-peer network using proof-of-work to record a public history of transactions that quickly becomes computationally impractical for an attacker to change if honest nodes control a majority of CPU power. The network is robust in its unstructured simplicity. Nodes work all at once with little coordination. They do not need to be identified, since messages are not routed to any particular place and only need to be delivered on a best effort basis. Nodes can leave and rejoin the network at will, accepting the proof-of-work chain as proof of what happened while they were gone. They vote with their CPU power, expressing their acceptance of valid blocks by working on extending them and rejecting invalid blocks by refusing to work on them. Any needed rules and incentives can be enforced with this consensus mechanism.
+
+我们提出了一个不必依赖信任的电子交易系统；起点是一个普通的使用数字签名的硬币框架开始，虽然它提供了健壮的所有权控制，却无法避免双重支付。为了解决这个问题，我们提出一个使用工作证明机制的点对点网络去记录一个公开的交易记录历史，只要诚实节点能够控制大多数 CPU 算力，那么攻击者就仅从算力方面就不可能成功篡改系统。这个网络的健壮在于它的无结构的简单。节点们可以在很少协同的情况下瞬间同时工作。它们甚至不需要被辨认，因为消息的路径并非取决于特定的终点；消息只需要被以最大努力为基本去传播即可。节点来去自由，重新加入时，只需要接受工作证明链，作为它们离线之时所发生之一切的证明。它们通过它们的 CPU 算力投票，通过不断为链添加新的有效区块、拒绝无效区块，去表示它们对有效交易的接受与否。任何必要的规则和奖励都可以通过这个共识机制来强制实施。
+
+我们提出了一个无需信任的电子交易系统。我们从常规的数字签名货币框架出发，它能强力保障所有权，但缺少防止“双重支付”的机制。为此，我们设计了一个点对点网络，通过“工作量证明”来记录公开的交易历史。只要诚实节点控制了大部分算力，攻击者就几乎不可能在计算上篡改记录。这个网络的强大，正在于其无结构的简洁性。节点们无需协调即可共同工作，也无需身份识别，信息只需尽力广播即可。节点可以自由地离开和重返网络，只需将最长的工作量证明链作为离线期间事实的证明。它们用算力投票：在有效区块上继续工作即是投赞成票，拒绝在无效区块上工作即是投反对票。一切必要的规则和激励，都可通过此共识机制来贯彻。
+
+
+> 【通过“工作量证明”机制】，这个，应该是修饰谁？是通过他，这个网络得以建成？还是通过他，这个公开的交易记录得以实现？还是说，这本来就是一条链上的东西？一条船上的？
+>
+> “impractical for an attacker to change”，这里，属于同类型的问题。第一个版本里说的是，篡改系统，第二个版本里说的是，篡改记录。而别人原文确实又没指明。但这个系统本身，就是一坨坨记录，难道不是吗？
+>
+> “work all at once”，注意到李笑来这里，翻译的是，瞬间同时工作，有两层修饰，但版本2里，就只有共同工作。
+>
+> “因为消息不路由到任何特定地方”，这样的直接把route翻译成路由是很蠢的我总觉得直接用这个音译词是很愚蠢的。路由这两个字本来就直接是根据别人的发音强硬的安上名字的。你在这里怎么能直接用呢？
+>
+> “所发生之一切”，第二个版本里面直接就说的是事实，我觉得这远远不够表达出。What happened所表达的意思？你上来这里真的已经做到了极好。你开箱更垃圾的本说的就是所发生的事情。这个版本差在哪儿？第一个就是说的很平庸。没有体现出那种全囊括的感觉。而第二个。他这里有个德，然后后面还有一个得证明这两个的放在一起读起来不顺。
+>
+> “enforced”，第二个版本里是翻译做贯彻，我到又是觉得李笑来翻译的强制实施就是更好的版本。什么贯彻贯彻这种。这个词确实很常见。读书期间被。背课文的时候。读书期间背政治的时候也确实常用对吧？但这个词很抽象模糊。我倒觉得音forth。强制实施。就是更加简洁，朴素。
 
 
 
@@ -204,11 +368,15 @@ The incentive may help encourage nodes to stay honest. If a greedy attacker is a
 
 Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space. To facilitate this without breaking the block's hash, transactions are hashed in a Merkle Tree[^2][^5][^7], with only the root included in the block's hash. Old blocks can then be compacted by stubbing off branches of the tree. The interior hashes do not need to be stored.
 
-
 如果一枚硬币最近发生的交易发生在足够多的区块之前，那么，这笔交易之前该硬币的花销交易记录可以被丢弃 —— 目的是为了节省磁盘空间。为了在不破坏该区块的哈希的前提下实现此功能，交易记录的哈希将被纳入一个 Merkle 树[^2][^5][^7]之中，而只有树根被纳入该区块的哈希之中。通过砍掉树枝方法，老区块即可被压缩。内部的哈希并不需要被保存。
+
 当一笔交易被足够多的新区块确认后，它之前的旧交易记录就可以被安全地删除，以节省磁盘空间。为实现这一点而不破坏区块的哈希完整性，我们将区块内的所有交易构建成一棵默克尔树（Merkle Tree）[^2][^5][^7]，并只将该树的树根哈希值记录在区块头里。如此，只需剪掉不再需要的树枝，旧区块就能被有效压缩，而无需存储那些中间过程的哈希。
 
-
+> 这里的第一句这个先后顺序的说明,当时就难住我了。同时我也觉得非常有意思。你看李笑来的版本，他就直接的是这么强硬的翻译过来了。但实际上我觉得读起来很拗口，而且非常难理解。在原文里，确实也没有刻意的强调，是怎样的先后。而且这顺序本就是相对的。只是表述方式的差异。
+> 而其实Discard，对应过来的话，确实就是丢弃。但安全的删除，肯定也没问题。另外注意到的一个点，就是without，李笑来他那边翻译，他那边理解成了前提，注意到了吗？
+> 又到了最难的地方，像这种hash，名词作动词，本来就不好翻译。当然，我觉得这里的纳入和构建都已经算是很好的了，比较优秀的做到复原。
+> 后面，这里你无论说不说其实都是一样的，比如说，只有树根被纳入，是树根的什么被纳入呢？它的哈希值。被纳入区块头里，那是被纳入区块头里的，是什么呢？其实也还是哈希。
+> 虽然说，后面的这个版本，它里面有很多原文中并没有的修饰，但其实都是可以辅助理解的。比如说这里的“不再需要的”、“有效”，以及“中间过程的”，都是符合语境的。既然那个数值是要砍掉的，那不就说明不再需要了吗？
 
 
 
@@ -219,7 +387,9 @@ A block header with no transactions would be about 80 bytes. If we suppose block
 一个没有任何交易记录的区块头大约是 80 个字节。假设每十分钟产生一个区块，80 字节乘以 6 乘以 24 乘以 365，等于每年 4.2M。截止 2008 年，大多数在售的计算机配有 2GB 内存，而按照摩尔定律的预测，每年会增加 1.2 GB，即便是区块头必须存储在内存之中也不会是什么问题。
 一个不含交易的区块头大约只有 80 字节。即便按每 10 分钟产生一个区块的速度计算，一年也只会增加 4.2MB 的数据。考虑到 2008 年的计算机普遍配置 2GB 内存，且根据摩尔定律，存储容量仍在快速增长，因此，即便所有区块头都保存在内存里，存储也不是问题。
 
-
+> “即便按每十分钟产生一个区块的速度计算，80 字节乘以 6 乘以 24 乘以 365，一年也只会增加 4.2MB 的数据。”这算是综合两者的一个更好的版本吧。不算画蛇添足，但确实多了很多。因为你如果是直接强硬的把那个等式后面说出来，那读者可能没有意识到这意味着什么，但有这一句说明的话，就更能理解。他就理解了，你一年也只会增加这么多数据。他想强调的是，少。
+> “截止、在售”，就我觉得是李笑来翻译的精妙之处，第二个版本就没有把selling表现出来。为什么要说截止呢？我觉得，能更显性地强调时间点，表达“现在是这样，以后不一定”，虽然说别人原文中没有until。
+> 最后一句其实也只是翻译上的差异。你看这里说，区块头必须存储在里面，和，所有区块头都保存在里面。表达的不是一个意思吗？既然必须保存在里面，那不就是，所有的都在里面的吗？
 
 
 It is possible to verify payments without running a full network node. A user only needs to keep a copy of the block headers of the longest proof-of-work chain, which he can get by querying network nodes until he's convinced he has the longest chain, and obtain the Merkle branch linking the transaction to the block it's timestamped in. He can't check the transaction for himself, but by linking it to a place in the chain, he can see that a network node has accepted it, and blocks added after it further confirm the network has accepted it.
@@ -227,6 +397,16 @@ It is possible to verify payments without running a full network node. A user on
 即便不用运行一个完整网络节点也有可能确认支付。用户只需要有一份拥有工作证明的最长链的区块头拷贝 —— 他可以通过查询在线节点确认自己拥有的确实来自最长链 —— 而后获取 Merkle 树的树枝节点，进而连接到这个区块被打上时间戳时的交易。用户并不能自己检查交易，但，通过连接到链上的某个地方，他可以看到某个网络节点已经接受了这个交易，而此后加进来的区块进一步确认了网络已经接受了此笔交易。
 
 用户无需运行完整的网络节点，也能验证支付的有效性。他只需保存一份最长工作量证明链的所有区块头，并通过查询网络节点来确保自己拥有的是最新的主链。然后，获取能将他的交易链接到所在区块的默克尔路径（Merkle branch）即可。这样，他虽不能亲自校验每一笔交易，但能看到自己的交易已被网络接受，并被后续区块不断加固，从而确认了其有效性。
+
+> 第二个版本他动了大手脚，注意到了吗？他把原本用在第二句中的主语提到前面来了。但确实表达的更清爽，因为原本第一季里面是没这个主意的。读者可能不好理解。
+> 注意到李笑来这里，翻译的是在线节点。原文中是network node。但你既然能够通过这个网络节点查询，那么就表示这个节点是在线的嘛，所以说也只是context大小的问题而已。
+> 第二版本里，这个主链也是context的问题，最长链就是主链，这是大家的默认叫法。但你在这里面用这个词，就是不好，因为你得默认用户没有context，而且这白皮书前文，确实在哪里都没提及主链这个词。
+>
+> “然后，获取能将他的交易链接到所在区块（即，为交易打上时间戳）的默克尔路径（Merkle branch）即可。这样，虽然不能亲自校验每一笔交易，但通过连接到链上的某个位置，他能看到自己的交易已被某个网络节点接受，并被后续区块不断加固，从而确认了其有效性（即，网络已接受了此笔交易）。”
+> 后面那一段，这是我自己吸取了两个版本的优劣，最终琢磨出来的版本，我知道可能多了很多另外的解释，但我觉得必要。
+> 说实话，你也得怪中本聪本人，虽然说他已经写得尽量的简洁朴素了。果然还是，直接看英文可能会好一点。
+> 因为你就是知道，这个树枝是用来连接交易记录的。怎么连接呢？那就是在区块中被打上时间戳。
+> 然后，你其实可以注意到最后一句，是有主语转变的。交易被接受是某个网络节点，后面是the network。李笑来这里就很谨慎，他把转变点出来了。有效性，我觉得这个用词很凝练，是得其意、忘其形的。
 
 
 
@@ -238,6 +418,21 @@ As such, the verification is reliable as long as honest nodes control the networ
 
 
 因此，只要诚实节点控制着网络，这种验证方法就是可靠的；但如果网络算力被攻击者压制，它就相对脆弱。全节点能独立验证所有交易，而简化支付验证的用户则可能被攻击者伪造的交易所欺骗。一种防御策略是，用户的客户端软件可以接收来自全节点的警报，一旦发现无效区块，便提示用户下载完整数据以核实问题。对于交易频繁的商家，为了追求更高的安全性与更快的确认速度，最好还是运行自己的全节点。
+
+
+> “overpower”，其实像这种over开头的组合词从来都不好翻译。要点名具体的角度，比如说之前的overpace，就得翻译成速度上超过攻击者。而这里确实很明显，就是算力上超过。
+> 第二个版本中的独立，我觉得这个用词很妙，很好地复现。
+> 你如果直接说，这个简化支付方式的话，看起来有点别扭，但是后第二个翻译，他把这个动作给了一个主语，那就是用户。那读者会更好理解。
+> 后面，是不是全节点的警报呢？虽然说别人原文里，确实是复数形式。理论上来说是的，因为如果谁都可以给你发警报，那不就是全节点吗？
+> 下载区块，下载数据。没什么差别，这些区块不就是数据吗？
+> 
+> 像最后一句，李笑来那的翻译，很明显就太生硬。第二版明显就清爽很多，表达的是一个意思。无论是描述别人交易频繁，还是他的主观，你看它这里翻译的，“应该仍然希望”就很云里雾里。但第二个版本里的句子。虽然说没遵循原文结构，但同样capture作者的原意，就是推荐你单干。
+>
+> “一种应对策略是，用户的客户端软件可以接收来自全节点的警报，一旦发现无效区块，_____ 便提示用户下载完整数据以核实交易的一致性。”
+> 当时到这，我还是有点担忧。谁提示呢？我知道是全节点。但你如果不点出来，还全用逗号连起来，会不会有语法错误？而且你如果把第二个改成句号，然后把这个主语补上，是不是更易读？
+
+
+
 
 
 
