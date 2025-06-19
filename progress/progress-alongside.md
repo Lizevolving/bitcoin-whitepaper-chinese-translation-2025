@@ -34,7 +34,7 @@ Abstract  概要
 
 
 
-## 6.16，翻译
+# 6.16，翻译
 
 
 Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer. To allow value to be split and combined, transactions contain multiple inputs and outputs. Normally there will be either a single input from a larger previous transaction or multiple inputs combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender.
@@ -171,7 +171,12 @@ We have proposed a system for electronic transactions without relying on trust. 
 
 我们提出了一个无需信任的电子交易系统。我们从常规的数字签名货币框架出发，它能强力保障所有权，但缺少防止“双重支付”的机制。为此，我们设计了一个点对点网络，通过“工作量证明”来记录公开的交易历史。只要诚实节点控制了大部分算力，攻击者就几乎不可能在计算上篡改记录。这个网络的强大，正在于其无结构的简洁性。节点们无需协调即可共同工作，也无需身份识别，信息只需尽力广播即可。节点可以自由地离开和重返网络，只需将最长的工作量证明链作为离线期间事实的证明。它们用算力投票：在有效区块上继续工作即是投赞成票，拒绝在无效区块上工作即是投反对票。一切必要的规则和激励，都可通过此共识机制来贯彻。
 
-
+> “无需 VS 不必依赖”，我还记得当时AI点出的这一段，是要翻译做【免信任】，还是【去信任】呢？总之，要强调主动挣脱，而非被动移除。光就这一段而言的话，我还是觉得无需信任的说法会好。
+>
+> “made from”，你又怎么去理解这个made from呢？那就是，强调这个框架是由数字签名而制成的。那如果直接用第二个版本，可能就把这一层意思给省去了。
+>
+> 发现了吗？第二个版本里的很多翻译，都没有按照原结构来。很明显的例子就是，后面一句的strong，是用来修饰Ownership。但在第二个版本里，它却在修饰保障的这个具体动作。而如果后面一句，你直接强硬翻译的话，就会像那第三个版本一样愚蠢：“但没有一种方式来避免双花，它就不完整。”
+> 
 > 【通过“工作量证明”机制】，这个，应该是修饰谁？是通过他，这个网络得以建成？还是通过他，这个公开的交易记录得以实现？还是说，这本来就是一条链上的东西？一条船上的？
 >
 > “impractical for an attacker to change”，这里，属于同类型的问题。第一个版本里说的是，篡改系统，第二个版本里说的是，篡改记录。而别人原文确实又没指明。但这个系统本身，就是一坨坨记录，难道不是吗？
@@ -183,6 +188,9 @@ We have proposed a system for electronic transactions without relying on trust. 
 > “所发生之一切”，第二个版本里面直接就说的是事实，我觉得这远远不够表达出。What happened所表达的意思？你上来这里真的已经做到了极好。你开箱更垃圾的本说的就是所发生的事情。这个版本差在哪儿？第一个就是说的很平庸。没有体现出那种全囊括的感觉。而第二个。他这里有个德，然后后面还有一个得证明这两个的放在一起读起来不顺。
 >
 > “enforced”，第二个版本里是翻译做贯彻，我到又是觉得李笑来翻译的强制实施就是更好的版本。什么贯彻贯彻这种。这个词确实很常见。读书期间被。背课文的时候。读书期间背政治的时候也确实常用对吧？但这个词很抽象模糊。我倒觉得音forth。强制实施。就是更加简洁，朴素。
+
+
+
 
 
 
