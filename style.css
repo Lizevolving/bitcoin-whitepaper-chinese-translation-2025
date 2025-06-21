@@ -508,7 +508,6 @@ figure > table {
 
 #TOC a:hover {
     background: var(--nav-hover-color);
-    border-left-color: #4183C4;
     transform: translateX(2px);
 }
 

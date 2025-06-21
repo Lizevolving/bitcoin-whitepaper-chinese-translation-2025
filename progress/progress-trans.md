@@ -126,3 +126,11 @@
 这个点我们已经悟到很多遍了。你比如说在最开始时，我们的做法是，
 直接把那一整个白皮书一刀两断，让Claude来做两次的翻译，结果你可以看一下他给到的那个翻译，
 那效果真的是**一般。还不如不用。每一次三份进行对比的时候，都是他那里最差。
+
+
+
+
+Pinpointing Translation Issues
+
+I'm now zeroing in on the specific translation challenges. The user's commentary is invaluable, highlighting the nuanced issues in the existing renditions. I'm focusing on discrepancies in accuracy, clarity, and the desired impact. I'll prioritize identifying weak points in the translations and thinking of how to make each point more simple, direct and effective.
+

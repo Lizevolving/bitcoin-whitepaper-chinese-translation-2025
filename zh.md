@@ -281,7 +281,7 @@ We now consider how long the recipient of a new transaction needs to wait before
 The receiver generates a new key pair and gives the public key to the sender shortly before signing. This prevents the sender from preparing a chain of blocks ahead of time by working on it continuously until he is lucky enough to get far enough ahead, then executing the transaction at that moment. Once the transaction is sent, the dishonest sender starts working in secret on a parallel chain containing an alternate version of his transaction.
 
 
-收款人应在签署交易前不久，才生成一对新的公私钥并将公钥交给付款方。这能防止一种情形：付款方提前通过连续运算秘密准备一条链，并一直等到自己幸运地足够领先，直到那时才执行交易。一旦交易被发出，这个不诚实的付款方就会立即开始秘密地构建一条平行链，其中包含他那笔交易的替代版本。
+收款人应在签署交易前不久，才生成一对新的公私钥并将公钥交给付款方。这能防止一种情形：付款方提前通过连续运算秘密准备一条链，并一直等到自己足够幸运地领先，直到那时才执行交易。一旦交易被发出，这个不诚实的付款方就会立即开始秘密地构建一条平行链，其中包含他那笔交易的替代版本。
 
 
 The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
@@ -408,10 +408,7 @@ Solving for P less than 0.1%...
 We have proposed a system for electronic transactions without relying on trust. We started with the usual framework of coins made from digital signatures, which provides strong control of ownership, but is incomplete without a way to prevent double-spending. To solve this, we proposed a peer-to-peer network using proof-of-work to record a public history of transactions that quickly becomes computationally impractical for an attacker to change if honest nodes control a majority of CPU power. The network is robust in its unstructured simplicity. Nodes work all at once with little coordination. They do not need to be identified, since messages are not routed to any particular place and only need to be delivered on a best effort basis. Nodes can leave and rejoin the network at will, accepting the proof-of-work chain as proof of what happened while they were gone. They vote with their CPU power, expressing their acceptance of valid blocks by working on extending them and rejecting invalid blocks by refusing to work on them. Any needed rules and incentives can be enforced with this consensus mechanism.
 
 
-我们提出了一个不必依赖信任的电子交易系统；起点是普通的使用数字签名的硬币框架开始，虽然它提供了健壮的所有权控制，却无法避免双重支付。为了解决这个问题，我们提出一个使用工作证明的点对点网络去记录公开的交易历史，只要诚实节点能够控制大多数 CPU 算力，那么攻击者就仅从算力方面就不可能成功篡改系统。这个网络的健壮在于它的无结构的简单。我们提出了一个无需信任的电子交易系统。我们从一个常规的使用数字签名的货币框架出发，它能强力保障所有权，但缺少防止“双重支付”的机制。为此，我们提出了一个点对点网络，通过“工作量证明”机制来记录一个公开的交易记录历史。只要诚实节点控制了大部分 CPU 算力，攻击者就几乎不可能在计算上篡改记录。这个网络的强大，正在于其无结构的简洁性。它们用 CPU 算力投票：在有效区块上继续工作即是投赞成票，拒绝在无效区块上工作即是投反对票。任何必要的规则和激励，都可通过这个共识机制来强制实施。
-
-****
------
+我们提出了一个无需信任的电子交易系统。我们从一种由数字签名铸造的货币框架出发，它能强力保障所有权，却缺少防止双重支付的机制。为此，我们提出了一个点对点网络，通过“工作量证明”来记录一部公开的交易历史。只要诚实节点控制着多数 CPU 算力，攻击者在计算上就几乎不可能篡改这份记录。这个网络的强大，正在于其无结构的简洁。节点们无需太多协调便可同时工作。他们也无需身份识别，因为消息的路径不取决于特定的终点；消息只需尽力广播即可。节点可自由来去，重返时只需接受最长的工作量证明链，作为其离线期间所发生之一切的证明。它们用算力投票：在有效区块上继续工作，即为赞同；拒绝在无效区块上工作，即为反对。一切必要的规则和激励，都可通过此共识机制得以强制实施。
 
 
 ## 参考文献 (References)
