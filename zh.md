@@ -275,13 +275,13 @@ Given our assumption that $p \gt q​$, the probability drops exponentially as t
 We now consider how long the recipient of a new transaction needs to wait before being sufficiently certain the sender can't change the transaction. We assume the sender is an attacker who wants to make the recipient believe he paid him for a while, then switch it to pay back to himself after some time has passed. The receiver will be alerted when that happens, but the sender hopes it will be too late.
 
 
-现在，我们来考虑一个问题：一笔新交易的收款人需要等待多久，才能足够确信付款方无法更改这笔交易？我们假设付款方是一个攻击者，他想让收款方在一段时间内相信自己已经付款，随后将这笔钱再转回给自己。当这发生时，虽然收款人最终会收到警报，但攻击者寄希望于到那时为时已晚。
+现在，我们来考虑一个问题：一笔新交易的收款人，需要等待多久才能充分确信付款方无法更改这笔交易？我们假设付款方是个攻击者，他想让收款方在一段时间内相信自己已经付款，随后再把这笔钱转回给自己。当这发生时，虽然收款人会收到警报，但攻击者指望那时已为时已晚。
 
 
 The receiver generates a new key pair and gives the public key to the sender shortly before signing. This prevents the sender from preparing a chain of blocks ahead of time by working on it continuously until he is lucky enough to get far enough ahead, then executing the transaction at that moment. Once the transaction is sent, the dishonest sender starts working in secret on a parallel chain containing an alternate version of his transaction.
 
 
-收款人应在签署交易前不久，才生成一对新的公私钥并将公钥交给付款方。这能防止一种情形：付款方提前通过连续运算秘密准备一条链，并一直等到自己足够幸运地领先，直到那时才执行交易。一旦交易被发出，这个不诚实的付款方就会立即开始秘密地构建一条平行链，其中包含他那笔交易的替代版本。
+为防范这种情况，收款人应在签署交易前不久，才生成一对新的公私钥并将公钥交给付款方。这能防止付款方提前构建一条备用链 —— 通过持续运算，并直到凭运气获得足够的领先时，再执行交易。一旦交易发出，这个不诚实的付款方就会立即秘密构建一条平行链，其中包含他那笔交易的替代版本。
 
 
 The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
