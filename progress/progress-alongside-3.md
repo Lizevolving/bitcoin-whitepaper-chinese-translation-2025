@@ -2,12 +2,24 @@
 
 
 
-## 
+## 9.
 
 Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer. To allow value to be split and combined, transactions contain multiple inputs and outputs. Normally there will be either a single input from a larger previous transaction or multiple inputs combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender.
 
 尽管逐个地处理硬币是可能的，但为每分钱设置一个单独的记录是很笨拙的。为了允许价值的分割与合并，交易记录包含多个输入和输出。一般情况下，要么是一个单独的来自于一个相对大的之前的交易的输入，要么是很多个输入来自于更小金额的组合；与此同时，最多有两个输出：一个是支付（指向收款方），如果必要的话，另外一个是找零（指向发款方）。
+
 单独处理每一分钱既不现实也效率低下。因此，为了让价值能够自由地组合与拆分，每笔交易都支持包含多个输入和多个输出。通常，一笔交易的输入要么来自一笔更大的历史交易，要么是几笔较小金额的合并；而其输出最多有两个：一笔用于支付，另一笔是找零（如有）退还给付款方。
+
+
+> 一个版本，很明显的翻译腔，而第二版，直接把条件从句砍了。所以我当时是，各取其优，造出了这个版本，“尽管可以逐个地处理硬币，但为每分钱设置单独的记录，既不现实也效率低下”。我也不知道这个形容词，unwieldy，到底有没有表达这么丰富的意思？
+> Allow value，其实没什么问题的，但如果翻译成中文，还说“允许价值的怎么怎么”，特别别扭。这里的，让，是更好的。
+> 同时，选用组合与拆分，我觉得，是比合并与分割，更加适合价值这个抽象词。
+> 后面一句，第一个版本完全没法读，确实是非常尊重原文结构。
+>  If any，最好处理方式就是，“（如有）”。否则你放到外面来说，更低效。
+> 第一个版本，括号内额外说明，不知道是否需要保留。我这样写，“一笔用于支付（指向收款方），另一笔用于找零（如有），即退还给付款方。”，主要是因为它第二句的如有，这已经有括号了。如果那个“指向付款方”还这么说的话，那就是两个括号，感觉不太行。
+
+
+> “被设计为”，OK的，虽说原文只有contain。
 
 
 
@@ -15,22 +27,68 @@ It should be noted that fan-out, where a transaction depends on several transact
 
 值得注意的是，“扇出”在这里并不是问题 —— 所谓“扇出”，就是指一笔交易依赖于数笔交易，且这些交易又依赖于更多笔交易。从来就没有必要去提取任何一笔交易的完整独立的历史拷贝。
 
-
 需要指出的是，一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易的“扇出”效应，在这里不成问题。因为系统在任何时候都无需去追溯一笔交易的完整历史记录。
 
 
+> “值得注意的是，“扇出”效应（一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易），在这里不成问题……”
+> 当时各取其优，做出这一版本，把解释放在括号里可能更好，第一版就太冗长，第二版就直接丢到形容词位置。我觉得都不够清晰。加符号，可能会让信息密度更舒缓。
+> 上游，这个特定说法，一点问题没有。虽然，原文中没有表达这含义，但这词一定会辅助理解。
+> 最后一句，也很明显看出第一版的翻译腔。
+> 第二个版，加了因果连接，还带上主语。Extract，直接翻译成提取，肯定不行。追溯，很明显是更合语境。总之，对于最后一句，第二版本完胜。
 
+> “从不需要 VS 在任何时候都无需”，后者更好，从不，更侧重之前。“从来都无需”，这个可能更好？
+> “为任何交易”，很明显比“一笔交易的、”更好，转成客体说明，但后者还放在形容词位置挤着。
+> 
+> “追溯”很好，但“提取...副本”更忠实于 `extract a...copy` 的计算机操作语境。
+
+
+
+## 10.
 
 The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party. The necessity to announce all transactions publicly precludes this method, but privacy can still be maintained by breaking the flow of information in another place: by keeping public keys anonymous. The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone. This is similar to the level of information released by stock exchanges, where the time and size of individual trades, the "tape", is made public, but without telling who the parties were.
 
 传统的银行模型通过限制他人获取交易者和可信第三方的信息而达成一定程度的隐私保护。出于对将所有交易记录公开的需求否决了这种方法。但是，维持隐私可通过于另一处的切断信息流来实现——公钥匿名。公众可以看到某某向某某转账了一定的金额，但是，没有任何信息指向某个确定的人。这种水平的信息发布有点像股市交易，只有时间和各个交易的金额被公布，但是，没有人知道交易双方都是谁。
+
 传统银行通过将信息限制在交易方和第三方机构内部来保护隐私。由于我们的系统要求所有交易公开，这种方法不再适用。但隐私依然可以得到保障，诀窍在于从另一个环节切断信息流：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法将这笔交易与任何人的真实身份关联起来。这类似于证券交易所的做法：交易的时间和数额是公开的，但交易双方的身份是保密的。
+
+
+> 皱巴巴挤一坨，看着人烦。所以我总是有一种倾向，能打括号和引号就尽量。比如这里，我给的版本就直接是把主语跟后面的隔开了，“传统的银行模型，……”
+> 第二版少了很多，但确实你如果要说全的话，那就是，“达成一定程度的隐私保护”，这就太冗余。
+> 
+> 总体而言，第一版更好。他说了是“限制谁获取谁的信息”，主体客体，说清楚了，而第二版很别扭。他说，“把信息限制在哪”。读者不知所云，为什么要限制在这呢？虽说原文中未说明到底是limiting谁的access，但点出来，就是更易读。
+> “但隐私保障可通过从另一个环节切断信息流来实现：保持公钥的匿名性”，我觉得，我的这一版比上两个都更好。像第二版的什么“诀窍”，又引入了新变量。第一版，他把“切断信息流”，作为一个整体名词发现了吗？总之更别扭。
+> 第一版，很明显还是忠于原文，第二版就更情景化。信息，具体指的就是这笔交易，然后，某个确定的人，然后说的更具体，就是说，任何人的真实身份。
+> Stock exchanges，我觉得，没必要再引入什么“证券交易所”这样的新变量。第一版的股市交易就挺好的。
+> 最后一句，原文里the tape，他是想干嘛？为什么这两个版本的翻译都没管，是一个类似于“or said”的另外说明吗？
+> 最后一句，“保密”，肯定是更好的。那不就是更高效地表达出意思了吗？得其意忘其形。
+
+
+> “made public”, 向公众披露，有必要这么说？但“是公开的”，确实可以再优化。
+> 
+>“与任何人的真实身份关联起来”，关联起来，不如“对应”那么有力。“挂钩”，很好，但不适合书面。
+>
+> “来实现一定程度的隐私”，确实忠于原文，但也实在愚蠢。
+
+
+
+
 
 As an additional firewall, a new key pair should be used for each transaction to keep them from being linked to a common owner. Some linking is still unavoidable with multi-input transactions, which necessarily reveal that their inputs were owned by the same owner. The risk is that if the owner of a key is revealed, linking could reveal other transactions that belonged to the same owner.
 
+
 还有另外一层防火墙。交易者应该针对每一笔交易启用一对新的公私钥，以便他人无法将这些交易追溯到同一个所有者身上。有些多输入的交易依然难免被追溯，因为那些输入必然会被识别出来自于同一个所有者。危险在于，如果一个公钥的所有者被曝光之后，与之相关的所有其他交易都会被曝光。
+
 作为一道额外的“防火墙”，用户应为每笔交易使用一对新的密钥，以防它们被关联到同一所有者。然而，在包含多个输入的交易中，一定程度的关联是不可避免的，因为这些输入必然来自同一所有者。其风险在于：一旦某个密钥的所有者身份暴露，那么与该所有者相关的其他交易也可能随之暴露。
 
+> 不确定是翻译做“还有”还是“作为”，第一个版本，断句更彻底。读起来可能更轻松，但第二句就是。把前后连贯起来，但也没有增加理解压力。
+> 针对 VS 为，启用 VS 使用，以便 VS 以防，其实差别都不太大。
+> link，你直接翻译做关联，肯定不好。第一个版本的追溯绝对能够能够更好的表达出“通过交易找到所有者”的感觉。
+> 后面，我总觉得这个主系表结构，“是什么什么的”，在中文这里都没有必要用。通常把那两个特定的词，去掉也没关系。像这种翻译，就比较呆板。
+> 被识别出？发现了吗？第二个版本，直接没有翻译这一段。
+> 第一个版本的假设句，实在太别扭。“如果”后面接的不是一个假设条件，甚至是一个带着时态的句子。
+
+
+> “一并揪出、顺藤摸瓜”，可能确实挺好，但真的不适合这一场景，可能是因为提示词问题，我提示词里有vivid这一暗示。
 
 
 
@@ -54,6 +112,33 @@ We consider the scenario of an attacker trying to generate an alternate chain fa
 > 试图，那也就是强调，这是他想做的，但不一定成功。我不知道加这里合不合适。
 > recently，翻译做，已经？还是刚刚呢？我觉得第一版更好。因为，你说刚刚的话，那就是强调时间距离差异不大，对吧？但前者，更加能够突出那种【完成时】。
 
+
+> 这实在太妙了。
+> 捕捉精髓（“充其量”）： 你想到的“最多也就只能试试”非常传神，其书面化表达就是“充其量”。这个词精准地翻译了“only”，并传达出一种“上限在此，别无他法”的轻蔑感，力量十足。
+
+
+
+```
+throw open（及物动词+形容词补语），类似"make happy"的"V+Adj"结构，但语义更固定，意为"突然开放/允许进入"。  
+
+成分关系：  
+throw（谓语动词）  
+the system（宾语）  
+open（宾语补足语，描述宾语状态）表示“system”的状态结果
+to arbitrary changes（介词短语作open的补语，表开放对象）。  
+
+与"make you happy"对比：  
+结构相似（V+O+Adj），但throw open是固定短语（强调"突然开放"），而"make happy"是自由组合（"使…快乐"）。  
+
+throw open更具特定语义，通常接"to"引出对象。  
+
+本质区别：语法结构同类，但词汇化程度不同。
+
+
+“throw open” ：使动结构（动宾+宾补）
+本质上是 **动词 + 宾语 + 补语** 结构，不是完全的“使役”动词结构，但跟 **“make you happy”** 类似。
+
+```
 
 
 

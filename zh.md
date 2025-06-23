@@ -200,7 +200,8 @@ As such, the verification is reliable as long as honest nodes control the networ
 Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer. To allow value to be split and combined, transactions contain multiple inputs and outputs. Normally there will be either a single input from a larger previous transaction or multiple inputs combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender.
 
 
-尽管可以逐个地处理硬币，但为每分钱设置单独的记录，既不现实也效率低下。为了让价值能够自由地拆分与组合，每笔交易都支持包含多个输入和输出。通常，一笔交易的输入要么来自一笔更大的历史交易，要么是几笔较小金额的合并；同时，其输出最多有两个：一笔用于支付（指向收款方），另一笔用于找零（如有），即退还给付款方。
+尽管可以逐个地处理硬币，但如果为每分钱都创建一笔独立交易，既不现实也效率低下。为了便于价值的分割与合并，交易被设计为可包含多个输入和输出。通常，一笔交易的输入要么来自一笔较大的历史交易，要么是多笔小额交易的汇集；同时，其输出最多有两个：一笔支付给收款方，另一笔（如有）作为找零退回付款方。
+
 
 
 ![](images/combining-splitting-value.svg)
@@ -209,7 +210,7 @@ Although it would be possible to handle coins individually, it would be unwieldy
 It should be noted that fan-out, where a transaction depends on several transactions, and those transactions depend on many more, is not a problem here. There is never the need to extract a complete standalone copy of a transaction's history.
 
 
-值得注意的是，“扇出”效应（一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易）在这里不成问题。因为系统在任何时候都无需去追溯一笔交易的完整历史记录。
+值得注意的是，“扇出”在这里不成问题 —— 所谓“扇出”，是指一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易。因为系统从来都没必要为任何交易提取完整、独立的历史副本。
 
 
 ## 10. 隐私 (Privacy)
@@ -218,7 +219,28 @@ It should be noted that fan-out, where a transaction depends on several transact
 The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party. The necessity to announce all transactions publicly precludes this method, but privacy can still be maintained by breaking the flow of information in another place: by keeping public keys anonymous. The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone. This is similar to the level of information released by stock exchanges, where the time and size of individual trades, the "tape", is made public, but without telling who the parties were.
 
 
-传统的银行模型，通过限制他人获取交易各方和可信第三方的信息来达成一定程度的隐私保护。而我们的系统要求将所有交易公开，因此这种方法被排除。但隐私保障可通过从另一个环节切断信息流来实现：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法将这笔交易与任何人的真实身份关联起来。这种水平的信息发布，类似于证券交易所的做法：交易的时间和数额是公开的，但交易双方的身份是保密的。
+传统的银行模型，通过限制他人获取交易各方和可信第三方的信息，来达成一定程度的隐私保护。而我们的系统要求将所有交易公开，因此这种方法被排除。但隐私保障可通过从另一个环节切断信息流来实现：保持公钥的匿名性。
+
+
+只让交易各方及受信任的第三方掌握信息
+通过将信息获取权限限制在交易方和可信第三方之内，
+
+比特币必须公开广播所有交易，无法沿用此法；
+而所有交易都需公开的原则，使这套方法在比特币中无法奏效。
+
+
+但我们可以改在另一处切断信息流——保持公钥匿名。
+不过，隐私仍可维系，只需在另一个环节切断信息流：**保持公钥匿名**。
+
+
+公众能看到有人向另一人转了一笔钱，但无法把这笔交易与任何人的真实身份对应。这种水平的信息发布，类似于股市交易的做法（即所谓“盘口数据”）：交易的时间和规模被公布，但交易双方的身份是保密的。
+
+
+
+**为何更好？**
+*   **结构清晰**：我用了分段。第一段讲“旧模式的失效”，第二段讲“新模式的建立”，第三段用类比巩固理解。结构本身就在说话。
+*   **补全主语**：`将信息获取权限限制在...之内`，精准回答了你“限制谁获取谁信息”的疑问，比两个版本都清晰。
+*   **“无法奏效”**：比“否决了”更书面，比“不再适用”更有“因果冲突”的意味。
 
 
 ![](images/privacy.svg)
@@ -227,7 +249,7 @@ The traditional banking model achieves a level of privacy by limiting access to 
 As an additional firewall, a new key pair should be used for each transaction to keep them from being linked to a common owner. Some linking is still unavoidable with multi-input transactions, which necessarily reveal that their inputs were owned by the same owner. The risk is that if the owner of a key is revealed, linking could reveal other transactions that belonged to the same owner.
 
 
-还有一道额外的“防火墙”。用户应为每笔交易启用一对新的公私钥，以防它们被溯源到同一个所有者身上。然而，在包含多个输入的交易中，一定程度的关联是不可避免的，因为这些输入必然会被识别出来自同一个所有者。其风险在于：一旦某个公钥的所有者，其身份暴露，那么与之相关的其他交易也可能随之暴露。
+作为一道额外的防火墙，用户应为每笔交易启用一对新的公私钥，以防被追溯到同一所有者。然而在包含多个输入的交易中，这种关联性仍不可避免，因为其所有输入必然（会被识别出）源自同一人。其风险在于：一旦某个公钥的所有者身份暴露，这层关联便可能使其名下的其他交易一并曝光。
 
 
 ## 11. 计算 (Calculations)
@@ -236,7 +258,7 @@ As an additional firewall, a new key pair should be used for each transaction to
 We consider the scenario of an attacker trying to generate an alternate chain faster than the honest chain. Even if this is accomplished, it does not throw the system open to arbitrary changes, such as creating value out of thin air or taking money that never belonged to the attacker. Nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them. An attacker can only try to change one of his own transactions to take back money he recently spent.
 
 
-假设一个场景，某个攻击者正在试图生成一条比诚实链增长更快的“替代链”。即便他成功了，也无法对系统肆意篡改，比如凭空创造价值，或获取从未属于他的钱。因为网络中的节点不会把一笔无效交易当作支付，而诚实节点也绝不会认可包含这类交易的区块。攻击者唯一能尝试的，是篡改自己的某笔交易，以收回他最近花掉的钱。
+假设一个场景，某个攻击者正试图生成一条比诚实链增长更快的“伪链”（替代链）。即便成功，他也无法肆意篡改系统，比如凭空创造价值，或盗取从未属于他的钱。因为节点不会接受无效交易，而诚实节点更是绝不会认可包含这类交易的区块。攻击者充其量，只能尝试篡改自己的某笔交易，以拿回他刚花掉的钱。
 
 
 The race between the honest chain and an attacker chain can be characterized as a Binomial Random Walk. The success event is the honest chain being extended by one block, increasing its lead by +1, and the failure event is the attacker's chain being extended by one block, reducing the gap by -1.
