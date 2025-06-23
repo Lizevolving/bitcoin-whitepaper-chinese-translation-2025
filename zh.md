@@ -242,13 +242,13 @@ We consider the scenario of an attacker trying to generate an alternate chain fa
 The race between the honest chain and an attacker chain can be characterized as a Binomial Random Walk. The success event is the honest chain being extended by one block, increasing its lead by +1, and the failure event is the attacker's chain being extended by one block, reducing the gap by -1.
 
 
-诚实链与攻击者链之间的竞争，可以看作一个“二项式随机漫步”模型。诚实链每成功生成一个新区块，其领先优势就加 1；反之，攻击者链每成功一次，差距就减 1。
+诚实链与攻击者链之间的竞赛，可以被看作一个“二项式随机漫步”过程：每当诚实链成功添加一个新区块，它的领先优势就增加 $1$（即一次“成功”事件）；反之，如果攻击者成功添加一个区块，差距就减少 $1$（即一次“失败”事件）。
 
 
 The probability of an attacker catching up from a given deficit is analogous to a Gambler's Ruin problem. Suppose a gambler with unlimited credit starts at a deficit and plays potentially an infinite number of trials to try to reach breakeven. We can calculate the probability he ever reaches breakeven, or that an attacker ever catches up with the honest chain, as follows[^8]:
 
 
-攻击者从落后状态追平的概率，类似于经典的“赌徒破产问题”。假设，一个拥有无限资本的赌徒，从亏损开始，允许他赌无限次，以达到盈亏平衡。我们能计算出他最终填补亏空的概率，也就是攻击者能够追上诚实链的概率[^8]，如下：
+攻击者能够从落后局面追平的概率，类似于经典的“赌徒破产问题”。假设，一个拥有无限筹码的赌徒，从亏空开始，允许他赌无限次，目标是填补上这笔亏空。我们可以计算出他最终填平亏空的概率——也就是攻击者最终能赶上诚实链的概率[^8]，如下：
 
 
 $$
@@ -269,7 +269,7 @@ $$
 Given our assumption that $p \gt q​$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. With the odds against him, if he doesn't make a lucky lunge forward early on, his chances become vanishingly small as he falls further behind.
 
 
-基于我们 $p > q$ 的假设，攻击者需要追赶的区块越多，其成功概率便呈指数级下降。由于胜算本就不利，如果他不能在初期就幸运地大幅度追近，那么随着差距拉大，他的胜率将变得微乎其微。
+基于我们 $p > q$ 的假设，攻击者需要追赶的区块越多，其成功概率便呈指数级下降。由于胜算本就不利，如果他不能在初期就幸运地大幅度追近，那么随着差距拉大，他成功的机会将变得微乎其微。
 
 
 We now consider how long the recipient of a new transaction needs to wait before being sufficiently certain the sender can't change the transaction. We assume the sender is an attacker who wants to make the recipient believe he paid him for a while, then switch it to pay back to himself after some time has passed. The receiver will be alerted when that happens, but the sender hopes it will be too late.
@@ -287,7 +287,7 @@ The receiver generates a new key pair and gives the public key to the sender sho
 The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
 
 
-收款人需要等到此笔交易被打包进区块，并且后续又链接了 $z$ 个区块之后。他虽然不知道攻击者的确切进度，但可以假设诚实区块按预期的平均时间生成，那么攻击者在此期间的潜在进展，可以用一个期望值如下的泊松分布来描述：
+收款人需要等待，直到此笔交易被打包进一个区块，且其后再链接上 $z$ 个区块。尽管他不知道攻击者的确切进度，但我们可以假定：诚实网络正以其平均出块时间稳定运行（即，诚实区块按预期的平均时间生成）。基于此，攻击者的潜在进展便服从一个泊松分布，其期望值为：
 
 
 $$
@@ -298,7 +298,7 @@ $$
 To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
 
 
-为了算出攻击者此刻依然能够追上的总概率，我们需要将他在这个时间段内可能追赶上的每个进度（k 个区块）的泊松分布概率密度，乘以他在那个特定进度下最终能够成功的概率，然后将所有可能情况的概率求和：
+为了计算出攻击者此刻依然能反超的概率，我们需要将以下两项相乘（**然后将所有可能情况的概率求和**）：其一，是攻击者取得每一种可能进展（k）的泊松概率；其二，是他从该进展（k）出发，最终能够反超的概率。
 
 
 $$
