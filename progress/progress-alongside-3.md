@@ -1,7 +1,6 @@
 # 琢磨钻研：9. 价值的组合与分割 (Combining and Splitting Value)   -  12. 结论 (Conclusion)
 
 
-
 ## 9.
 
 Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer. To allow value to be split and combined, transactions contain multiple inputs and outputs. Normally there will be either a single input from a larger previous transaction or multiple inputs combining smaller amounts, and at most two outputs: one for the payment, and one returning the change, if any, back to the sender.
@@ -37,7 +36,7 @@ It should be noted that fan-out, where a transaction depends on several transact
 > 第二个版，加了因果连接，还带上主语。Extract，直接翻译成提取，肯定不行。追溯，很明显是更合语境。总之，对于最后一句，第二版本完胜。
 
 > “从不需要 VS 在任何时候都无需”，后者更好，从不，更侧重之前。“从来都无需”，这个可能更好？
-> “为任何交易”，很明显比“一笔交易的、”更好，转成客体说明，但后者还放在形容词位置挤着。
+> “为任何交易”，很明显比“一笔交易的、”更好，转成客体说明。后者还放在形容词位置挤着，虽说这样就是更符合原文。
 > 
 > “追溯”很好，但“提取...副本”更忠实于 `extract a...copy` 的计算机操作语境。
 
@@ -47,18 +46,24 @@ It should be noted that fan-out, where a transaction depends on several transact
 
 The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party. The necessity to announce all transactions publicly precludes this method, but privacy can still be maintained by breaking the flow of information in another place: by keeping public keys anonymous. The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone. This is similar to the level of information released by stock exchanges, where the time and size of individual trades, the "tape", is made public, but without telling who the parties were.
 
-传统的银行模型通过限制他人获取交易者和可信第三方的信息而达成一定程度的隐私保护。出于对将所有交易记录公开的需求否决了这种方法。但是，维持隐私可通过于另一处的切断信息流来实现——公钥匿名。公众可以看到某某向某某转账了一定的金额，但是，没有任何信息指向某个确定的人。这种水平的信息发布有点像股市交易，只有时间和各个交易的金额被公布，但是，没有人知道交易双方都是谁。
+传统的银行模型通过限制他人获取交易者和可信第三方的信息而达成一定程度的隐私保护。出于对将所有交易记录公开的需求否决了这种方法。但是，维持隐私可通过于另一处的切断信息流来实现——公钥匿名。
+公众可以看到某某向某某转账了一定的金额，但是，没有任何信息指向某个确定的人。这种水平的信息发布有点像股市交易，只有时间和各个交易的金额被公布，但是，没有人知道交易双方都是谁。
 
-传统银行通过将信息限制在交易方和第三方机构内部来保护隐私。由于我们的系统要求所有交易公开，这种方法不再适用。但隐私依然可以得到保障，诀窍在于从另一个环节切断信息流：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法将这笔交易与任何人的真实身份关联起来。这类似于证券交易所的做法：交易的时间和数额是公开的，但交易双方的身份是保密的。
+传统银行通过将信息限制在交易方和第三方机构内部来保护隐私。由于我们的系统要求所有交易公开，这种方法不再适用。但隐私依然可以得到保障，诀窍在于从另一个环节切断信息流：保持公钥的匿名性。
+公众能看到有人向另一人转了一笔钱，但无法将这笔交易与任何人的真实身份关联起来。这类似于证券交易所的做法：交易的时间和数额是公开的，但交易双方的身份是保密的。
 
 
 > 皱巴巴挤一坨，看着人烦。所以我总是有一种倾向，能打括号和引号就尽量。比如这里，我给的版本就直接是把主语跟后面的隔开了，“传统的银行模型，……”
 > 第二版少了很多，但确实你如果要说全的话，那就是，“达成一定程度的隐私保护”，这就太冗余。
 > 
 > 总体而言，第一版更好。他说了是“限制谁获取谁的信息”，主体客体，说清楚了，而第二版很别扭。他说，“把信息限制在哪”。读者不知所云，为什么要限制在这呢？虽说原文中未说明到底是limiting谁的access，但点出来，就是更易读。
+> 
 > “但隐私保障可通过从另一个环节切断信息流来实现：保持公钥的匿名性”，我觉得，我的这一版比上两个都更好。像第二版的什么“诀窍”，又引入了新变量。第一版，他把“切断信息流”，作为一个整体名词发现了吗？总之更别扭。
+> “breaking the flow of information”，这不是动词短语吗？笑来这里翻译得也不当啊？
+> 
 > 第一版，很明显还是忠于原文，第二版就更情景化。信息，具体指的就是这笔交易，然后，某个确定的人，然后说的更具体，就是说，任何人的真实身份。
 > Stock exchanges，我觉得，没必要再引入什么“证券交易所”这样的新变量。第一版的股市交易就挺好的。
+> 
 > 最后一句，原文里the tape，他是想干嘛？为什么这两个版本的翻译都没管，是一个类似于“or said”的另外说明吗？
 > 最后一句，“保密”，肯定是更好的。那不就是更高效地表达出意思了吗？得其意忘其形。
 
@@ -107,6 +112,7 @@ We consider the scenario of an attacker trying to generate an alternate chain fa
 > 肯定要体现出，从未，才能把never翻译的好。
 > 后面一句，第一版就太生硬。虽然说它真是完全按照原文句子结构来的。
 > 其实我说实话，最后一句话，如果如果可以再口语化一点，其实我们可以这样说：“攻击者最多也就只能试试……”，然后再接上后面的话。但第一版字最少，且能说明的清楚的，但我觉得还可以再更清楚一点。怎么搞到更好的版本？
+> 
 > 主动加，属于，这两个字有必要，强调own这个词。
 > 进而，挺好的表达，有那种承接关系。第二个版本，就更加强调目的，那就是完全反应to。
 > 试图，那也就是强调，这是他想做的，但不一定成功。我不知道加这里合不合适。
@@ -122,10 +128,7 @@ We consider the scenario of an attacker trying to generate an alternate chain fa
 throw open（及物动词+形容词补语），类似"make happy"的"V+Adj"结构，但语义更固定，意为"突然开放/允许进入"。  
 
 成分关系：  
-throw（谓语动词）  
-the system（宾语）  
-open（宾语补足语，描述宾语状态）表示“system”的状态结果
-to arbitrary changes（介词短语作open的补语，表开放对象）。  
+throw（谓语动词） + the system（宾语） + open（宾语补足语，描述宾语状态，表示“system”的状态结果）+ to arbitrary changes（介词短语作open的补语，表开放对象）。  
 
 与"make you happy"对比：  
 结构相似（V+O+Adj），但throw open是固定短语（强调"突然开放"），而"make happy"是自由组合（"使…快乐"）。  
@@ -133,7 +136,6 @@ to arbitrary changes（介词短语作open的补语，表开放对象）。
 throw open更具特定语义，通常接"to"引出对象。  
 
 本质区别：语法结构同类，但词汇化程度不同。
-
 
 “throw open” ：使动结构（动宾+宾补）
 本质上是 **动词 + 宾语 + 补语** 结构，不是完全的“使役”动词结构，但跟 **“make you happy”** 类似。

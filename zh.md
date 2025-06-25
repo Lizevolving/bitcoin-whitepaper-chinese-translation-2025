@@ -176,10 +176,7 @@ A block header with no transactions would be about 80 bytes. If we suppose block
 It is possible to verify payments without running a full network node. A user only needs to keep a copy of the block headers of the longest proof-of-work chain, which he can get by querying network nodes until he's convinced he has the longest chain, and obtain the Merkle branch linking the transaction to the block it's timestamped in. He can't check the transaction for himself, but by linking it to a place in the chain, he can see that a network node has accepted it, and blocks added after it further confirm the network has accepted it.
 
 
-
-即便不用运行完整网络节点也有可能确认支付。用户只需要有一份拥有工作证明的最长链的区块头 —— 他可以通过查询节点确认自己拥有的确实来自最长链 —— 而后获取 Merkle 树的树枝节点，进而连接到这个区块被打上时间戳时的交易。用户并不能自己检查交易，但，通过连接到链上的某个地方，他可以看到某个网络节点已经接受了这个交易，而此后加进来的区块进一步确认了网络已经接受了此笔交易。
-
-用户无需运行一个完整的网络节点，也能验证支付的有效性。他只需保存一份最长工作量证明链的区块头副本，并通过查询在线节点来确保自己拥有的确实来自最长链。然后，获取能将他的交易链接到所在区块（即，为交易打上时间戳）的默克尔路径（Merkle branch）即可。这样，虽然不能亲自校验每一笔交易，但通过连接到链上的某个位置，用户能看到自己的交易已被某个网络节点接受，并被后续区块不断加固，从而确认了其有效性（即，网络已接受了此笔交易）。
+用户无需运行一个完整的网络节点，也能验证支付。他只需保存一份最长工作量证明链的区块头副本，并通过查询在线节点来确保自己拥有的确实是最长链。然后，获取那条能将这笔交易与其所在区块链接起来的默克尔路径（Merkle branch）即可。这样一来，他虽然不能亲自校验这笔交易，但通过将它链接到链上的某个位置，就能看到交易已被某个网络节点接受；而在这之后不断加入的新区块，则进一步证明了整个网络都已接受了它。
 
 
 ![](images/simplified-payment-verification.svg)
@@ -188,10 +185,7 @@ It is possible to verify payments without running a full network node. A user on
 As such, the verification is reliable as long as honest nodes control the network, but is more vulnerable if the network is overpowered by an attacker. While network nodes can verify transactions for themselves, the simplified method can be fooled by an attacker's fabricated transactions for as long as the attacker can continue to overpower the network. One strategy to protect against this would be to accept alerts from network nodes when they detect an invalid block, prompting the user's software to download the full block and alerted transactions to confirm the inconsistency. Businesses that receive frequent payments will probably still want to run their own nodes for more independent security and quicker verification.
 
 
-只要诚实节点网络，如此这般，验证即为可靠的。然而，如果网络被攻击者所控制的时候，验证就没那么可靠了。尽管网络节点可以自己验证交易，那么简化版验证方式可能会被攻击者伪造的交易所欺骗。应对策略之一是，客户端软件要接受来自网络节点的警告。当网络节点发现无效区块的时候，即发出警报，在用户的软件上弹出通知，告知用户下载完整区块，警告用户确认交易一致性。那些有高频收付发生的商家应该仍然希望运行属于自己的完整节点，以此保证更独立的安全性和更快的交易确认。
-
-
-因此，只要诚实节点依然掌控着网络，这种验证方法就是可靠的；但如果网络算力被攻击者压制，验证就没那么可靠。尽管网络节点能独立验证所有交易，但是，只要攻击者能继续控制网络，简化支付验证的用户就可能被攻击者伪造的交易记录所欺骗。一种应对策略是，用户的客户端软件可以接收来自全节点的警报，一旦发现无效区块，便提示用户下载完整数据以核实交易的一致性。对于交易频繁的商家，为了追求更高的安全性与更快的验证，最好还是运行自己的全节点。
+因此，只要诚实节点依然掌控着网络，这种验证就足够可靠；但如果网络被攻击者实现了算力压制，验证就会变得极其脆弱。尽管全节点能自主验证所有交易，但只要攻击者能继续保持算力优势，采用简化版验证的用户就可能被攻击者伪造的交易记录所欺骗。一种应对策略是：让用户的软件接收来自网络节点的警报。一旦有节点检测到无效区块，即发出警报，软件就应立即提示用户下载该区块及相关交易，以核实问题。对于那些交易频繁的商家而言，为了追求更强的独立安全与更快的验证，最好还是运行自己的全节点。
 
 
 ## 9. 价值的组合与分割 (Combining and Splitting Value)
@@ -219,28 +213,7 @@ It should be noted that fan-out, where a transaction depends on several transact
 The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party. The necessity to announce all transactions publicly precludes this method, but privacy can still be maintained by breaking the flow of information in another place: by keeping public keys anonymous. The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone. This is similar to the level of information released by stock exchanges, where the time and size of individual trades, the "tape", is made public, but without telling who the parties were.
 
 
-传统的银行模型，通过限制他人获取交易各方和可信第三方的信息，来达成一定程度的隐私保护。而我们的系统要求将所有交易公开，因此这种方法被排除。但隐私保障可通过从另一个环节切断信息流来实现：保持公钥的匿名性。
-
-
-只让交易各方及受信任的第三方掌握信息
-通过将信息获取权限限制在交易方和可信第三方之内，
-
-比特币必须公开广播所有交易，无法沿用此法；
-而所有交易都需公开的原则，使这套方法在比特币中无法奏效。
-
-
-但我们可以改在另一处切断信息流——保持公钥匿名。
-不过，隐私仍可维系，只需在另一个环节切断信息流：**保持公钥匿名**。
-
-
-公众能看到有人向另一人转了一笔钱，但无法把这笔交易与任何人的真实身份对应。这种水平的信息发布，类似于股市交易的做法（即所谓“盘口数据”）：交易的时间和规模被公布，但交易双方的身份是保密的。
-
-
-
-**为何更好？**
-*   **结构清晰**：我用了分段。第一段讲“旧模式的失效”，第二段讲“新模式的建立”，第三段用类比巩固理解。结构本身就在说话。
-*   **补全主语**：`将信息获取权限限制在...之内`，精准回答了你“限制谁获取谁信息”的疑问，比两个版本都清晰。
-*   **“无法奏效”**：比“否决了”更书面，比“不再适用”更有“因果冲突”的意味。
+传统的银行模型，通过仅限交易各方和可信第三方接触信息来实现一定的隐私保护。而我们的系统要求将所有交易公开，因此这种方法被排除。但是，维持隐私可通过从另一个环节切断信息流来实现：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法把交易信息与任何人的真实身份对应。这种水平的信息发布，类似于股市交易的做法：交易的时间和规模（即所谓“行情记录”）被公布，但交易双方的身份保密。
 
 
 ![](images/privacy.svg)
