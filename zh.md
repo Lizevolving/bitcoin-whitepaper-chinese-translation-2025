@@ -139,6 +139,12 @@ By convention, the first transaction in a block is a special transaction that st
 
 按照约定，每个区块的第一笔交易是笔特殊交易：它会生成一枚新币，奖励给该区块的创建者。这么做，既激励了节点来维护网络，也解决了在没有中心机构时如何首次发行货币的问题。这种以稳定速率发行新币的方式，就好比矿工消耗资源将黄金注入流通。在我们的系统里，被消耗的资源是 CPU 时间和电力。
 
+**按照约定，每个区块的首笔交易是特殊的：它会生成一枚新币，奖励给该区块的创建者。**
+
+**这既为节点维护网络提供了激励，也解决了在缺乏中央机构时，如何发行初始货币的问题。**
+
+**这种新币的稳定增发，好比矿工消耗资源挖出黄金。而在我们的系统中，这种资源就是CPU的算力和电力。**
+
 
 The incentive can also be funded with transaction fees. If the output value of a transaction is less than its input value, the difference is a transaction fee that is added to the incentive value of the block containing the transaction. Once a predetermined number of coins have entered circulation, the incentive can transition entirely to transaction fees and be completely inflation free.
 
@@ -158,7 +164,7 @@ The incentive may help encourage nodes to stay honest. If a greedy attacker is a
 Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space. To facilitate this without breaking the block's hash, transactions are hashed in a Merkle Tree[^2][^5][^7], with only the root included in the block's hash. Old blocks can then be compacted by stubbing off branches of the tree. The interior hashes do not need to be stored.
 
 
-当一枚币最近发生的一次交易被足够多的新区块确认后，它之前的旧交易记录就可以被安全地删除，以节省磁盘空间。为实现这一点而不破坏区块的哈希完整性，我们将区块内的所有交易构建成一棵默克尔树（Merkle Tree）[^2][^5][^7]，并只将树根的哈希值记录在区块的哈希之中。如此，只需剪掉不再需要的树枝，旧区块即可被压缩，而无需存储那些中间过程的哈希。
+一旦一枚币最近发生的某笔交易被足够多的区块覆盖，其更早的交易记录便可被丢弃，以节省磁盘空间。为实现此功能且不破坏区块的整体哈希，区块内的所有交易将被组织成一棵默克尔树（Merkle Tree）[^2][^5][^7]，并且只将树根（Merkle Root）计入该区块的哈希之中。这样，通过剪除树枝即可压缩旧区块，而树的内部哈希也无需存储。
 
 
 ![](images/reclaiming-disk-space.svg)
@@ -167,7 +173,7 @@ Once the latest transaction in a coin is buried under enough blocks, the spent t
 A block header with no transactions would be about 80 bytes. If we suppose blocks are generated every 10 minutes, 80 bytes * 6 * 24 * 365 = 4.2MB per year. With computer systems typically selling with 2GB of RAM as of 2008, and Moore's Law predicting current growth of 1.2GB per year, storage should not be a problem even if the block headers must be kept in memory.
 
 
-一个不含交易记录的区块头大约只有 80 字节。即便按每十分钟产生一个区块的速度计算，80 字节乘以 6 乘以 24 乘以 365，一年也只会增加 4.2MB 的数据。截止 2008 年，在售的计算机普遍配有 2GB 的内存，且按照摩尔定律的预测，存储容量仍在快速增长（每年增加 1.2 GB）。因此，即便区块头都必须存储在内存里，也不是问题。
+一个不含交易记录的区块头仅约 80 字节。即便按每 10 分钟生成一个区块的速度计算，80 字节乘以 6 乘以 24 乘以 365，年增数据也仅为 4.2MB。截止 2008 年，市售计算机的普遍内存为 2GB，而摩尔定律更预示着存储容量的高速增长（年增约 1.2GB）。因此，即便所有区块头都必须存储在内存里，也不是问题。
 
 
 ## 8. 简化版支付确认 (Simplified Payment Verification)
@@ -185,7 +191,7 @@ It is possible to verify payments without running a full network node. A user on
 As such, the verification is reliable as long as honest nodes control the network, but is more vulnerable if the network is overpowered by an attacker. While network nodes can verify transactions for themselves, the simplified method can be fooled by an attacker's fabricated transactions for as long as the attacker can continue to overpower the network. One strategy to protect against this would be to accept alerts from network nodes when they detect an invalid block, prompting the user's software to download the full block and alerted transactions to confirm the inconsistency. Businesses that receive frequent payments will probably still want to run their own nodes for more independent security and quicker verification.
 
 
-因此，只要诚实节点依然掌控着网络，这种验证就足够可靠；但如果网络被攻击者实现了算力压制，验证就会变得极其脆弱。尽管全节点能自主验证所有交易，但只要攻击者能继续保持算力优势，采用简化版验证的用户就可能被攻击者伪造的交易记录所欺骗。一种应对策略是：让用户的软件接收来自网络节点的警报。一旦有节点检测到无效区块，即发出警报，软件就应立即提示用户下载该区块及相关交易，以核实问题。对于那些交易频繁的商家而言，为了追求更强的独立安全与更快的验证，最好还是运行自己的全节点。
+因此，只要诚实节点依然掌控着网络，这种验证就足够可靠；但如果网络被攻击者实现了算力压制，验证就会变得极其脆弱。尽管全节点能自主验证所有交易，但只要攻击者能继续保持算力压制，采用简化版验证的用户就可能被攻击者伪造的交易记录所欺骗。一种应对策略是：让用户的软件接收来自网络节点的警报。一旦有节点检测到无效区块，即发出警报，软件就应立即提示用户下载该区块及相关交易，以核实问题。对于那些交易频繁的商家，为了追求更强的独立安全与更快的验证，最好还是运行自己的全节点。
 
 
 ## 9. 价值的组合与分割 (Combining and Splitting Value)
