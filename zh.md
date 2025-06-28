@@ -137,11 +137,9 @@ New transaction broadcasts do not necessarily need to reach all nodes. As long a
 By convention, the first transaction in a block is a special transaction that starts a new coin owned by the creator of the block. This adds an incentive for nodes to support the network, and provides a way to initially distribute coins into circulation, since there is no central authority to issue them. The steady addition of a constant of amount of new coins is analogous to gold miners expending resources to add gold to circulation. In our case, it is CPU time and electricity that is expended.
 
 
-按照约定，每个区块的第一笔交易是笔特殊交易：它会生成一枚新币，奖励给该区块的创建者。这么做，既激励了节点来维护网络，也解决了在没有中心机构时如何首次发行货币的问题。这种以稳定速率发行新币的方式，就好比矿工消耗资源将黄金注入流通。在我们的系统里，被消耗的资源是 CPU 时间和电力。
+按照约定，每个区块的首笔交易是一笔特殊交易：它会生成一枚新币，奖励给该区块的创建者。这么做，既激励了节点来维护网络，既为节点维护网络提供了激励，也解决了在没有中心机构时如何首次发行货币的问题。这种以稳定速率发行新币的方式，就好比矿工消耗资源将黄金注入流通。在我们的系统里，被消耗的资源是 CPU 时间和电力。
 
-**按照约定，每个区块的首笔交易是特殊的：它会生成一枚新币，奖励给该区块的创建者。**
-
-**这既为节点维护网络提供了激励，也解决了在缺乏中央机构时，如何发行初始货币的问题。**
+这也解决了在缺乏中央机构时，如何发行初始货币的问题。**
 
 **这种新币的稳定增发，好比矿工消耗资源挖出黄金。而在我们的系统中，这种资源就是CPU的算力和电力。**
 

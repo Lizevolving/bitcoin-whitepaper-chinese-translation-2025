@@ -56,6 +56,9 @@ Nodes always consider the longest chain to be the correct one and will keep work
 > 比如说always，你翻译做始终或者总是，其实都行，只是程度上稍微有些差异。而同时那个one，我觉得你又要把它表现出来。再者就是，他这里的继续工作，工作是什么呢？
 > 工作本来就是添加新数据，那所以说到底用哪个更合适呢？你也不知道。而原文说的又是“扩展它”。最后，我觉得那个额外增加的“在此基础上”是OK的。
 
+
+
+
 New transaction broadcasts do not necessarily need to reach all nodes. As long as they reach many nodes, they will get into a block before long. Block broadcasts are also tolerant of dropped messages. If a node does not receive a block, it will request it when it receives the next block and realizes it missed one.
 
 
@@ -116,20 +119,14 @@ By convention, the first transaction in a block is a special transaction that st
 > Add gold to circulation，“将黄金注入流通”，明显翻译的更好，挖出黄金，很明显不是更好的。而其实发行和注入到流通之中，想表达的是一个概念。
 
 
+> 
+
+
 
 1.  **`By convention`**：这个力的方向是“非强制、共识、协议”。所以“约定”远胜于“规则”。你的判断极准。
 2.  **`owned by the creator`**：这个力的方向是“归属、激励”。“所属权”只说了归属，是静态的。“奖励给”，一步到位，把归属和激励的目的都说了，是动态的，更有力。
 3.  **`distribute coins into circulation`**：这个力的方向是“从无到有，进入公共领域”。“发行”一词，本身就包含了“进入流通”的含义。“发行到流通之中”是同义反复，力被稀释了。“进入流通”则略显平淡。核心是“发行”。
 4.  **`analogous to gold miners`**：这个力的方向是“建立一个强类比，让读者秒懂”。“黄金开采者……增加黄金”太啰嗦，力道不足。“矿工……挖出黄金”，瞬间建立图像，力道千钧。在这里，“挖出”比“注入”更好，因为它更质朴，更符合“矿工”这个主体形象。
-
-
-逻辑骨架：
-
-*   **约定**：区块首笔交易特殊，是给创建者的**奖励**。
-*   **目的**：1. **激励**节点。 2. 解决**初始发行**问题。
-*   **类比**：这就像矿工**耗费资源挖黄金**。
-*   **点题**：我们耗费的是**算力和电力**。
-
 
 
 
