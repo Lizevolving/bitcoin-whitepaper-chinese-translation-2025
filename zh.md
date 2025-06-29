@@ -137,23 +137,19 @@ New transaction broadcasts do not necessarily need to reach all nodes. As long a
 By convention, the first transaction in a block is a special transaction that starts a new coin owned by the creator of the block. This adds an incentive for nodes to support the network, and provides a way to initially distribute coins into circulation, since there is no central authority to issue them. The steady addition of a constant of amount of new coins is analogous to gold miners expending resources to add gold to circulation. In our case, it is CPU time and electricity that is expended.
 
 
-按照约定，每个区块的首笔交易是一笔特殊交易：它会生成一枚新币，奖励给该区块的创建者。这么做，既激励了节点来维护网络，既为节点维护网络提供了激励，也解决了在没有中心机构时如何首次发行货币的问题。这种以稳定速率发行新币的方式，就好比矿工消耗资源将黄金注入流通。在我们的系统里，被消耗的资源是 CPU 时间和电力。
-
-这也解决了在缺乏中央机构时，如何发行初始货币的问题。**
-
-**这种新币的稳定增发，好比矿工消耗资源挖出黄金。而在我们的系统中，这种资源就是CPU的算力和电力。**
+按照约定，每个区块的首笔交易是一笔特殊交易：它会生成一枚新币，奖励给该区块的创建者。这既为节点维护网络提供了激励，也解决了在没有中央机构时，如何发行初始货币的问题。这种新币的稳定增发，就好比矿工消耗资源挖出黄金并将其注入流通。而在我们的系统里，被消耗的资源是 CPU 工作时间和电力。
 
 
 The incentive can also be funded with transaction fees. If the output value of a transaction is less than its input value, the difference is a transaction fee that is added to the incentive value of the block containing the transaction. Once a predetermined number of coins have entered circulation, the incentive can transition entirely to transaction fees and be completely inflation free.
 
 
-奖励还可以来自交易费。如果一笔交易的输出值小于它的输入值，那么其中的差额就成了交易费；这笔费用会一同奖励给打包该交易的区块创建者。一旦硬币发行总量达到预设的上限，系统的奖励将完全来自交易费，从而实现零通货膨胀。
+激励还可来源于交易费。如果一笔交易的输出值小于输入值，那么其中的差额就是交易费；这笔费用会一并计入该区块的奖励之中。一旦预设的货币总量发行完毕，系统的激励将完全由交易费承担，从而实现零通货膨胀。
 
 
 The incentive may help encourage nodes to stay honest. If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments, or using it to generate new coins. He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.
 
 
-这种奖励机制也能鼓励节点保持诚实。如果一个贪婪的攻击者，能够掌握超半数的算力（即，比所有诚实节点的都更多），他将面临一个选择：是利用这些算力偷回自己花掉的钱来行骗，还是用它来生成新币？他会发现，按规则行事对他更有利，因为这些规则能让他获得比其他所有人加起来都多的新币 —— 这远比破坏系统、动摇自己财富的根基要划算得多。
+这种激励机制也能鼓励节点保持诚实。如果一个贪婪的攻击者，能够掌握比所有诚实节点都更多的算力，他将面临一个选择：是利用这些算力偷回自己的付款来行骗，还是用它来生成新币？他将会发现，按规则行事更有利可图 —— 因为规则能让他获得比其他所有人加起来都多的新币，这远比破坏系统、动摇自身财富的根基划算得多。
 
 
 ## 7. 回收硬盘空间 (Reclaiming Disk Space)
