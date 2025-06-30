@@ -9,7 +9,7 @@
 
 > **Abstract.** A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution. Digital signatures provide part of the solution, but the main benefits are lost if a trusted third party is still required to prevent double-spending. We propose a solution to the double-spending problem using a peer-to-peer network. The network timestamps transactions by hashing them into an ongoing chain of hash-based proof-of-work, forming a record that cannot be changed without redoing the proof-of-work. The longest chain not only serves as proof of the sequence of events witnessed, but proof that it came from the largest pool of CPU power. As long as a majority of CPU power is controlled by nodes that are not cooperating to attack the network, they'll generate the longest chain and outpace attackers. The network itself requires minimal structure. Messages are broadcast on a best effort basis, and nodes can leave and rejoin the network at will, accepting the longest proof-of-work chain as proof of what happened while they were gone. 
 >
-> **概要**：一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。数字签名能解决部分问题，但，如果还要靠信任第三方来防止“一币多花”，电子支付的主要优势就被没了。我们提出，用点对点网络解决双重支付问题：该网络给每笔交易标记时间戳，方法是：把交易哈希值打包记录到一条不断延展的、以散列为基础的工作证明链上，谁想篡改记录就得重做所有计算。最长的链，既用于证明所见证事件的顺序，也证明它来自最大的 CPU 算力池。只要大多数算力掌握在诚实节点手里（不与那些尝试攻击网络的节点合作），这些节点将会生成最长链，攻击者追不上。网络本身需要最简单的结构。消息尽力而为地广播，而节点随时可加入或离开，同时，接受最长的工作证明链作为他们离开期间所发生事件的证明。
+> **概要**：一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。数字签名能解决部分问题，但，如果还要靠信任第三方来防止“一币多花”，电子支付的主要优势就被没了。我们提出，用点对点网络解决双重支付问题：该网络给每笔交易标记时间戳，方法是：把交易哈希值打包记录到一条不断延展的、以散列为基础的工作量证明链上，谁想篡改记录就得重做所有计算。最长的链，既用于证明所见证事件的顺序，也证明它来自最大的 CPU 算力池。只要大多数算力掌握在诚实节点手里（不与那些尝试攻击网络的节点合作），这些节点将会生成最长链，攻击者追不上。网络本身需要最简单的结构。消息尽力而为地广播，而节点随时可加入或离开，同时，接受最长的工作量证明链作为他们离开期间所发生事件的证明。
 
 -----
 
@@ -65,20 +65,57 @@ The solution we propose begins with a timestamp server. A timestamp server works
 ![](images/timestamp-server.svg)
 
 
-## 4. 工作证明 (Proof-of-Work)
+## 4. 工作量证明 (Proof-of-Work)
 
 
 To implement a distributed timestamp server on a peer-to-peer basis, we will need to use a proof-of-work system similar to Adam Back's Hashcash[^6], rather than newspaper or Usenet posts. The proof-of-work involves scanning for a value that when hashed, such as with SHA-256, the hash begins with a number of zero bits. The average work required is exponential in the number of zero bits required and can be verified by executing a single hash.
 
 
-为了实现一个基于点对点的分布式时间戳服务器，我们需要使用类似 Adam Back 提出的哈希现金[^6]的工作证明系统，而不是像报纸或新闻组帖子那样。所谓的工作证明，就是搜索一个数，使得被哈希时，让得到的值（比如用 SHA-256 计算）以一定数量的零开头。随着所需零的数量的增加，所需的平均工作量会呈指数级增长，并且，这个工作量的验证只需通过算一次哈希。
+为了实现一个基于点对点的分布式时间戳服务器，我们需要使用类似 Adam Back 提出的哈希现金[^6]的工作量证明系统，而不是像报纸或新闻组帖子那样的东西。所谓工作量证明，就是搜索一个数，使得被哈希时，让得到的值（比如用 SHA-256 计算）以一定数量的零开头。随着所需零的数量的增加，所需的平均工作量会呈指数级增长，并且，这个工作量的验证只需通过算一次哈希。
 
+
+为了实现一个基于点对点的分布式时间戳服务器，我们需要使用类似 Adam Back 提出的哈希现金\[^6]那样的工作量证明系统，而不是依赖报纸或新闻组帖子。所谓工作量证明，就是要搜索一个数值，使得在对它进行哈希计算（比如使用 SHA-256）后，所得结果以若干个零开头。所需的平均工作量会随着所需零的数量增加而呈指数级增长，但验证这项工作量只需进行一次哈希计算即可。
+
+
+
+要在点对点网络中实现一个分布式时间戳服务器，我们需要采用一种工作量证明系统，它类似于亚当·伯克的哈希现金（Hashcash）[^6]，而非报纸或新闻组帖子。
+
+工作量证明，就是寻找一个特定值，该值经哈希运算后（如使用 SHA-256），其结果以若干个零开头。所要求的零位数越多，所需的平均工作量就呈指数级增长，而验证这个结果只需一次哈希运算。
+
+**优化思路说明：**
+
+*   **“要在…实现…，我们需采用…”**：比“为了实现…”更直接，语气更肯定。使用“采用”比“使用”更书面化。
+*   **“而非…”**：比“而不是…那样的东西”更简洁、书面化。
+*   **“工作量证明，就是…”**：将定义独立成句，清晰明了。
+*   **“寻找一个特定值，该值经哈希运算后…”**：完美解决了“hash”做动词的别扭感。用“经…运算后”的结构，清晰地描述了动作和结果。
+*   **“所要求的零位数越多，所需的平均工作量就…”**：采用了经典的“越…越…”句式，比两个版本都更符合中文逻辑，自然流畅。同时将“零的数量”精确为“零位数”。
+*   **“而验证这个结果只需一次哈希运算”**：将“verify”的对象明确为“这个结果”，比模糊的“工作量”更准确。
+*   
 
 For our timestamp network, we implement the proof-of-work by incrementing a nonce in the block until a value is found that gives the block's hash the required zero bits. Once the CPU effort has been expended to make it satisfy the proof-of-work, the block cannot be changed without redoing the work. As later blocks are chained after it, the work to change the block would include redoing all the blocks after it.
 
 
-在时间戳网络中，我们是这样实现工作证明的：在区块中不断增加一个随机数（Nonce），直至找到使这个区块的哈希值以特定数量的 0 开头的数值。一旦所投入的 CPU 算力，使其满足了工作量证明，那么这个区块就无法再被改动，除非重做所有计算。
-随着后续区块一层层被链接上，想改动这个区块，就得重做它之后所有区块的工作。
+在我们的时间戳网络中，实现工作量证明的方式是这样的：在区块中不断增加一个随机数（Nonce），直至找到使该区块的哈希值以特定数量的 0 开头的数值。一旦所投入的 CPU 算力，使其满足了工作量证明，这个区块就无法再被改动，除非重做所有计算。随着后续区块一层层被链接上，想要篡改当前区块，就意味着要重做它之后所有区块的工作。
+
+一旦投入的 CPU 计算得出了满足工作量证明的结果，
+
+
+
+在我们的时间戳网络中，实现工作量证明的方法是：不断递增区块中的一个随机数（Nonce），直到找到一个能使该区块的哈希值以规定数量的零开头的值。
+
+一旦耗费 CPU 算力完成此项证明，该区块便无法修改，除非重做整个工作。并且，随着后续区块逐一链接上来，修改当前区块还将意味着重做其后所有的区块。
+
+**优化思路说明：**
+
+*   **“实现…的方法是：…”**：清晰的启下句式。使用“递增”比“增加”更贴合“incrementing”。
+*   **“直到找到一个能使该区块的哈希值以…开头的值”**：这句吸收了第二版的优点，非常流畅地解决了“gives”的翻译问题，是一个完整的目的状语从句。
+*   **“一旦耗费 CPU 算力完成此项证明”**：这里将原文的被动语态“effort has been expended”转为主动，主语是隐含的“我们/矿工”。“完成此项证明”比“使其满足证明”更简洁，也避免了指代不清的问题。“此项证明”清晰指向前文的“工作量证明”。
+*   **“该区块便无法修改”**：“便”字的使用增强了因果联系和语气。
+*   **“除非重做整个工作”**：“the work”在这里指代的是整个寻找和计算的过程。“重做整个工作”是高度概括且有力的翻译，比“重做计算/工作量”都更准确。
+*   **“并且，随着后续区块逐一链接上来”**：“逐一链接”比“一层层链接”更书面化，同时保留了其形象感。“并且”让句子间的逻辑递进关系更明确。
+*   **“还将意味着”**：准确传达了“would include”所包含的推论和结果的意味。
+
+
 
 
 ![](images/proof-of-work.svg)
@@ -87,13 +124,13 @@ For our timestamp network, we implement the proof-of-work by incrementing a nonc
 The proof-of-work also solves the problem of determining representation in majority decision making. If the majority were based on one-IP-address-one-vote, it could be subverted by anyone able to allocate many IPs. Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes. We will show later that the probability of a slower attacker catching up diminishes exponentially as subsequent blocks are added.
 
 
-工作量证明，也解决了集体决策中的“代表权”问题，也就是“如何决定谁能代表大多数来做决定”。如果我们用“一个 IP 地址一票”的方式来决定谁是“大多数”，那么任何能控制大量 IP 的人都能操控结果。而工作量证明，本质是“一个 CPU 一票”。在这里，“大多数”的决定，就体现在投入了最多算力、因此也最长的那条链上。只要多数算力掌握在诚实节点手中，诚实链就增长得最快，速度上会远超任何竞争链。想要修改历史区块，攻击者就必须重做该区块以及其后所有区块的全部工作量证明，然后还要追上并反超诚实链的总工作量。我们稍后会证明：随着后续区块的增加，一个算力更落后的攻击者能追上的概率，会呈指数级下降。
+工作量证明，也解决了集体决策中的“代表权”问题，也就是“如何决定谁能代表大多数来做决定”。如果我们用“一个 IP 地址一票”的方式来决定谁是“大多数”，那么任何能控制大量 IP 的人都能操控结果。而工作量证明，本质是“一个 CPU 一票”。在这里，“大多数”的决定，就体现在投入了最多算力、因此也最长的那条链上。只要多数算力掌握在诚实节点手中，诚实链就增长得最快，速度上会远超任何竞争链。攻击者如果想要修改历史区块，就必须重做该区块以及其后所有区块的全部工作量证明，然后还要追上并反超诚实链的总工作量。我们稍后会证明：一个算力落后的攻击者，他能追上的概率，会随着新区块的增加而呈指数级下降。
 
 
 To compensate for increasing hardware speed and varying interest in running nodes over time, the proof-of-work difficulty is determined by a moving average targeting an average number of blocks per hour. If they're generated too fast, the difficulty increases.
 
 
-为了应对硬件算力的提升，以及随着时间推移可能产生的节点数量的变化，工作证明的难度会根据每小时平均区块数的移动平均值来决定。如果区块生成过快，难度就会提高。
+为了应对硬件算力的提升，以及随着时间推移可能产生的节点参与数量的变化，工作量证明的难度会根据每小时平均区块数的一个移动平均值来决定。如果区块生成过快，难度就会提高。
 
 
 ## 5. 网络 (Network)
@@ -111,24 +148,24 @@ The steps to run the network are as follows:
 
 网络运行的步骤如下：
 
-> 1. 新的交易广播给所有节点。
-> 2. 每个节点将收到的新交易打包到一个区块。
-> 3. 每个节点为自己的区块寻找符合要求的工作量证明。
-> 4. 某个节点找到证明后，他将该区块广播给所有节点。
+> 1. 新的交易会广播给所有节点。
+> 2. 每个节点把收到的新交易打包进一个区块。
+> 3. 每个节点开始为自己的区块寻找符合要求的工作量证明。
+> 4. 当某个节点找到证明后，他要将该区块广播给所有节点。
 > 5. 当且仅当区块内的所有交易都有效且未被双重支付时，其他节点才会接受该区块。
-> 6. 节点们通过将已接受区块的哈希作为上一个哈希，来创建并延伸下一个区块，以此表示对该区块的认可。
+> 6. 节点们通过将已接受区块的哈希作为前一个哈希，来创建下一个区块，以此表示对该区块的认可。
 
 
 Nodes always consider the longest chain to be the correct one and will keep working on extending it. If two nodes broadcast different versions of the next block simultaneously, some nodes may receive one or the other first. In that case, they work on the first one they received, but save the other branch in case it becomes longer. The tie will be broken when the next proof-of-work is found and one branch becomes longer; the nodes that were working on the other branch will then switch to the longer one.
 
 
-节点始终默认最长链是正确的那个，并在此基础上继续延展它。如果有两个节点同时向网络广播了不同版本的新区块，不同节点可能先接收到不同的版本。这种情况下，节点会优先在自己先收到的区块上工作，但也会保留另一个分支，以防后者成为最长链。当下一个工作量证明被找到，而其中一条分支领先、成为更长的链时，这个暂时的分歧就解决了。原本在另外一个分支上工作的节点们，会切换到更长的那条链上。
+节点始终默认最长链是正确的那个，并在此基础上持续延展它。如果有两个节点同时广播了不同版本的新区块，各节点可能先接收到不同的版本。这种情况下，节点会优先在自己先接收到的区块上工作，同时保留另一个分支，以防后者成为最长链。一旦下一个工作量证明被找到，而其中一条分支成为更长的链时，这个暂时的分歧就解决了。原本在另外一分支上工作的节点们，会切换到更长的链上。
 
 
 New transaction broadcasts do not necessarily need to reach all nodes. As long as they reach many nodes, they will get into a block before long. Block broadcasts are also tolerant of dropped messages. If a node does not receive a block, it will request it when it receives the next block and realizes it missed one.
 
 
-新交易的广播不必抵达所有的节点。只要能触达足够多的节点，这些交易迟早会被打包进一个区块。区块广播也容忍一些消息的丢失。如果一个节点没接收到某个区块，它会在收到下一个区块时意识到自己漏掉了一环，并主动请求补上这个缺失的区块。
+新交易的广播不必抵达所有的节点。只要能触达足够多的节点，这些交易迟早会被打包进区块。区块广播也容忍一些消息的丢失。如果一个节点未收到某个区块，它会在收到下一个区块时意识到自己漏掉了前一区块，并主动请求补全。
 
 
 ## 6. 奖励 (Incentive)
@@ -143,13 +180,13 @@ By convention, the first transaction in a block is a special transaction that st
 The incentive can also be funded with transaction fees. If the output value of a transaction is less than its input value, the difference is a transaction fee that is added to the incentive value of the block containing the transaction. Once a predetermined number of coins have entered circulation, the incentive can transition entirely to transaction fees and be completely inflation free.
 
 
-激励还可来源于交易费。如果一笔交易的输出值小于输入值，那么其中的差额就是交易费；这笔费用会一并计入该区块的奖励之中。一旦预设的货币总量发行完毕，系统的激励将完全由交易费承担，从而实现零通货膨胀。
+激励还可来源于交易费。如果一笔交易的输出值小于输入值，那么其中的差额就是交易费；它会被一并计入该区块的奖励之中。一旦预设总量的货币发行完毕，系统的激励将完全由交易费承担，从而实现零通货膨胀。
 
 
 The incentive may help encourage nodes to stay honest. If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments, or using it to generate new coins. He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.
 
 
-这种激励机制也能鼓励节点保持诚实。如果一个贪婪的攻击者，能够掌握比所有诚实节点都更多的算力，他将面临一个选择：是利用这些算力偷回自己的付款来行骗，还是用它来生成新币？他将会发现，按规则行事更有利可图 —— 因为规则能让他获得比其他所有人加起来都多的新币，这远比破坏系统、动摇自身财富的根基划算得多。
+这种激励机制也能鼓励节点保持诚实。如果一个贪婪的攻击者，能够掌握比所有诚实节点都更多的算力，他将面临一个选择：是利用这些算力偷回自己的付款来行骗，还是用它来生成新币？他将会发现，按规则行事更有利可图 —— 毕竟这些规则能让他获得比所有人加起来还多的新币，比起破坏系统、动摇自身财富的根基，划算得多。
 
 
 ## 7. 回收硬盘空间 (Reclaiming Disk Space)

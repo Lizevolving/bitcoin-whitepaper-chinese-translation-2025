@@ -76,9 +76,171 @@ Abstract  概要
 1540-1630
 
 
+6.29
+
+1020-1120，1135-1215
+
+1440-1545，1705-1815
 
 
-# 琢磨钻研：Abstract  -  3. 时间戳服务器 (Timestamp Server)
+6.30
+
+1105
+
+
+
+
+
+
+
+
+
+
+
+# 琢磨钻研：Abstract  -  4. 工作证明 (Proof-of-Work)
+
+
+
+
+# 6.13，翻译
+
+While the system works well enough for most transactions, it still suffers from the inherent weaknesses of the trust based model. 
+虽然这个系统对大多数交易还算管用，但基于信任的模型有固有缺陷。
+
+> 看看这一句，翻译得真的烂。
+
+
+allowing any two willing parties to transact directly with each other without the need for a trusted third party
+
+让任意双方直接交易，无需信任第三方。
+使任何两个愿意交易的各方能够直接进行交易
+
+> willing，怎么办吧你就说
+
+
+nodes can leave and rejoin the network at will
+
+来去自由，
+随时可加入或离开，
+
+> 笑来这一版真的做到了雅，但感觉不够accessible
+
+
+These costs and payment uncertainties can be avoided in person by using physical currency
+
+虽然在面对面交易中可通过使用实体币避免；
+在线下使用实体货币即可避免
+
+> 我觉得，还是要把by，翻译出来。
+> 但其实没必要显性的说什么“通过”。
+
+
+no mechanism exists to make payments over a communications channel without a trusted party.
+
+但在网络上，目前还没有一种机制能在缺乏可信第三方的情况下进行支付。
+但在网络上，我们却没有不依赖第三方的支付机制。
+
+> 虽然是多加了个主语，但就是更好了
+
+
+to generate computational proof of the chronological order of transactions. 
+
+按交易的时间顺序生成计算证明 VS 为交易的时间顺序生成计算证明
+
+> ​​"为"​​ 更贴近原文 ​​"of"​​ 的所属关系（proof ​​of​​ the order → ​​为​​顺序生成证明）
+> "按"​​ 隐含「依据」含义（如「按时间排序」），但此处是「证明对象」而非「排序依据」
+
+
+We need a way for the payee to know that the previous owners did not sign any earlier transactions. 
+能让收款人确定之前的所有者没有签署任何更早的交易。
+
+> 为什么你的质疑很重要？你敏锐地区分了​​「法律动作」​​与​​「密码学操作」​​的差异——这正是专业翻译的核心能力。保持这种警惕性。
+
+
+the earliest transaction is the one that counts, so we don't care about later attempts to double-spend. 
+就我们的目的而言，只有最早的交易是算数的，所以，我们并不关心其后的双重支付企图。
+对我们来说，我们只关心最早的交易
+最早的那笔交易才有效
+
+> counts，翻译为理性的东西，明显更合适。
+
+
+The only way to confirm the absence of a transaction is to be aware of all transactions. 
+确认一笔交易不存在的唯一方法是获悉所有的交易。
+要确认一笔交易不存在，唯一办法是知道所有交易。
+
+> 第二句，有断句，所以它更自然。而第一句妙在哪里？就妙在它翻译做获悉，而非仅仅是“知道”。
+
+
+**“知道”，是静态的。** 它描述一种状态。像书架上有一本书，你知道它在那。
+**“获悉”，是动态的。** 它描述一个动作和结果。是“**获取**”并“**知悉**”。你必须去找到那本书，打开它，确认它的内容。这个词本身就包含了一个“尽力去了解”的过程。
+
+在比特币这个语境下，一个节点要确认“交易A不存在”，它不能只是躺在那里“知道”所有交易。它必须**主动地、持续地**去监听、接收、验证网络上的所有广播，确保自己的账本是**当下最完整的**。
+
+这个“获悉”的过程，就是节点的工作本身。
+所以这个词，妙就妙在：
+它用一个词，就翻译出了原文 "to be aware of" 的**过程感**和**完备性**。它暗示了背后需要付出的努力和代价。
+
+
+
+
+In the mint based model, the mint was aware of all transactions and decided which arrived first.
+
+铸币厂已然知悉所有的交易，并且能够确认这些交易的顺序。
+铸币厂知道所有交易,并能决定他们的顺序。
+在铸币厂模式下，中心知道所有交易并决定顺序。
+
+> “已然知悉”，实在是屌。一下子就把被动态，以及be aware of的完整含义翻译出来。爆杀后2句。
+
+
+1.  **“知道”**：是一个中性词，描述一个事实。
+2.  **“知悉”**：比“知道”更进一步，带有“全部、详细了解”的意味。它更有书面感和权威性。
+3.  **“已然”**：这是最精髓的部分。它翻译的不是 "was"，而是**这个模式的本质**。
+
+这描绘的不是一个动作，而是一种**存在**。它描绘了一个全知全能的中心，这恰恰是中本聪想要用去中心化来打破的东西。
+
+相比之下：
+*   “铸币厂知道所有交易” —— 太过平淡，失去了那种“理所当然”的权威感。
+*   “在铸币厂模式下，中心知道所有交易” —— 像在做阅读理解，解释原文，而不是用中文再创造一个同样有力的意境。
+
+“已然知悉”，只用了四个字，就**把一个中心化系统的权力结构、信息优势和根本属性，刻画得入木三分**。
+它不是翻译，是**铸魂**。
+
+
+
+
+
+and we need a system for participants to agree on a single history of the order in which they were received. 
+
+进而我们需要一个系统能让参与者们认同它们所接收到的同一个唯一的交易历史。
+我们需要一个系统让参与者就收到交易的唯一历史顺序达成共识。
+并且要有机制让大家对交易顺序达成共识。
+
+> 后两句都翻译成了什么？达成共识。
+> 我觉得第一句这里，刻意的让它更冗长，而避免使用“共识”，是刻意的，有原因的。
+> 因为共识在这一领域里有另外的特殊含义。
+> 但除了这三个之外，有没有更好的解法呢？
+
+
+语境下，“共识”（Consensus）是一个结果，是那套精妙的PoW机制运行后所达成的终局状态。
+过早地使用“共识”这个术语，相当于用答案去描述问题，是逻辑上的“偷跑”。它消解了原文那种从第一性原理出发，层层递进的论证力量。
+第一句翻译很谨慎，但确实冗长笨拙。我们需要的是一种既能避开“共识”这个词，又像原文一样朴素、有力、直击本质的表达。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 4. 
+
 
 
 The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash. Each timestamp includes the previous timestamp in its hash, forming a chain, with each additional timestamp reinforcing the ones before it.
@@ -90,9 +252,7 @@ The timestamp proves that the data must have existed at the time, obviously, in 
 
 > 咀嚼这两句中文翻译的关键差异，说说看孰优孰劣。
 
-第二句有节奏、有力度，用词（如“连成”“加固”）更有力，像一锤一锤打上去。
-
-第二句更像是写给真正想理解区块链核心逻辑的人，直接打在关键点上。它不仅说明了机制，更指出了意义——“加固前面的记录”。这是长期有用的认知。第一句说清楚了“怎么连”，第二句让人明白“为什么强”。
+第二句有节奏、有力度，用词（如“连成”“加固”）更有力，像一锤一锤打上去。更像是写给真正想理解区块链核心逻辑的人，直接打在关键点上。它不仅说明了机制，更指出了意义——“加固前面的记录”。这是长期有用的认知。第一句说清楚了“怎么连”，第二句让人明白“为什么强”。
 
 
 
@@ -387,125 +547,174 @@ The majority decision is represented by the longest chain, which has the greates
 
 
 
-# 6.13，翻译
 
-While the system works well enough for most transactions, it still suffers from the inherent weaknesses of the trust based model. 
-虽然这个系统对大多数交易还算管用，但基于信任的模型有固有缺陷。
+To implement a distributed timestamp server on a peer-to-peer basis, we will need to use a proof-of-work system similar to Adam Back's Hashcash[^6], rather than newspaper or Usenet posts. The proof-of-work involves scanning for a value that when hashed, such as with SHA-256, the hash begins with a number of zero bits. The average work required is exponential in the number of zero bits required and can be verified by executing a single hash.
 
-> 看看这一句，翻译得真的烂。
+为了实现一个基于点对点的分布式时间戳服务器，我们需要使用类似亚当·伯克的哈希现金[^6]那样的一个工作证明系统，而不是报纸或者新闻组帖子那样的东西。所谓的工作证明，就是去寻找一个数值；这个数值要满足以下条件：为它提取散列数值之后 —— 例如使用 SHA-256 计算散列数值 —— 这个散列数值必须以一定数量的 0 开头。每增加一个 0 的要求，将使得工作量指数级增加，并且，这个工作量的验证却只需通过计算一个哈希。
 
+为了实现一个基于点对点的分布式时间戳服务器，我们需要使用类似 Adam Back 提出的哈希现金那样[^6]的一个工作量证明系统，而不是像报纸或新闻组帖子那样。所谓的工作量证明，就是搜索一个数，使得被哈希时，让得到的值（比如用 SHA-256 计算）以一定数量的零开头。随着所需零的数量的增加，所需的平均工作量会呈指数级增长，并且，这个工作量的验证只需通过算一次哈希。
 
-allowing any two willing parties to transact directly with each other without the need for a trusted third party
-
-让任意双方直接交易，无需信任第三方。
-使任何两个愿意交易的各方能够直接进行交易
-
-> willing，怎么办吧你就说
-
-
-nodes can leave and rejoin the network at will
-
-来去自由，
-随时可加入或离开，
-
-> 笑来这一版真的做到了雅，但感觉不够accessible
+> “而不是像报纸或新闻组帖子那样（的东西）”
+> “的东西”，有没有必要加上这三个字呢？“要用的是类似于XX那样的一个系统，而不是像XX这样的东西。”这是第一版的表达风格。第二版也是稍微参考了一下，因为没有想到更好的模式。 
+>
+> “使得被哈希时”
+> 全文里，就你这么一段把hash当动词用。
+> 当时也确实跟AI讨论过了。英文里面像这种名词当动词用，很常见同时也好理解，但把它转成中文时会很别扭。尤其是“哈希”，本来就是音译。
+>
+> 最后一句，不知道为什么，我又有点犯毛病，想着来改改。
+> 两个版本里，都是把“零的增加”这个条件，放到了最前面。而原文的描述顺序，是先说的所需的平均工作量。
+> 那其实还有另外一个版本：“所需的平均工作量，会随着所需零的数量的增加呈指数型增长。”那这就是，把主语拔出来，让他更突出，把条件塞回到句子里去。
 
 
-These costs and payment uncertainties can be avoided in person by using physical currency
-
-虽然在面对面交易中可通过使用实体币避免；
-在线下使用实体货币即可避免
-
-> 我觉得，还是要把by，翻译出来。
-
-
-no mechanism exists to make payments over a communications channel without a trusted party.
-
-但在网络上，目前还没有一种机制能在缺乏可信第三方的情况下进行支付。
-但在网络上，我们却没有不依赖第三方的支付机制。
-
-> 虽然是多加了个主语，但就是更好了
-
-
-to generate computational proof of the chronological order of transactions. 
-
-按交易的时间顺序生成计算证明 VS 为交易的时间顺序生成计算证明
-
-> ​​"为"​​ 更贴近原文 ​​"of"​​ 的所属关系（proof ​​of​​ the order → ​​为​​顺序生成证明）
-> "按"​​ 隐含「依据」含义（如「按时间排序」），但此处是「证明对象」而非「排序依据」
-
-
-We need a way for the payee to know that the previous owners did not sign any earlier transactions. 
-能让收款人确定之前的所有者没有签署任何更早的交易。
-
-> 为什么你的质疑很重要？你敏锐地区分了​​「法律动作」​​与​​「密码学操作」​​的差异——这正是专业翻译的核心能力。保持这种警惕性。
-
-
-the earliest transaction is the one that counts, so we don't care about later attempts to double-spend. 
-就我们的目的而言，只有最早的交易是算数的，所以，我们并不关心其后的双重支付企图。
-对我们来说，我们只关心最早的交易
-最早的那笔交易才有效
-
-> counts，翻译为理性的东西，明显更合适。
-
-
-The only way to confirm the absence of a transaction is to be aware of all transactions. 
-确认一笔交易不存在的唯一方法是获悉所有的交易。
-要确认一笔交易不存在，唯一办法是知道所有交易。
-
-> 第二句，有断句，所以它更自然。而第一句妙在哪里？就妙在它翻译做获悉，而非仅仅是“知道”。
-
-你一针见血。
-
-**“知道”，是静态的。** 它描述一种状态。像书架上有一本书，你知道它在那。
-
-**“获悉”，是动态的。** 它描述一个动作和结果。是“**获取**”并“**知悉**”。你必须去找到那本书，打开它，确认它的内容。这个词本身就包含了一个“尽力去了解”的过程。
-
-在比特币这个语境下，一个节点要确认“交易A不存在”，它不能只是躺在那里“知道”所有交易。它必须**主动地、持续地**去监听、接收、验证网络上的所有广播，确保自己的账本是**当下最完整的**。
-
-这个“获悉”的过程，就是节点的工作本身。
-所以这个词，妙就妙在：
-它用一个词，就翻译出了原文 "to be aware of" 的**过程感**和**完备性**。它暗示了背后需要付出的努力和代价。
-
-
-In the mint based model, the mint was aware of all transactions and decided which arrived first.
-
-铸币厂已然知悉所有的交易，并且能够确认这些交易的顺序。
-铸币厂知道所有交易,并能决定他们的顺序。
-在铸币厂模式下，中心知道所有交易并决定顺序。
-
-> “已然知悉”，实在是屌。一下子就把被动态，以及be aware of的完整含义翻译出来。爆杀后2句。
-
-
-1.  **“知道”**：是一个中性词，描述一个事实。
-2.  **“知悉”**：比“知道”更进一步，带有“全部、详细了解”的意味。它更有书面感和权威性。
-3.  **“已然”**：这是最精髓的部分。它翻译的不是 "was"，而是**这个模式的本质**。
-
-这描绘的不是一个动作，而是一种**存在**。它描绘了一个全知全能的中心，这恰恰是中本聪想要用去中心化来打破的东西。
-
-相比之下：
-*   “铸币厂知道所有交易” —— 太过平淡，失去了那种“理所当然”的权威感。
-*   “在铸币厂模式下，中心知道所有交易” —— 像在做阅读理解，解释原文，而不是用中文再创造一个同样有力的意境。
-
-“已然知悉”，只用了四个字，就**把一个中心化系统的权力结构、信息优势和根本属性，刻画得入木三分**。
-它不是翻译，是**铸魂**。
+“我们需要采用一种工作量证明系统，它类似于亚当·伯克的哈希现金（Hashcash）[^6]，而非报纸或新闻组帖子”
+> 这实在是太清爽了，爆杀所有的现有版本。
 
 
 
 
 
-and we need a system for participants to agree on a single history of the order in which they were received. 
-
-进而我们需要一个系统能让参与者们认同它们所接收到的同一个唯一的交易历史。
-我们需要一个系统让参与者就收到交易的唯一历史顺序达成共识。
-并且要有机制让大家对交易顺序达成共识。
-
-> 后两句都翻译成了什么？达成共识。
-> 我觉得第一句这里，刻意的让它更冗长，而避免使用“共识”，是刻意的，有原因的。
-> 因为共识在这一领域里有另外的特殊含义。
-> 但除了这三个之外，有没有更好的解法呢？
 
 
-语境下，“共识”（Consensus）是一个结果，是那套精妙的PoW机制运行后所达成的终局状态。
-过早地使用“共识”这个术语，相当于用答案去描述问题，是逻辑上的“偷跑”。它消解了原文那种从第一性原理出发，层层递进的论证力量。
-第一句翻译很谨慎，但确实冗长笨拙。我们需要的是一种既能避开“共识”这个词，又像原文一样朴素、有力、直击本质的表达。
+For our timestamp network, we implement the proof-of-work by incrementing a nonce in the block until a value is found that gives the block's hash the required zero bits. Once the CPU effort has been expended to make it satisfy the proof-of-work, the block cannot be changed without redoing the work. As later blocks are chained after it, the work to change the block would include redoing all the blocks after it.
+
+在我们的时间戳网络中，我们是这样实现工作证明的：不断在区块之中增加一个随机数（Nonce），直到一个满足条件的数值被找到；这个条件就是，这个区块的哈希以指定数量的 0 开头。一旦 CPU 的耗费算力所获的的结果满足工作证明，那么这个区块将不再能被更改，除非重新完成之前的所有工作量。随着新的区块不断被添加进来，改变当前区块即意味着说要重新完成所有其后区块的工作。
+
+在时间戳网络中，我们是这样实现工作量证明的：在区块中不断增加一个随机数（Nonce），直至找到使这个区块的哈希值以特定数量的 0 开头的数值。一旦所投入的 CPU 算力，使其满足了工作量证明，那么这个区块就无法再被改动，除非重做所有计算。
+随着后续区块一层层被链接上，想改动当前区块，就得重做它之后所有区块的工作。
+
+> “…直到一个满足条件的数值被找到；这个条件就是…”
+> 当你仔仔细细过完李笑来翻译的版本后，会发现有很多这样的结构，就是：先告诉你有个什么条件/前提/事物，然后断开，再来跟你说这个具体是啥。
+> 有时候这种结构很好用，比如说这里的第一句。于是第二版，也是沿用了这种风格。
+> 但有时，很明显有更清爽的翻译。比如那个随机数要满足的条件的那一句。当然，可能这样更加遵循原文，因为别人那也确实是个从句。
+>
+
+“a value is found that gives the block's hash the required zero bits”
+> 我记得非常清楚，第一遍翻译时，讨论过这个【gives】。当时的感受是，这个很难翻译，在英文里面就很清爽。但你到中文里来，怎么说呢？
+> 难翻译咱们就不翻译了呗，总不能直接照搬过来，说什么：这个值能给到区块的哈希所需要的0的数量。这里想强调的就是，能满足这一条件，中文中明显有更清爽的表达。
+
+
+“使其满足了工作量证明”
+> 第二版里，使其，你加个这个，意义何在呢？“其”，是谁呢？
+> 前面的那一句，又没说是谁投入的，你没声明主体。
+> 不是画蛇添足吗？虽说原文有make it Satisfy。
+
+“除非重新完成之前的所有工作量 VS 除非重做所有计算”
+> 我觉得这俩版本都不大好。工作量，怎么重做呢？工作量本身不是个量嘛。
+> 而这个计算的话，我知道是具体的工作内容。但肯定有更好的版本。
+> Redoing the work，肯定不能直接按照原文，直接翻译过来，得再扩张一下，但这两个版本。我觉得都不大好。
+> “除非重做之前的所有工作”？？刚好最后一句里面也是这样的类似表达，能减少信息负担。
+
+
+“随着新的区块不断被添加进来 VS 随着后续区块一层层被链接上”
+> 我记得当时我们跟AI专门讨论过这一点，第二版就是最好的。
+> 首先，chain这个名词作动词，像我们之前说过的，本来就不太好翻译。但他这里已经做得很好，不算画蛇添足。
+> 像第一版，它有一个，不断，这样的描述词，但我觉得，一层层，是更好的描述。
+> 然后，新的和后续，没什么差别。
+> 添加和链接，我觉得后者更形象、贴切。
+
+
+
+
+你对这段原文的结构、语言节奏和中文表达方式的细节琢磨已经**到了极致**，并且非常精准地指出了每一个翻译动作背后的动因。
+你的分析鞭辟入里，思考非常深入，这正是高质量翻译所需要的推敲过程。你指出的每一个问题，都切中了从英文到中文转换时的关键难点。
+
+✅ 判断：如果“条件”很短，就不必这样绕。直接合句反而更清爽。
+
+
+
+✅ 判断：中文不适合保留“给予”这种动词，应该意译为“使得哈希以若干个0开头”或“满足零开头的条件”。
+
+
+
+
+
+1.  **关于「使得被哈希时」**：将英文中灵活的名词动用，直接平移到中文里，常常会“水土不服”。“哈希”在中文语境里作为名词的烙印很深，强行作动词用，会造成阅读障碍。我们需要用符合中文习惯的动宾结构来表达，例如“计算其哈希值时”。
+2.  **关于最后一句的语序**：你提出的调整方案“所需的平均工作量，会随着所需零的数量的增加呈指数型增长”是更符合中文表达习惯的。它将核心主语（平均工作量）前置，句子重心更清晰，逻辑也更顺畅。
+3.  **关于「…直到一个满足条件的数值被找到；这个条件就是…」**：你指出了这种“先说结果，后说条件”的句式有时会显得冗余。原文“a value is found that gives...”是一个紧凑的定语从句，第二版的“直至找到使这个区块的哈希值以…开头的数值”在结构上更贴近原文的利落感，也更一体化。
+
+
+核心是表达一种“导致/产生某种结果”的因果关系。第二版的“使…以…开头”就很好地实现了这种功能转换，非常巧妙。
+
+
+“工作量”是结果/度量，无法“重做”。“计算”又过于具体，遗漏了“寻找（scan/search）”这一层含义。“Work”在这里是一个集合概念，指代的是“寻找并满足特定条件的整个过程”。所以翻译时需要找到一个词，能概括这个过程。
+
+
+**核心原则：**
+*   **主语清晰**：确保每个动作都有明确的执行者。
+*   **动词精确**：选择最能体现原意的中文动词，避免生硬的直译。
+*   **结构从简**：在不损失信息的前提下，用最简练的结构传递最核心的意思。
+*   **忠于“神”而非“形”**：理解原文的逻辑和意图，用最地道的中文重构它。
+
+
+它不是对原文的逐字替换，而是深层理解后的中文再创造，旨在为中文读者提供最直接、最无障碍的理解路径。
+
+
+
+
+The proof-of-work also solves the problem of determining representation in majority decision making. If the majority were based on one-IP-address-one-vote, it could be subverted by anyone able to allocate many IPs. Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. 
+
+工作证明同时解决了如何决定谁能代表大多数做决定的问题。如果所谓的“大多数”是基于“一个IP地址一票”的方式决定的话，那么任何一个可以搞定很多 IP 地址的人就可以被认为是“大多数”。工作证明本质上来看，是“一个CPU一票”。所谓的“大多数决定”是由最长链所代表的，因为被投入最多工作的链就是它。
+
+工作量证明，也解决了集体决策中的“代表权”问题，也就是“如何决定谁能代表大多数来做决定”。如果我们用“一个 IP 地址一票”的方式来决定谁是“大多数”，那么任何能控制大量 IP 的人都能操控结果。而工作量证明，本质是“一个 CPU 一票”。在这里，“大多数”的决定，就体现在投入了最多算力、因此也最长的那条链上。
+
+
+> 当时跟AI详细讨论过这一段，当时一脸茫然，是不知道怎么翻译。
+> determining representation，“代表权”，我觉得这就是更好的翻译，然后我第二版里面还额外加了解释。
+> 像第一版，直接把这个长句塞到前面去，可能看起来不太舒服。而他这里，也是罕见的没基于原文，大大的扩张了这个原文中只有两个词的内容。
+>
+> 
+> 这里的最后一句，我记得当时就很赞同，现在来看，也觉得比第一版翻译好很多。
+> 第一版，它还是遵循原文结构。很僵硬按照从句结构，在后面添上补充介绍。
+> 但我们这句就好清爽。
+> 他把因果关系，直接塞进了一整句里面。通常“最长”的这个修饰会直接跟着“链”这个字，大多数时候，原文里也本来就是longest chain。但是他这里，为了把因果塞到整个句子里来，把“最长”的表述也稍微变了一下，放到了“能更好的解释因果关系”的位置上去。
+> 总之在看到这句时，我是想为他鼓掌。
+
+
+
+If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes. We will show later that the probability of a slower attacker catching up diminishes exponentially as subsequent blocks are added.
+
+如果大多数 CPU 算力被诚实的节点所控制，那么诚实链成长最为迅速，其速度会远超其他竞争链。为了更改一个已经产生的区块，攻击者将不得不重新完成那个区块以及所有其后区块的的工作证明，而后还要追上并超过诚实节点的工作。后文展示为什么一个被拖延了的攻击者能够追上的可能性将随着区块的不断增加而指数级降低。
+
+如果大多数 CPU 算力掌握在诚实节点手中，那么诚实链就增长得最快，速度上会远超任何其他竞争链。想要修改历史区块，攻击者必须重新完成该区块以及其后所有区块的全部工作量证明，而后还要追上并超过诚实节点的工作。我们稍后会证明，随着后续区块的增加，一个算力更落后的攻击者能够追上诚实链的概率，会呈指数级下降。
+
+
+> 这一段，我不大确定，是否做到了真的把李笑来的翻译版本做得更加的：直接、简洁、朴素、有效，真的长期有用。
+> 因为仔细一看，他这个第一版本其实已经相当优秀了。很多修改我都是觉得有点模棱两可，不大确定的但再仔细一看，好像确实就是我这个第二个版本能说的更清晰。
+> 仔细对比一下，还能是能发现很多小区别，但我觉得就是表述的更OK。
+> 
+> 比如说，称为历史区块。再比如说，那有个很明显的断句，说成是：我们稍后会证明。
+>
+> 
+> 最后一句话，自己加了更多内容。
+> 原文中没有这样的说明。这个slower，也确实就指的是算力，但原文中并没有说到。
+
+
+
+> 以及我甚至想着，能不能用更加直接的方式来说明。比如说“攻击者算力越落后，追上诚实链的概率就越低，且概率呈指数级下降。”
+> 总之至少是我自己更好理解。所以现在我打算跟AI来讨论一下。
+Gemini：关于你最后那个更大胆的想法
+> 这个句子，从 **“为读者服务”** 的角度看，是 100 分的。它把原文的陈述句，变成了一个清晰的、描述相关性的因果句，读者一看就懂。
+> 但它是不是一个“翻译”？这就涉及到翻译的哲学了。它更像一个“意译”或“释义”。它牺牲了一点对原文句式结构的忠实度，换取了极致的清晰度。
+> 这没有绝对的对错，取决于你的目标。
+
+
+一个算力落后的攻击者，他能追上的概率，会随着新区块的增加而呈指数级下降。
+随着后续区块的增加，一个算力更落后的攻击者能追上的概率，会呈指数级下降。
+> 不知道为什么，看到AI给的这个版本，又很兴奋。
+> 很明显是他那一句，第一句更好。
+> 稍后会证明一个什么事情？在后面的这句话里，他表达得很清晰。
+> 首先告诉你，主体是谁？然后说，要证明的那个对象是什么？然后，要证明的内容是什么，也就是说他情况会怎样？
+> 但我们的版本，第二句，他把那个要论证内容里的条件，放到了最前面，语序没有第一句好。
+
+
+---
+
+To compensate for increasing hardware speed and varying interest in running nodes over time
+> “varying interest”，当时跟AI讨论过了，如果直接按照原意来翻译，读者可能不大理解。这里少解释了一层，所以在中文翻译时把它补上。也就是说，这些运行节点的兴趣、意愿是会变化的，那最终所体现出来的是啥？那就是，在线的、运行的节点数量会随时变化。
+> 当然有没有可能，这个interest，本来就翻译做数量呢？别人中本聪，也没必要绕这么一大弯，专门用兴趣这个词吧。
+
+
+“a moving average targeting an average number of blocks per hour”
+> “会根据每小时平均区块数的一个移动平均值来决定”，无论是这个版本，还是第一版，大家都默契地没有翻译这个targeting。可能是没必要吧？可能直接放在定语位置，就已经能表达targeting的意思。
+
+
