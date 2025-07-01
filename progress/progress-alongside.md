@@ -87,8 +87,9 @@ Abstract  概要
 
 1105-1150，1500-1610
 
+7.1
 
-
+1130-1205，1500-1610，2035-2140
 
 
 
@@ -101,97 +102,314 @@ Abstract  概要
 
 
 
-## 6.13，翻译
+
+
+> **Abstract.** 
+
+A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution. Digital signatures provide part of the solution, but the main benefits are lost if a trusted third party is still required to prevent double-spending. We propose a solution to the double-spending problem using a peer-to-peer network. The network timestamps transactions by hashing them into an ongoing chain of hash-based proof-of-work, forming a record that cannot be changed without redoing the proof-of-work. The longest chain not only serves as proof of the sequence of events witnessed, but proof that it came from the largest pool of CPU power. As long as a majority of CPU power is controlled by nodes that are not cooperating to attack the network, they'll generate the longest chain and outpace attackers. The network itself requires minimal structure. Messages are broadcast on a best effort basis, and nodes can leave and rejoin the network at will, accepting the longest proof-of-work chain as proof of what happened while they were gone. 
+
+一个纯粹的点对点版本的电子现金系统，将允许在线支付直接从一方发送到另一方，而无需通过金融机构。数字签名虽然提供了部分解决方案，但，若是仍然需要被信任的第三方来防止双重支出的话，那么电子支付的主要优势就被抵消了。我们提出一个方案，使用点对点网络去解决双重支出问题。点对点网络将为每笔交易标记时间戳，方法是：把交易的散列数据录入一个不断延展的、以散列为基础的工作证明链上，形成一个如非完全重做就不可能改变的记录。最长链，一方面用来证明已被见证的事件及其顺序，与此同时，也用来证明它来自于最大的 CPU 算力池。只要绝大多数 CPU 算力被良性节点控制 —— 即，它们不与那些尝试攻击网络的节点合作 —— 那么，良性节点将会生成最长链，并且在速度上超过攻击者。这个网络本身需要最小化的结构。信息将以最大努力为基本去传播，节点来去自由；但，加入之时总是需要接受最长的工作证明链作为它们未参与期间所发生之一切的证明。
+
+一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。数字签名能解决部分问题，但，如果还要靠信任第三方来防止“一币多花”，电子支付的主要优势就被没了。我们提出，用点对点网络解决双重支付问题。该网络给每笔交易标记时间戳，方法是：把交易哈希值打包记录到一条不断延展的、以散列为基础的工作量证明链上，谁想篡改记录就得重做所有计算。最长的链，既用于证明所见证事件的顺序，也证明它来自最大的 CPU 算力池。只要大多数算力掌握在诚实节点手里（即，不与那些尝试攻击网络的节点合作），这些节点将会生成最长链，攻击者追不上。网络本身需要最简单的结构。消息尽力而为地广播，而节点随时可加入或离开，同时，接受最长的工作量证明链作为他们离开期间所发生事件的证明。
+
+> 第一就是这毛病第一季我们又能看到这样的毛病。它又是非常僵硬的遵循原文。From one party to another？你看别人英语本文中都是用了省略的。说的是another，而不是another party。你这翻译过来怎么就不能省略了呢？怎么就不能说成更简洁的形式？允许从一方发到另一方那不就相当于说是任何人都可以吗？Homage优势一样的僵硬的照搬提供了部分解决方案。能解决部分问题。说的是同理，你这就表达的是一个意思。那你就是更清爽的版本吗？但就是更清爽的版本。
+>
+> “一币多花”
+> 这里可能是个大胆的动作我不知道好不合适。在我们第二版翻译中之后接到double spending的时候也用了这样的方式。但我觉得第一次出现我们是不是得用一个更正式一点的方式。就直接说成双重支付。在之后。那个lost在第一版里被翻译作抵消其实是很妙的。能很好的成绩。上文就刚说了数字签名的优势，然后来说这个缺点。用抵消这个词体现出。好坏之间的冲突？
+>
+> 录入  VS  打包记录到
+> 英文中非常好表达，对吧？你需要说他醒就好了。但中文里面。你就得找到相应的好词而很明显，第二版是更好的。
+>
+> 形成一个如非完全重做就不可能改变的记录  VS  谁想篡改记录就得重做所有计算
+> 又是严格遵循原文结构和。基于原文含义之间的冲突了。第一版，它是非常严苛的。第一版非常严苛的直接就for me record照搬一下来了。然后把后面的修饰部分搬到定语位置。把后面的从句部分刚好就搬到这相应的定语位置。很明显，第二版更像人话更好懂但有没有一个更好的版本呢？我现在来尝试一下，形成一个只有完全重做才能被篡改的记录。
+>
+> 已被见证的事件及其顺序  VS  所见证事件的顺序
+> 注意到这里的细微差别没有。Witnessed该怎么翻译呢？想说的本来就是这个事情已经被见证了，那我们就只需要看哪个翻译更好懂。以及第二个差别就是。且第一版在第一版里面是有两个东西是证明了两个东西。事件和顺序，但在第二版里不一样的。从这里连死你就能看出来一个是极其，一个是德。那这个链到底有没有同时做到这两点呢？
+>
+> 被良性节点控制  VS  掌握在诚实节点手里
+> 整份白皮书里有很多描述这种节点掌控算力的句子。而每到这里，我都会倾向于用这个手这样一个意象。因为你对照过来这就是中文中常见的。而且确实更好懂。
+>
+> 并且在速度上超过攻击者  VS  攻击者追不上
+> “outpace attackers”，其实当时在最开始的时候我就已经为李笑来能够。点出在速度上，这一点感到。感到佩服了。因为像这种out。加的词是比较难翻译的。当然可能是我太嫩了吧。然后这两个版本描述的是同一个东西。只不过第一版。主语是城市节点第二版这主语就变成了攻击者。算是有一点背离原文的结构因为你说着说着突然变了个主语。。但很明显很就是给人一种干脆利落的感觉。Minimal。你说他是做最简化最小化还是最简单的，我觉得都差不多吧，想表达的都是那个意思。什么意思呢？mini mile的意思。Minimal minimal的意思。所以说***斗都滚去看英文吧。看到这个英文词一目了然。
+>
+> on a best effort basis
+> 整篇文章中关于这个说明出现过不止一次。为什么说让我印象非常深刻呢？第一个就是。李笑来翻他这第一版里翻译得很僵硬，真的就是完全对仗过来说什么以最大努力为基本。第二个就就是我本身我。我对这个东西本身很好奇。就是为什么要做到尽力而为呢？为什么要做到今年人为的广播呢？而他又如何做到呢？尽力而为的广播，但同时又无需触达每个节点。这到底是怎样的一种弹性呢？
+>
+> 对于来去自由，我们当时也讨论过了。已经说过你下来的这个第一版，这个来去自由这样的描述其实非常好的做到了信达雅，非常优雅的就非常完好地传达出了at wheel。这种全凭意愿的感觉。但感觉总感觉还是不够。accessible，所以我们第二版就会比较保守。
+>
+> “节点可自由来去，重返时只需接受最长的工作量证明链，作为其离线期间所发生之一切的证明。”
+> 结论中有同样的依据，而我们第二版在结论中的我们第二版在结论中的翻译是这样的。那在摘要处的这个第一版的这一句是不是也可以换一下了？感觉这就是更清爽的。
+
+
+## 1. 
+
+Commerce on the Internet has come to rely almost exclusively on financial institutions serving as trusted third parties to process electronic payments. While the system works well enough for most transactions, it still suffers from the inherent weaknesses of the trust based model. Completely non-reversible transactions are not really possible, since financial institutions cannot avoid mediating disputes. The cost of mediation increases transaction costs, limiting the minimum practical transaction size and cutting off the possibility for small casual transactions, and there is a broader cost in the loss of ability to make non-reversible payments for non-reversible services. With the possibility of reversal, the need for trust spreads. Merchants must be wary of their customers, hassling them for more information than they would otherwise need. A certain percentage of fraud is accepted as unavoidable. These costs and payment uncertainties can be avoided in person by using physical currency, but no mechanism exists to make payments over a communications channel without a trusted party.
+
+互联网商业几乎完全依赖金融机构作为可信第三方去处理电子支付。虽然针对大多数交易来说，这个系统还算不错，但，它仍然被基于信任的模型所固有的缺陷所拖累。完全不可逆转的交易实际上并不可能，因为金融机构不能避免仲裁争议。仲裁成本增加了交易成本，进而限制了最小可能交易的规模，且干脆阻止了很多小额支付交易。除此之外，还有更大的成本：系统无法为那些不可逆的服务提供不可逆的支付。逆转的可能性，造成了对于信任的需求无所不在。商家必须提防着他们的顾客，麻烦顾客提供若非如此（如若信任）就并不必要的更多信息。一定比例的欺诈，被认为是不可避免的。这些成本和支付不确定性，虽然在人与人之间直接使用物理货币支付的时候是可以避免的；但，没有任何一个机制能在双方在其中一方不被信任的情况下通过沟通渠道进行支付。
+
+当今的互联网商业，几乎都靠金融机构作为可信第三方来处理电子支付。这套系统在多数情况下行之有效，但其基于信任的模式存在固有缺陷。比如：交易无法彻底不可逆，因为金融机构必须调解争议。调解成本会让交易成本变高，限制最小交易规模，且干脆阻断小额支付的可能性。此外，更大的成本是：我们无法为不可逆的服务提供不可逆的支付。逆转的可能性，导致了对信任的需求无处不在。商家必须提防顾客，麻烦他们提供本不必要的更多信息。一定的欺诈也被认为是难以避免。这些成本和支付不确定性，虽然在面对面交易中可通过使用实体货币避免；但在网络上，我们却没有一种机制能在不依赖第三方的情况下进行支付。
+
+> 加入当今的。我觉得OK。当然是锦上添花的说明。说是加入个时间戳。算是加入一个时间戳。我同时注意这个almost exclusively。Dry看着有点懵，但其实就是。几乎完全。 Almost这个副词。来进一步修饰那个副词。
+> 对于works well，你看这英文里就可以表示得如此清爽。但到咱们中文来，你又得再琢磨一下。我记得。最开始看的一个。比较土的版本是还算管用。然后这个第一版里的还算不错。也比较土。行之有效，就显得高级的多。我同时确实。演得很好的囊括这个works well。这就可以体现出中英文的差异了对吧？各语言都有其独特的美。然后对于这一句。Suffers from其实是比较难翻译的。第一版比较呆就直接翻译做了被什么所拖累。而第二版是没体现出来。他直接说的是存在。他直接把。对应的中文位置上的那个词换成了存在。我不知道算不算好翻译。
+> 然后在这里加了，比如。我觉得OK。我甚至怀疑是不是中本聪当时忘家了，因为他这后面本来就是在说例子。然后这一句你就能看到第一版是很笨拙的在照搬结构。第二版则是根据语义来进行的翻译。没有遵循原文结构。而同时我觉得第二版里的这个词得换一下。因为不能避免和必须这两者。所表达的可能还是有点差别吧。
+> Only注意到对于后面的那三个影响，第一版是用了逐渐递进的方式。但我仔细看了下原文它后面的那两个小音响。你注意它是个非谓语词组。它后面两个所描述的影响。在那三个并列的影响内。后面的两个小的是非谓语词组表示出来的。
+> 后面一句大差不差。你看到两个版本都默契地添上了主语。你说这里是说系统好还是说我们更好呢？你也不知道。用我们的话可能更加accessible。
+> 
+> 我觉得第一版本实在太在这个地方实在太厉害了。他把那个spreads翻译成无处不在。
+> “将更广泛”，果不其然，你看，在官网放着的中文版本都是这样的平庸翻译。还是我们的第一晚好，以至于我们的第二版都是从他那儿借过来的。还有像这里的hustle。
+>
+> hassling them for more information than they would otherwise need
+> 这其实是非常难翻译的。我觉得很考验功力。最对应的词确实就是麻烦。首先那个动词我觉得最对应的确实就是麻烦。Hustle。就是麻烦你了不好意思麻烦了里面的那个。麻烦。还有这个otherwise其实我一直没搞懂放在这里是干嘛。
+> 并不知道怎么翻译。第一版的地方看着太别扭然后第二版又感觉少点啥。Thank。可能是更清爽的。总之想表达的就是。必须得信任。才可能不需要提供这些额外的信息。否则就总是得提供。
+>
+> 再来看最后一段吧，这反应第一版这翻译的实在是太僵硬了。
+> “在面对面交易中可通过使用实体货币避免”，这对比之下，实在是我们第二版实在是清爽太多了，而且也是完全。对应着原文来的。我当时也讨论过了这个沟通渠道。在这个语境下就是网络。你反倒说网络是跟accessible的。然后这是不是出问题了without a。Without a trusted party。他第一版里面居然翻译做事。其中一方不被信任的情况下。嗯，仔细一看，这一次的可信方里面，这一次确实是没有这个没有sword这个词，那到底是说缺可信的？三方还是说交易双方有一方。Address确实是没诶。这一次这里确实是没有sold这个词。那这一次的对象到底指的是第三方还是交易双方？的其中一方呢？交易中的其中一方呢？加个主语，我们肯定是锦上添花。
+
+
+
+
+
+What is needed is an electronic payment system based on cryptographic proof instead of trust, allowing any two willing parties to transact directly with each other without the need for a trusted third party. Transactions that are computationally impractical to reverse would protect sellers from fraud, and routine escrow mechanisms could easily be implemented to protect buyers. In this paper, we propose a solution to the double-spending problem using a peer-to-peer distributed timestamp server to generate computational proof of the chronological order of transactions. The system is secure as long as honest nodes collectively control more CPU power than any cooperating group of attacker nodes.
+
+我们真正需要的是一种基于加密证明而非基于信任的电子支付系统，允许任意双方在不需要信任第三方的情况下直接交易。算力保障的不可逆转交易能帮助卖家不被欺诈，而保护买家的日常担保机制也很容易实现。在本论文中，我们将提出一种针对双重支出的解决方案，使用点对点的、分布式的时间戳服务器去生成基于算力的证明，按照时间顺序记录每条交易。此系统是安全的，只要诚实节点总体上相对于相互合作的攻击者掌握更多的 CPU 算力。
+
+我们真正需要的，是一个基于加密证明、而非基于信任的电子支付系统，允许任意两方直接交易，无需可信第三方。通过让交易在计算上难以撤销来保护卖家免受欺诈，同时通过常规的托管机制来保护买家。本文中，我们提出一个针对双重支付问题的方案：利用一个点对点的、分布式的时间戳服务器，为交易的时间顺序生成计算证明。只要诚实节点总体上控制的 CPU 算力超过任何协同攻击者节点，该系统就是安全的。
+
+
+> 第一句，还是我们的特有习惯，遵循：尽量能断就断，通过加这加那的符号，让信息密度更舒缓。
+> 
+> 第二句，其实像第一版的这种，在什么什么的情况下，已经算是比较好的翻译形式，但我还是想拆出来，但要不要加个【而】呢？
+>
+> 
+> 接下来这一句，两个版本都不大好，
+> 第一版，非常遵循原文，整个结构都是搬下来的。这个版本里，原文中的定语从句中的内容，被他非常完好的放在主语前面。甚至从头到尾，第一版本里、笑来的版本从头到尾都这样子。他都是更加遵循原作者，原文的语序。
+> 第二版的问题在哪里？完全拆掉了。他是把结构拆掉，从语义传输的角度出，优先想着把意思说清楚，所以就没有遵循原文结构。
+> 
+> computationally，第一版翻译做，算力保障的。而我们第二版，还是依据“+ly”类型的传统翻译，就是什么什么方面，那就是计算上的。
+>
+> 
+> 至于【不可逆转  VS  难以撤销】的程度描述差别。你也不太好说，原文中是impractical。那第二版，可能就更加遵循它的意思。确实也没人撤销吧？我记得好像是难度是2的256次方的。没人干这蠢事吧？
+> 
+> 而这一句的后半段，你也能看到，依然非常遵循原文，“很容易实现”。
+> 第一版，就强调容易实现。而第二版，更强调这个机制本身，突出了另一个点。算是跟第二版的前一句形成了对照。
+> 你说，到底该翻译作日常，还是常规；担保，还是托管呢？咱也不知道，对这个东西我本身不太熟。
+>
+> 
+> 再来看computational proof，
+> 第一版里，翻译的是，基于算力的证明。为什么要这么做？
+> 而我们，为什么在当时在第二版里翻译成，计算证明？
+> 
+> 以及又到了这一段，当时我纠结了很久的地方，of the chronological order of transactions。
+> 注意，第一版单独拆了一部分出来，按照时间顺序记录每条交易。他罕见的没按照原文意思来。你这是不是额外解释？其实这一段。我不大理解。当然，对于。我只是对于这个工作原理本身肯定是读了很多遍了，是没问题的。
+> 只是说在这个翻译这一方面，我不知道这一坨要怎么解释。
+> 
+> 最后一句，当然是先把条件前置。第一版太怪了。条件前置才是中文常见形式。条件前置，再说结论，符合用户预期。
+> 然后，第二版还是牺牲了对原文结构的忠诚，原文那个动词是control。但到我们第二版的翻译里来，动词就变成了超过。
+> 那有没有遵循原文结构，但同时比第一版表达的更清爽的版本呢？我现在来试一下：只要诚实节点总体上比协同的攻击者掌握更多的CPU算力。
+> 
+> collectively，怎么翻译。我觉得，协同，是更好的版本。相互合作是不是太冗余。
+
+
+
+
+
+
+## 2. 
+
+We define an electronic coin as a chain of digital signatures. Each owner transfers the coin to the next by digitally signing a hash of the previous transaction and the public key of the next owner and adding these to the end of the coin. A payee can verify the signatures to verify the chain of ownership.
+
+我们将一枚电子硬币定义为一个数字签名链。一位所有者将一枚硬币交给另一个人的时候，要通过在这个数字签名链的末尾附加上以下数字签名：上一笔交易的哈希（hash，音译，亦翻译为“散列值”），以及新所有者的公钥。收款人可以通过验证签名去验证数字签名链的所属权。
+
+我们把一枚电子硬币定义为一个数字签名链。每个所有者转交币时，要通过在这个链的末尾添加以下的数字签名：前一笔交易的哈希值（hash，音译，亦翻译为“散列值”）和下一个持有者的公钥。收款人可以通过验证签名来验证数字签名链的归属。
+
+
+> 这一段，都是些非常微小的差别。
+> 
+> 第二句话，算是第一版的老毛病，他每次都是这样僵硬翻译过来的。一旦原文中有这样的转交动作，它都是翻译得如此僵硬，但很明显有更清爽简洁的说法。
+> 没必要说是：一个人转给另一个人。还能转给谁？这个情景下，不都只能是用户嘛。所以可以直接说：转交时。
+> 
+> 然后注意，在这里，又是那个典型特定句式，先说要干个啥，然后再说这东西的具体内容是啥。
+> 还是像我们之前所讨论过的，第一版，也就是李笑来那一版，它在整篇翻译中有很多这样的句式结构，有时候好用，比如说在这里。
+> 否则，如果把它放在前面的定语位置，然后用一个“的”字连起来，就显得太臃肿了；
+> 但有时候，很明显不用这样拆，可以直接合起来。
+>
+> 说实话，这个也得怪一下别人原作者，总是写这种长句子，一坨子内容全部打一个句子里，你哪怕用从句拆出来都更好，看起来更顺眼。
+> 当然，看久了也就习惯了吧。估计之后要研究的东西里，应该常有这样的长句。也算是磨练。
+> 
+> 其他的都是些无伤大雅的小区别。
+> 
+> 还记得6.13，自己当时翻译到这一段，是通过李笑来的第一版有所感悟。
+> 比如说，他在这里对哈希的解释，是在第二段才出现的，但在摘要里面，就已经出现了hash这个词。
+> 为什么呢？【摘要里面，通常不放解释】，这是我的观察和推测。
+> 可能这是这种正经文章的规矩吗？仔细回顾一下，你看的那些正经东西里，也没有人在摘要里面做解释。那可能就是在第二次出现时，再来稍做解释。
+
+
+
+The problem of course is the payee can't verify that one of the owners did not double-spend the coin. A common solution is to introduce a trusted central authority, or mint, that checks every transaction for double spending. After each transaction, the coin must be returned to the mint to issue a new coin, and only coins issued directly from the mint are trusted not to be double-spent. The problem with this solution is that the fate of the entire money system depends on the company running the mint, with every transaction having to go through them, just like a bank.
+
+这个路径的问题在于收款人无法验证曾经的所有者之中没有人双重支付过。常见的解决方案是引入一个可信的中心化权威方，或称“铸币厂”，让它去检查每一笔交易是否存在双重支付。每一次发生交易之后，硬币必须返回到铸币厂，铸币厂再发行一枚新的硬币。进而，只有铸币厂直接发行的硬币才是可信的、未被双重支付过的。这个解决方案的问题在于，整个货币系统的命运被拴在运营铸币厂的那个公司（就好像银行那样）身上，每一笔交易必须通过它。
+
+问题在于，收款人无法验证之前的所有者中，有没有人“一币多花”。常见做法是引入一个可信的中心化机构，或"铸币厂"，由它检查每一笔交易是否重复。每次交易后，硬币必须回到铸币厂重新发行。进而，只有铸币厂直接发行的硬币才是可信的、未被双重支付过的。但这样一来，整个货币系统的命运取决于运营铸币厂的公司，每笔交易都必须经过它们，就像银行一样。
+
+> 当时也挣扎得比较久吧，能很明显的看到，整体上而言，我们的第二版就是更好。信息密度更舒缓，更accessible。
+> 
+> 首先，of course，我在想有没有必要体现出来，可以稍微加一下。
+> 
+> 在这里打个引号，说“一币多花”，我觉得合理。更清晰形象地表达出来了。
+> 
+> 这个，做法，可能要换成【解法】，更加显性的体现出来，我们是针对这个问题去想方法。
+> 
+> 注意到了吗？他第一个版本是，或称。为什么中心化机构和铸币厂，这两个东西可以互换呢？他们真的只是称谓上的不同？还是说，是完全不同的东西？原文中只是or。
+> 
+> transaction for double spending，有没有必要再来翻译成，双重支付呢？第二个版本里的，【是否重复】，是否是更清爽的答案呢？
+> 
+> 之后的那一句，我觉得整体而言就是第二版更好。不仅字更少，确实也更好理解。
+> 
+> “这个解决方案的问题在于”，第一版确实非常忠于原文，但很僵硬。第二版本呢，就更丝滑。
+> 
+> 最后一句里，第一版本他居然把depends on翻译成：拴在身上。
+> 
+> 
+> just like a bank的补充说明。
+> 第二版更好，信息密度就更低。你也不用纠结这个【像银行一样】，究竟是要修饰这个公司呢？还是修饰每笔交易就必须要经过他们？是相通的。因为这是银行的共有特性。
+> 就是说，你是这样的公司，那么你就有【每笔交易都得流经你们】的这样的特性。
+> 所以把这一句just like a bank的修饰靠谁近一点，是没关系的。
+
+
+
+---
+
+We need a way for the payee to know that the previous owners did not sign any earlier transactions. For our purposes, the earliest transaction is the one that counts, so we don't care about later attempts to double-spend. The only way to confirm the absence of a transaction is to be aware of all transactions. In the mint based model, the mint was aware of all transactions and decided which arrived first. To accomplish this without a trusted party, transactions must be publicly announced[^1], and we need a system for participants to agree on a single history of the order in which they were received. The payee needs proof that at the time of each transaction, the majority of nodes agreed it was the first received.
+
+我们需要一种方式，可以让收款人确认之前的所有者并没有在任何之前的交易上签名。就我们的目的而言，只有最早的交易是算数的，所以，我们并不关心其后的双重支付企图。确认一笔交易不存在的唯一方法是获悉所有的交易。在铸币厂模型之中，铸币厂已然知悉所有的交易，并且能够确认这些交易的顺序。为了能在没有“被信任的一方”参与的情况下完成以上任务，交易记录必须被公开宣布[^1]，进而我们需要一个系统能让参与者们认同它们所接收到的同一个唯一的交易历史。收款人需要证明在每笔交易发生之时，大多数节点能够认同它是第一个被接收的。
+
+我们需要一种方法，能让收款人确认之前的所有者没有在任何更早的交易上签过名。对我们来说，最早的那笔交易才算数，所以，我们不在乎后续的双重支付尝试。要确认一笔交易不存在，唯一办法是获悉所有的交易。在铸币厂模式下，铸币厂已然知悉所有的交易，并能决定他们的顺序。为了在没有可信第三方的情况下做到这一点，交易必须被公开宣布[^1]。进而，我们需要一个系统，能让参与者们一致认同他们接收到的唯一交易历史。收款人需要证明，在每笔交易发生时，大多数节点都认同它是第一个收到的。
+
+> 第一句，大家都是小差异，这无伤大雅。
+> 
+> 到第二句开头，开始不一样。【对我们来说】，这种翻译可能更清爽直白。第一板僵硬，但直接。
+> 
+> Attempts，翻译做企图，还是尝试呢？
+> 都可以，因为你既然会有这样的尝试，那不就说明你有相应的企图吗？
+> 他想表达的就是：随你胡搞乱搞，我们只看第一笔。
+> 
+> 第三句，那还是遵循我们的原则，能断句就断句。就尽量让信息密度更舒缓更易读。
+> 同时，当时我们已经讨论过，这里的【获悉】，是非常棒的翻译，比【知道】强很多。
+> 同时，【已然获悉】也很棒。非常完美的描绘出在旧模式下，这个中央机构的那种昂然傲立，权力无边的态势。
+> 
+> System，那一段描述是用to连起来的。而在我们的翻译中，不知道放在哪里合适。2版本里，都是被摆在后面做状语，我不知道第二版本这样的断句够不够合理。是不是应该加一个代词，它？
+> 
+> 最后一句，两个版本是不是都搞错了？
+> 宾语是proof，但这两个怎么都在里面【证明】的动词呢？
+> 而这里，我觉得很明显有指代不明的毛病。这个【它】，到底指的是收款人，还是每笔交易，还是大多数节点呢？这一句里，可是有三个主体。
+> 原文也就是这么写的，但我觉得翻译过来，你肯定得指明清楚吧。总之我现在作为读者是无法理解这一点的。
+
+
+## 3. 
+
+The solution we propose begins with a timestamp server. A timestamp server works by taking a hash of a block of items to be timestamped and widely publishing the hash, such as in a newspaper or Usenet post[^2] [^3] [^4] [^5]. The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash. Each timestamp includes the previous timestamp in its hash, forming a chain, with each additional timestamp reinforcing the ones before it.
+
+本解决方案起步于一种时间戳服务器。时间戳服务器是这样工作的：为一组（block）记录（items）的哈希打上时间戳，而后把哈希广播出去，就好像一份报纸所做的那样，或者像是在新闻组（Usenet）里的一个帖子那样[^2] [^3] [^4] [^5]。显然，时间戳能够证明那数据在那个时间点之前已然存在，否则那哈希也就无法生成。每个时间戳在其哈希中包含着之前的时间戳，因此构成了一个链；每一个新的时间戳被添加到之前的时间戳之后。
+
+我们的解决方案从一种“时间戳服务器”开始。它的做法是：为一组（block）记录（items）的哈希打上时间戳，然后把哈希广播出去，就像登在报纸上或发到新闻组（Usenet）的帖子上[^2] [^3] [^4] [^5]。显然，时间戳能证明这些数据在那个时间点之前就存在，否则也无法生成哈希。每个时间戳在其哈希中都包含之前的时间戳，因此连成了一条链；而每个新增的时间戳不断加固之前的记录。
+
+> 仔细看，还有挺多值得来说的点。
+> 
+> 【我们的】这样的句子，更accessible。
+> 他这里，begin with，第一版本翻译成了，起步于。第二版说的是，从什么开始。更accessible的。
+> 
+> works，第二版本的翻译不是很好。更恰当、更清楚的版本可能是，【他的工作方式是】。
+> 
+> 然后关于报纸和新闻组，第一版本说的太冗余了。
+> 
+> forming，是翻译成，构成，还是，连成呢？后者，有画面感。
+>
+> with each additional timestamp reinforcing the ones before it.
+> 第二版的翻译看似挺棒，但有点偏离了。别人原文想表达的意思是，这个新增时间戳，在加固它之前的那一个。
+> 不对，第二就是更好，我上一秒理解错误，ones不是复数吗？
+> 那就指明了，是在当前这个新增的之前的所有的那些时间戳，那不就是相当于之前的记录吗？
+
+
+
+
+## 6.13，最初
 
 While the system works well enough for most transactions, it still suffers from the inherent weaknesses of the trust based model. 
-虽然这个系统对大多数交易还算管用，但基于信任的模型有固有缺陷。
-
+> “虽然这个系统对大多数交易还算管用，但基于信任的模型有固有缺陷。”
+> 
 > 看看这一句，翻译得真的烂。
 
 
 allowing any two willing parties to transact directly with each other without the need for a trusted third party
-
-让任意双方直接交易，无需信任第三方。
-使任何两个愿意交易的各方能够直接进行交易
-
-> willing，怎么办吧你就说
+> 让任意双方直接交易，无需信任第三方。 VS  使任何两个愿意交易的各方能够直接进行交易
+> willing，怎么办吧，你就说
 
 
 nodes can leave and rejoin the network at will
-
-来去自由，
-随时可加入或离开，
-
+> 来去自由， VS 随时可加入或离开，
 > 笑来这一版真的做到了雅，但感觉不够accessible
 
 
 These costs and payment uncertainties can be avoided in person by using physical currency
-
-虽然在面对面交易中可通过使用实体币避免；
-在线下使用实体货币即可避免
+>虽然在面对面交易中可通过使用实体币避免； VS  在线下使用实体货币即可避免
 
 > 我觉得，还是要把by，翻译出来。
-> 但其实没必要显性的说什么“通过”。
+> 但其实，没必要显性的说什么“通过”。
 
 
 no mechanism exists to make payments over a communications channel without a trusted party.
-
-但在网络上，目前还没有一种机制能在缺乏可信第三方的情况下进行支付。
-但在网络上，我们却没有不依赖第三方的支付机制。
-
-> 虽然是多加了个主语，但就是更好了
+> 但在网络上，目前还没有一种机制能在缺乏可信第三方的情况下进行支付。
+> 但在网络上，我们却没有不依赖第三方的支付机制。
+> 
+> 虽然是多加了个主语，但就是更好了；就是：显式地点出主语，才更清晰。
 
 
 to generate computational proof of the chronological order of transactions. 
-
-按交易的时间顺序生成计算证明 VS 为交易的时间顺序生成计算证明
-
+> 按 / 为交易的时间顺序生成计算证明
+> 
 > ​​"为"​​ 更贴近原文 ​​"of"​​ 的所属关系（proof ​​of​​ the order → ​​为​​顺序生成证明）
 > "按"​​ 隐含「依据」含义（如「按时间排序」），但此处是「证明对象」而非「排序依据」
 
 
 We need a way for the payee to know that the previous owners did not sign any earlier transactions. 
-能让收款人确定之前的所有者没有签署任何更早的交易。
-
+> 能让收款人确定之前的所有者没有【签署】任何更早的交易。
+> 
 > 为什么你的质疑很重要？你敏锐地区分了​​「法律动作」​​与​​「密码学操作」​​的差异——这正是专业翻译的核心能力。保持这种警惕性。
 
 
 the earliest transaction is the one that counts, so we don't care about later attempts to double-spend. 
-就我们的目的而言，只有最早的交易是算数的，所以，我们并不关心其后的双重支付企图。
-对我们来说，我们只关心最早的交易
-最早的那笔交易才有效
-
+> 就我们的目的而言，只有最早的交易是算数的，所以，我们并不关心其后的双重支付企图。
+> 对我们来说，我们只关心最早的交易
+> 最早的那笔交易才有效
+> 
 > counts，翻译为理性的东西，明显更合适。
+> 也不用那么严苛的区分主观客观吧。也就是说，在这里我们是基于一个客观的规矩，从而有了主观的态度。
 
 
 The only way to confirm the absence of a transaction is to be aware of all transactions. 
-确认一笔交易不存在的唯一方法是获悉所有的交易。
-要确认一笔交易不存在，唯一办法是知道所有交易。
+> 确认一笔交易不存在的唯一方法是获悉所有的交易。
+> 要确认一笔交易不存在，唯一办法是知道所有交易。
+> 
+> 第二句，有断句，所以它更自然。而第一句妙在哪里？就妙在它翻译做【获悉】，而非仅仅是“知道”。
 
-> 第二句，有断句，所以它更自然。而第一句妙在哪里？就妙在它翻译做获悉，而非仅仅是“知道”。
-
-
+```
 **“知道”，是静态的。** 它描述一种状态。像书架上有一本书，你知道它在那。
 **“获悉”，是动态的。** 它描述一个动作和结果。是“**获取**”并“**知悉**”。你必须去找到那本书，打开它，确认它的内容。这个词本身就包含了一个“尽力去了解”的过程。
 
-在比特币这个语境下，一个节点要确认“交易A不存在”，它不能只是躺在那里“知道”所有交易。它必须**主动地、持续地**去监听、接收、验证网络上的所有广播，确保自己的账本是**当下最完整的**。
-
-这个“获悉”的过程，就是节点的工作本身。
-所以这个词，妙就妙在：
-它用一个词，就翻译出了原文 "to be aware of" 的**过程感**和**完备性**。它暗示了背后需要付出的努力和代价。
-
+在比特币这个语境下，一个节点要确认“交易A不存在”，它不能只是躺在那里“知道”所有交易。它必须**主动地、持续地**去监听、接收、验证网络上的所有广播，确保自己的账本是**当下最完整的**。这个“获悉”的过程，就是节点的工作本身。
+所以，妙就妙在：用一个词，就翻译出了原文 "to be aware of" 的**过程感**和**完备性**。它暗示了背后需要付出的努力和代价。
+```
 
 
 
 In the mint based model, the mint was aware of all transactions and decided which arrived first.
-
-铸币厂已然知悉所有的交易，并且能够确认这些交易的顺序。
-铸币厂知道所有交易,并能决定他们的顺序。
-在铸币厂模式下，中心知道所有交易并决定顺序。
-
+> 铸币厂已然知悉所有的交易，并且能够确认这些交易的顺序。
+> 铸币厂知道所有交易,并能决定他们的顺序。
+> 中心知道所有交易并决定顺序。
+> 
 > “已然知悉”，实在是屌。一下子就把被动态，以及be aware of的完整含义翻译出来。爆杀后2句。
 
-
+```
 1.  **“知道”**：是一个中性词，描述一个事实。
 2.  **“知悉”**：比“知道”更进一步，带有“全部、详细了解”的意味。它更有书面感和权威性。
 3.  **“已然”**：这是最精髓的部分。它翻译的不是 "was"，而是**这个模式的本质**。
@@ -199,45 +417,42 @@ In the mint based model, the mint was aware of all transactions and decided whic
 这描绘的不是一个动作，而是一种**存在**。它描绘了一个全知全能的中心，这恰恰是中本聪想要用去中心化来打破的东西。
 
 相比之下：
-*   “铸币厂知道所有交易” —— 太过平淡，失去了那种“理所当然”的权威感。
-*   “在铸币厂模式下，中心知道所有交易” —— 像在做阅读理解，解释原文，而不是用中文再创造一个同样有力的意境。
+“铸币厂知道所有交易”、“中心知道所有交易”  
+太过平淡，失去了那种“理所当然”的权威感。像在做阅读理解，解释原文，而不是用中文再创造一个同样有力的意境。
 
 “已然知悉”，只用了四个字，就**把一个中心化系统的权力结构、信息优势和根本属性，刻画得入木三分**。
-它不是翻译，是**铸魂**。
-
-
+```
 
 
 
 and we need a system for participants to agree on a single history of the order in which they were received. 
-
-进而我们需要一个系统能让参与者们认同它们所接收到的同一个唯一的交易历史。
-我们需要一个系统让参与者就收到交易的唯一历史顺序达成共识。
-并且要有机制让大家对交易顺序达成共识。
-
+> 进而我们需要一个系统能让参与者们认同它们所接收到的同一个唯一的交易历史。
+> 我们需要一个系统让参与者就收到交易的唯一历史顺序达成共识。
+> 并且要有机制让大家对交易顺序达成共识。
+> 
 > 后两句都翻译成了什么？达成共识。
 > 我觉得第一句这里，刻意的让它更冗长，而避免使用“共识”，是刻意的，有原因的。
 > 因为共识在这一领域里有另外的特殊含义。
 > 但除了这三个之外，有没有更好的解法呢？
 
-
+```
 语境下，“共识”（Consensus）是一个结果，是那套精妙的PoW机制运行后所达成的终局状态。
 过早地使用“共识”这个术语，相当于用答案去描述问题，是逻辑上的“偷跑”。它消解了原文那种从第一性原理出发，层层递进的论证力量。
 第一句翻译很谨慎，但确实冗长笨拙。我们需要的是一种既能避开“共识”这个词，又像原文一样朴素、有力、直击本质的表达。
-
+```
 
 
 
 The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash. Each timestamp includes the previous timestamp in its hash, forming a chain, with each additional timestamp reinforcing the ones before it.
-
 
 显然，时间戳能够证明那数据在那个时间点之前已然存在，否则那哈希也就无法生成。每个时间戳在其哈希中包含着之前的时间戳，因此构成了一个链；每一个新的时间戳被添加到之前的时间戳之后。
 
 显然，时间戳能证明这些数据在那个时间点之前就存在，否则也无法生成哈希。每个时间戳在其哈希中都包含之前的时间戳，连成一条链；而每个新增的时间戳不断加固前面的记录。
 
 > 咀嚼这两句中文翻译的关键差异，说说看孰优孰劣。
-
-第二句有节奏、有力度，用词（如“连成”“加固”）更有力，像一锤一锤打上去。更像是写给真正想理解区块链核心逻辑的人，直接打在关键点上。它不仅说明了机制，更指出了意义——“加固前面的记录”。这是长期有用的认知。第一句说清楚了“怎么连”，第二句让人明白“为什么强”。
+> 
+> “第二句有节奏、有力度，用词（如“连成”“加固”）更有力，像一锤一锤打上去。更像是写给真正想理解区块链核心逻辑的人，直接打在关键点上。
+> 它不仅说明了机制，更指出了意义——“加固前面的记录”。这是长期有用的认知。第一句说清楚了“怎么连”，第二句让人明白“为什么强”。”
 
 
 
