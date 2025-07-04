@@ -11,36 +11,11 @@
 >
 > **概要**：
 
+一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。
 
-一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。数字签名能解决部分问题，但，如果还要靠信任第三方来防止“一币多花”，电子支付的主要优势就被没了。我们提出，用点对点网络解决双重支付问题：该网络给每笔交易标记时间戳，方法是：把交易哈希值打包记录到一条不断延展的、以散列为基础的工作量证明链上，谁想篡改记录就得重做所有计算。最长的链，既用于证明所见证事件的顺序，也证明它来自最大的 CPU 算力池。只要大多数算力掌握在诚实节点手里（不与那些尝试攻击网络的节点合作），这些节点将会生成最长链，攻击者追不上。网络本身需要最简单的结构。消息尽力而为地广播，而节点随时可加入或离开，同时，接受最长的工作量证明链作为他们离开期间所发生事件的证明。
+数字签名解决了部分问题，但如果还需要一个可信第三方来防止双重支付的话，其核心优势就被抵消了。我们提出了一个利用点对点网络来解决双重支付问题的方案。该网络通过以下方式为交易标记时间戳：将交易的哈希值打包，并录入一条持续延伸的、基于工作量证明的链中，由此形成一份不重做所有工作量证明便无法修改的记录。
 
-
-一种纯粹点对点的电子现金，将允许在线支付由一方直接发送给另一方，无需经过金融机构。数字签名解决了部分问题，但若仍需一个可信第三方来防止**双重支付**，其核心优势便会**被抵消**。我们提出了一个利用点对点网络来解决双重支付问题的方案。
-
-该网络通过以下方式为交易标记时间戳：将交易的哈希值打包，并录入一条持续延伸的、基于工作量证明的链中，由此形成一份**不重做所有工作量证明便无法修改**的记录。最长的链，既是其所见证的一系列事件的时序证明，也证明了它源于最大的CPU算力池。
-
-只要大部分CPU算力**掌握在诚实节点手中**（即，不与攻击网络的节点群合谋），他们就将生成最长的链，并最终**超越**攻击者。网络自身的结构极其简单。信息以**尽力而为**的方式广播，节点可**自由来去**，在重返网络时，只需接受最长的工作量证明链，作为它们离线期间所有事件的证明。
-
-
-
-**分析与取舍：**
-
-1.  **开篇立意**：采纳了更正式的【双重支付】，将“一币多花”这种更生动的解释留到正文。采纳了你高度评价的【被抵消】，这个词精妙地传达了`lost`在这里的内涵——优势与劣势的冲突与中和。
-2.  **核心机制的描述**：
-    *   将核心机制的描述单独成段，提升了可读性。
-    *   采纳了你提议的、对“记录如何不可篡改”的更优表述：【不重做所有工作量证明便无法修改】。这个版本比V1的直译更通顺，比V2的口语化更书面，达到了完美的平衡。
-    *   【时序证明】精确翻译了`proof of the sequence`，澄清了你提出的关于“证明事件还是顺序”的疑问——它证明的是事件的**顺序**。
-
-3.  **算力与安全**：
-    *   采纳了你偏爱的意象化表达【掌握在诚实节点手中】，这比“被...控制”更符合中文语境，也更有力。
-    *   关于`outpace attackers`，融合两个版本的优点，译为【超越攻击者】。这比V1“在速度上超过”更简洁，又比V2“攻击者追不上”更忠于原文的语态和主体，干脆利落。
-
-4.  **网络特性**：
-    *   【尽力而为】替代了V1僵硬的直译，准确传达了`best effort basis`的技术含义。
-    *   采纳了第一版优雅的【自由来去】，并吸收了你在结论部分打磨出的更优句式，将最后一句重组为：“节点可自由来去，在重返网络时，只需接受最长的工作量证明链，作为它们离线期间所有事件的证明。” 这句话的逻辑流畅度和信息完整度，都超越了原有的两个版本。
-
-
-
+最长的链，既用于证明它所见证的一系列事件的时序，也证明它来自最大的 CPU 算力池。只要大部分 CPU 算力掌握在诚实节点手里（即，不与攻击网络的节点合作），他们将会生成最长链，并在速度上超越攻击者。网络自身的结构极其简单。信息以尽力而为的方式广播，节点可自由来去，重返时只需接受最长的工作量证明链，作为他们离线期间所发生之一切的证明。
 
 
 
@@ -53,22 +28,7 @@
 Commerce on the Internet has come to rely almost exclusively on financial institutions serving as trusted third parties to process electronic payments. While the system works well enough for most transactions, it still suffers from the inherent weaknesses of the trust based model. Completely non-reversible transactions are not really possible, since financial institutions cannot avoid mediating disputes. The cost of mediation increases transaction costs, limiting the minimum practical transaction size and cutting off the possibility for small casual transactions, and there is a broader cost in the loss of ability to make non-reversible payments for non-reversible services. With the possibility of reversal, the need for trust spreads. Merchants must be wary of their customers, hassling them for more information than they would otherwise need. A certain percentage of fraud is accepted as unavoidable. These costs and payment uncertainties can be avoided in person by using physical currency, but no mechanism exists to make payments over a communications channel without a trusted party.
 
 
-当今的互联网商业，几乎都靠金融机构作为可信第三方来处理电子支付。这套系统在多数情况下行之有效，但其基于信任的模式存在固有缺陷。比如：交易无法彻底不可逆，因为金融机构必须调解争议。调解成本会让交易成本变高，限制最小交易规模，且干脆阻断小额支付的可能性。此外，更大的成本是：我们无法为不可逆的服务提供不可逆的支付。逆转的可能性，导致了对信任的需求无处不在。商家必须提防顾客，麻烦他们提供本不必要的更多信息。一定的欺诈也被认为是难以避免。这些成本和支付不确定性，虽然在面对面交易中可通过使用实体货币避免；但在网络上，我们却没有一种机制能在不依赖第三方的情况下进行支付。
-
-
-如今的互联网商业，几乎完全依赖金融机构作为可信第三方来处理电子支付。这套体系在多数情况下都行之有效，但依然受制于“信任模式”的固有缺陷。例如，交易无法做到彻底不可逆，因为金融机构必须介入以调解纠纷。调解的成本推高了交易成本，既限制了实际可行的最小交易额度，也杜绝了小额临时交易的可能。更广泛的成本在于：我们丧失了为不可逆服务提供不可逆支付的能力。由于逆转始终可能，对信任的需求也因此无处不在。商家不得不提防顾客，向他们索取本不必要的额外信息。一定比例的欺诈，也被当作无法避免的代价。这些成本与不确定性，在当面使用实体货币时本可避免，但在网络上，我们仍未有一种无需可信方参与，就能完成支付的机制。
-
-
-**分析与取舍：**
-
-1.  **语境与质感**：采纳【如今的】作为开场，赋予了文本鲜活的时代感。采纳了你激赏的【行之有效】，这个词精准传达了`works well`的效能感，远胜于“还算不错”。对于`suffers from`，新版本译为【受制于】，既体现了原文中“被拖累”的被动与无奈，又比“存在”一词更具张力，点明了其发展的瓶颈。
-2.  **逻辑与递进**：在“固有缺陷”后加入【例如】，使行文逻辑更清晰，明确了后续内容是对缺陷的举例说明。对于由调解成本引发的三个后果，新版本用【既...也...】的结构，清晰地表达了原文中`limiting... and cutting off...`的并列递进关系，比简单的罗列更有层次。
-3.  **精确与深刻**：
-    *   `otherwise need`：这是最考验功力的地方。你一针见血地指出了`otherwise`的重要性。新版本译为【本不必要的额外信息】，这里的【本不必要】精准地暗含了`otherwise`的语境——“如果情况不同（即，如果存在信任），这些信息本是不需要的”。这比直译更优雅，比省略更完整。
-    *   `spreads`：完全采纳了第一版惊艳的翻译——【无处不在】，它传神地描绘出信任需求弥漫开来的状态，极富表现力。
-    *   `without a trusted party`：你敏锐地发现了第一版的错误。结合上下文，这里指的必然是“第三方”。新版本译为【无需可信方参与】，这里的【可信方】准确指向了贯穿全文的“第三方”，彻底解决了最后一句的歧义。
-4.  **主体与视角**：多处采纳了【我们】作为主语，如【我们丧失了...能力】、【我们仍未有...机制】，这让原本客观、冰冷的陈述，转变为从用户和参与者视角出发的切身体会，极大地增强了文本的亲和力（accessibility）。
-
+当今的互联网商业，几乎完全依赖金融机构作为可信第三方来处理电子支付。这套系统在多数情况下都行之有效，但依然受制于“信任模式”的固有缺陷。例如，交易无法做到彻底不可逆，因为金融机构必须介入以调解争议。调解的成本推高了交易成本，既限制了实际可行的最小交易额度，也杜绝了小额临时交易的可能。此外，更大的成本在于：我们无法为不可逆的服务提供不可逆的支付。由于逆转始终可能，对信任的需求也因此无处不在。商家不得不提防顾客，麻烦他们提供本不必要的额外信息。一定比例的欺诈，也被当作无法避免的代价。这些成本与支付不确定性，在面对面交易时可通过使用实体货币避免；但在网络上，我们仍未有一种无需可信方参与，就能完成支付的机制。
 
 
 What is needed is an electronic payment system based on cryptographic proof instead of trust, allowing any two willing parties to transact directly with each other without the need for a trusted third party. Transactions that are computationally impractical to reverse would protect sellers from fraud, and routine escrow mechanisms could easily be implemented to protect buyers. In this paper, we propose a solution to the double-spending problem using a peer-to-peer distributed timestamp server to generate computational proof of the chronological order of transactions. The system is secure as long as honest nodes collectively control more CPU power than any cooperating group of attacker nodes.
@@ -83,7 +43,8 @@ What is needed is an electronic payment system based on cryptographic proof inst
 We define an electronic coin as a chain of digital signatures. Each owner transfers the coin to the next by digitally signing a hash of the previous transaction and the public key of the next owner and adding these to the end of the coin. A payee can verify the signatures to verify the chain of ownership.
 
 
-我们将一枚电子硬币定义为一条数字签名链。每位持有者在转交币时，会对前一笔交易的哈希值（hash，音译，亦翻译为“散列值”）和下一位持有者的公钥进行数字签名，然后将这些数据附加到这条链的末尾。收款人即可通过检验这一系列签名，来核实其所有权链。
+
+我们将一枚电子硬币定义为一条由数字签名串联而成的链。每位持有者在转交币时，会对前一笔交易的哈希值（hash，音译，亦翻译为“散列值”）和下一位持有者的公钥进行数字签名，然后将这些数据附加到这条链的末尾。收款人即可通过检验这一系列签名，来核实其所有权链。
 
 
 ![](images/transactions.svg)
@@ -92,7 +53,7 @@ We define an electronic coin as a chain of digital signatures. Each owner transf
 The problem of course is the payee can't verify that one of the owners did not double-spend the coin. A common solution is to introduce a trusted central authority, or mint, that checks every transaction for double spending. After each transaction, the coin must be returned to the mint to issue a new coin, and only coins issued directly from the mint are trusted not to be double-spent. The problem with this solution is that the fate of the entire money system depends on the company running the mint, with every transaction having to go through them, just like a bank.
 
 
-当然，问题在于收款人无法确认，之前的某位所有者没有“一币多花”。一个常见的解法，是引入一个可信的中央机构（或称“铸币厂”），由它来检查每笔交易是否重复。每次交易后，硬币都必须交还铸币厂，以便重新铸造并发行新的硬币。进而，只有铸币厂直接发行的硬币，才被认为是可信的、没有被双重支付的。但这种解法的问题是，整个货币体系的命运，都取决于运营铸币厂的公司 —— 每笔交易都必须经过它，就像银行一样。
+当然，问题在于收款人无法确认，之前的某位所有者没有“一币多花”。一个常见的解法，是引入一个可信的中央机构（或称“铸币厂”），由它来检查每笔交易是否重复。每次交易后，硬币都必须交还铸币厂，以便重新铸造并发行新的硬币。进而，只有铸币厂直接发行的硬币，才被认为是可信的、没有被双重支付的。但这种解法的问题是，整个货币体系的命运，都会取决于运营铸币厂的公司 —— 每笔交易都必须经过它，就像银行一样。
 
 
 We need a way for the payee to know that the previous owners did not sign any earlier transactions. For our purposes, the earliest transaction is the one that counts, so we don't care about later attempts to double-spend. The only way to confirm the absence of a transaction is to be aware of all transactions. In the mint based model, the mint was aware of all transactions and decided which arrived first. To accomplish this without a trusted party, transactions must be publicly announced[^1], and we need a system for participants to agree on a single history of the order in which they were received. The payee needs proof that at the time of each transaction, the majority of nodes agreed it was the first received.
@@ -450,7 +411,7 @@ Solving for P less than 0.1%...
 We have proposed a system for electronic transactions without relying on trust. We started with the usual framework of coins made from digital signatures, which provides strong control of ownership, but is incomplete without a way to prevent double-spending. To solve this, we proposed a peer-to-peer network using proof-of-work to record a public history of transactions that quickly becomes computationally impractical for an attacker to change if honest nodes control a majority of CPU power. The network is robust in its unstructured simplicity. Nodes work all at once with little coordination. They do not need to be identified, since messages are not routed to any particular place and only need to be delivered on a best effort basis. Nodes can leave and rejoin the network at will, accepting the proof-of-work chain as proof of what happened while they were gone. They vote with their CPU power, expressing their acceptance of valid blocks by working on extending them and rejecting invalid blocks by refusing to work on them. Any needed rules and incentives can be enforced with this consensus mechanism.
 
 
-我们提出了一个无需信任的电子交易系统。我们从一种由数字签名铸造的货币框架出发，它能强力保障所有权，却缺少防止双重支付的机制。为此，我们提出了一个点对点网络，通过“工作量证明”来记录一部公开的交易历史。只要诚实节点控制着多数 CPU 算力，攻击者在计算上就几乎不可能篡改这份记录。这个网络的强大，正在于其无结构的简洁。节点们无需太多协调便可同时工作。他们也无需身份识别，因为消息的路径不取决于特定的终点；消息只需尽力广播即可。节点可自由来去，重返时只需接受最长的工作量证明链，作为其离线期间所发生之一切的证明。它们用算力投票：在有效区块上继续工作，即为赞同；拒绝在无效区块上工作，即为反对。一切必要的规则和激励，都可通过此共识机制得以强制实施。
+我们提出了一个无需信任的电子交易系统。我们从一种由数字签名铸造的货币框架出发，它能强力保障所有权，却缺少防止双重支付的机制。为此，我们提出了一个点对点网络，通过“工作量证明”来记录一部公开的交易历史。只要诚实节点控制着多数 CPU 算力，攻击者在计算上就几乎不可能篡改这份记录。这个网络的强大，正在于其无结构的简洁。节点们无需太多协调便可同时工作。他们也无需身份识别，因为消息的路径不取决于特定的终点；消息只需尽力广播即可。节点可自由来去，重返时只需接受最长的工作量证明链，作为他们离线期间所发生之一切的证明。它们用算力投票：在有效区块上继续工作，即为赞同；拒绝在无效区块上工作，即为反对。一切必要的规则和激励，都可通过此共识机制得以强制实施。
 
 
 ## 参考文献 (References)
