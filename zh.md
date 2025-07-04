@@ -9,7 +9,40 @@
 
 > **Abstract.** A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution. Digital signatures provide part of the solution, but the main benefits are lost if a trusted third party is still required to prevent double-spending. We propose a solution to the double-spending problem using a peer-to-peer network. The network timestamps transactions by hashing them into an ongoing chain of hash-based proof-of-work, forming a record that cannot be changed without redoing the proof-of-work. The longest chain not only serves as proof of the sequence of events witnessed, but proof that it came from the largest pool of CPU power. As long as a majority of CPU power is controlled by nodes that are not cooperating to attack the network, they'll generate the longest chain and outpace attackers. The network itself requires minimal structure. Messages are broadcast on a best effort basis, and nodes can leave and rejoin the network at will, accepting the longest proof-of-work chain as proof of what happened while they were gone. 
 >
-> **概要**：一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。数字签名能解决部分问题，但，如果还要靠信任第三方来防止“一币多花”，电子支付的主要优势就被没了。我们提出，用点对点网络解决双重支付问题：该网络给每笔交易标记时间戳，方法是：把交易哈希值打包记录到一条不断延展的、以散列为基础的工作量证明链上，谁想篡改记录就得重做所有计算。最长的链，既用于证明所见证事件的顺序，也证明它来自最大的 CPU 算力池。只要大多数算力掌握在诚实节点手里（不与那些尝试攻击网络的节点合作），这些节点将会生成最长链，攻击者追不上。网络本身需要最简单的结构。消息尽力而为地广播，而节点随时可加入或离开，同时，接受最长的工作量证明链作为他们离开期间所发生事件的证明。
+> **概要**：
+
+
+一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。数字签名能解决部分问题，但，如果还要靠信任第三方来防止“一币多花”，电子支付的主要优势就被没了。我们提出，用点对点网络解决双重支付问题：该网络给每笔交易标记时间戳，方法是：把交易哈希值打包记录到一条不断延展的、以散列为基础的工作量证明链上，谁想篡改记录就得重做所有计算。最长的链，既用于证明所见证事件的顺序，也证明它来自最大的 CPU 算力池。只要大多数算力掌握在诚实节点手里（不与那些尝试攻击网络的节点合作），这些节点将会生成最长链，攻击者追不上。网络本身需要最简单的结构。消息尽力而为地广播，而节点随时可加入或离开，同时，接受最长的工作量证明链作为他们离开期间所发生事件的证明。
+
+
+一种纯粹点对点的电子现金，将允许在线支付由一方直接发送给另一方，无需经过金融机构。数字签名解决了部分问题，但若仍需一个可信第三方来防止**双重支付**，其核心优势便会**被抵消**。我们提出了一个利用点对点网络来解决双重支付问题的方案。
+
+该网络通过以下方式为交易标记时间戳：将交易的哈希值打包，并录入一条持续延伸的、基于工作量证明的链中，由此形成一份**不重做所有工作量证明便无法修改**的记录。最长的链，既是其所见证的一系列事件的时序证明，也证明了它源于最大的CPU算力池。
+
+只要大部分CPU算力**掌握在诚实节点手中**（即，不与攻击网络的节点群合谋），他们就将生成最长的链，并最终**超越**攻击者。网络自身的结构极其简单。信息以**尽力而为**的方式广播，节点可**自由来去**，在重返网络时，只需接受最长的工作量证明链，作为它们离线期间所有事件的证明。
+
+
+
+**分析与取舍：**
+
+1.  **开篇立意**：采纳了更正式的【双重支付】，将“一币多花”这种更生动的解释留到正文。采纳了你高度评价的【被抵消】，这个词精妙地传达了`lost`在这里的内涵——优势与劣势的冲突与中和。
+2.  **核心机制的描述**：
+    *   将核心机制的描述单独成段，提升了可读性。
+    *   采纳了你提议的、对“记录如何不可篡改”的更优表述：【不重做所有工作量证明便无法修改】。这个版本比V1的直译更通顺，比V2的口语化更书面，达到了完美的平衡。
+    *   【时序证明】精确翻译了`proof of the sequence`，澄清了你提出的关于“证明事件还是顺序”的疑问——它证明的是事件的**顺序**。
+
+3.  **算力与安全**：
+    *   采纳了你偏爱的意象化表达【掌握在诚实节点手中】，这比“被...控制”更符合中文语境，也更有力。
+    *   关于`outpace attackers`，融合两个版本的优点，译为【超越攻击者】。这比V1“在速度上超过”更简洁，又比V2“攻击者追不上”更忠于原文的语态和主体，干脆利落。
+
+4.  **网络特性**：
+    *   【尽力而为】替代了V1僵硬的直译，准确传达了`best effort basis`的技术含义。
+    *   采纳了第一版优雅的【自由来去】，并吸收了你在结论部分打磨出的更优句式，将最后一句重组为：“节点可自由来去，在重返网络时，只需接受最长的工作量证明链，作为它们离线期间所有事件的证明。” 这句话的逻辑流畅度和信息完整度，都超越了原有的两个版本。
+
+
+
+
+
 
 -----
 
@@ -23,10 +56,25 @@ Commerce on the Internet has come to rely almost exclusively on financial instit
 当今的互联网商业，几乎都靠金融机构作为可信第三方来处理电子支付。这套系统在多数情况下行之有效，但其基于信任的模式存在固有缺陷。比如：交易无法彻底不可逆，因为金融机构必须调解争议。调解成本会让交易成本变高，限制最小交易规模，且干脆阻断小额支付的可能性。此外，更大的成本是：我们无法为不可逆的服务提供不可逆的支付。逆转的可能性，导致了对信任的需求无处不在。商家必须提防顾客，麻烦他们提供本不必要的更多信息。一定的欺诈也被认为是难以避免。这些成本和支付不确定性，虽然在面对面交易中可通过使用实体货币避免；但在网络上，我们却没有一种机制能在不依赖第三方的情况下进行支付。
 
 
+如今的互联网商业，几乎完全依赖金融机构作为可信第三方来处理电子支付。这套体系在多数情况下都行之有效，但依然受制于“信任模式”的固有缺陷。例如，交易无法做到彻底不可逆，因为金融机构必须介入以调解纠纷。调解的成本推高了交易成本，既限制了实际可行的最小交易额度，也杜绝了小额临时交易的可能。更广泛的成本在于：我们丧失了为不可逆服务提供不可逆支付的能力。由于逆转始终可能，对信任的需求也因此无处不在。商家不得不提防顾客，向他们索取本不必要的额外信息。一定比例的欺诈，也被当作无法避免的代价。这些成本与不确定性，在当面使用实体货币时本可避免，但在网络上，我们仍未有一种无需可信方参与，就能完成支付的机制。
+
+
+**分析与取舍：**
+
+1.  **语境与质感**：采纳【如今的】作为开场，赋予了文本鲜活的时代感。采纳了你激赏的【行之有效】，这个词精准传达了`works well`的效能感，远胜于“还算不错”。对于`suffers from`，新版本译为【受制于】，既体现了原文中“被拖累”的被动与无奈，又比“存在”一词更具张力，点明了其发展的瓶颈。
+2.  **逻辑与递进**：在“固有缺陷”后加入【例如】，使行文逻辑更清晰，明确了后续内容是对缺陷的举例说明。对于由调解成本引发的三个后果，新版本用【既...也...】的结构，清晰地表达了原文中`limiting... and cutting off...`的并列递进关系，比简单的罗列更有层次。
+3.  **精确与深刻**：
+    *   `otherwise need`：这是最考验功力的地方。你一针见血地指出了`otherwise`的重要性。新版本译为【本不必要的额外信息】，这里的【本不必要】精准地暗含了`otherwise`的语境——“如果情况不同（即，如果存在信任），这些信息本是不需要的”。这比直译更优雅，比省略更完整。
+    *   `spreads`：完全采纳了第一版惊艳的翻译——【无处不在】，它传神地描绘出信任需求弥漫开来的状态，极富表现力。
+    *   `without a trusted party`：你敏锐地发现了第一版的错误。结合上下文，这里指的必然是“第三方”。新版本译为【无需可信方参与】，这里的【可信方】准确指向了贯穿全文的“第三方”，彻底解决了最后一句的歧义。
+4.  **主体与视角**：多处采纳了【我们】作为主语，如【我们丧失了...能力】、【我们仍未有...机制】，这让原本客观、冰冷的陈述，转变为从用户和参与者视角出发的切身体会，极大地增强了文本的亲和力（accessibility）。
+
+
+
 What is needed is an electronic payment system based on cryptographic proof instead of trust, allowing any two willing parties to transact directly with each other without the need for a trusted third party. Transactions that are computationally impractical to reverse would protect sellers from fraud, and routine escrow mechanisms could easily be implemented to protect buyers. In this paper, we propose a solution to the double-spending problem using a peer-to-peer distributed timestamp server to generate computational proof of the chronological order of transactions. The system is secure as long as honest nodes collectively control more CPU power than any cooperating group of attacker nodes.
 
 
-我们真正需要的，是一个基于加密证明、而非基于信任的电子支付系统，允许任意两方直接交易，无需可信第三方。通过让交易在计算上难以撤销来保护卖家免受欺诈，同时通过常规的托管机制来保护买家。本文中，我们提出一个针对双重支付问题的方案：利用一个点对点的、分布式的时间戳服务器，为交易的时间顺序生成计算证明。只要诚实节点总体上控制的 CPU 算力超过任何协同攻击者节点，该系统就是安全的。
+我们真正需要的，是一个基于加密证明、而非基于信任的电子支付系统，它允许任意两方直接交易，而无需可信第三方。其一，在计算上难以撤销的交易可以保护卖家免受欺诈；其二，常规的托管机制也能轻松建立以保护买家。在本文中，我们提出了一个解决双重支付问题的方案：利用一个点对点的、分布式的时间戳服务器，为交易的时间顺序生成一份计算证明。只要诚实节点们总体上比协同的攻击者掌握更多的CPU算力，该系统就是安全的。
 
 
 ## 2. 交易 (Transactions)
@@ -35,7 +83,7 @@ What is needed is an electronic payment system based on cryptographic proof inst
 We define an electronic coin as a chain of digital signatures. Each owner transfers the coin to the next by digitally signing a hash of the previous transaction and the public key of the next owner and adding these to the end of the coin. A payee can verify the signatures to verify the chain of ownership.
 
 
-我们把一枚电子硬币定义为一个数字签名链。每个所有者转交币时，要通过在这个链的末尾添加以下的数字签名：前一笔交易的哈希值（hash，音译，亦翻译为“散列值”）和下一个持有者的公钥。收款人可以通过验证签名来验证数字签名链的归属。
+我们将一枚电子硬币定义为一条数字签名链。每位持有者在转交币时，会对前一笔交易的哈希值（hash，音译，亦翻译为“散列值”）和下一位持有者的公钥进行数字签名，然后将这些数据附加到这条链的末尾。收款人即可通过检验这一系列签名，来核实其所有权链。
 
 
 ![](images/transactions.svg)
@@ -44,13 +92,13 @@ We define an electronic coin as a chain of digital signatures. Each owner transf
 The problem of course is the payee can't verify that one of the owners did not double-spend the coin. A common solution is to introduce a trusted central authority, or mint, that checks every transaction for double spending. After each transaction, the coin must be returned to the mint to issue a new coin, and only coins issued directly from the mint are trusted not to be double-spent. The problem with this solution is that the fate of the entire money system depends on the company running the mint, with every transaction having to go through them, just like a bank.
 
 
-问题在于，收款人无法验证之前的所有者中，有没有人“一币多花”。常见做法是引入一个可信的中心化机构，或"铸币厂"，由它检查每一笔交易是否重复。每次交易后，硬币必须回到铸币厂重新发行。进而，只有铸币厂直接发行的硬币才是可信的、未被双重支付过的。但这样一来，整个货币系统的命运取决于运营铸币厂的公司，每笔交易都必须经过它们，就像银行一样。
+当然，问题在于收款人无法确认，之前的某位所有者没有“一币多花”。一个常见的解法，是引入一个可信的中央机构（或称“铸币厂”），由它来检查每笔交易是否重复。每次交易后，硬币都必须交还铸币厂，以便重新铸造并发行新的硬币。进而，只有铸币厂直接发行的硬币，才被认为是可信的、没有被双重支付的。但这种解法的问题是，整个货币体系的命运，都取决于运营铸币厂的公司 —— 每笔交易都必须经过它，就像银行一样。
 
 
 We need a way for the payee to know that the previous owners did not sign any earlier transactions. For our purposes, the earliest transaction is the one that counts, so we don't care about later attempts to double-spend. The only way to confirm the absence of a transaction is to be aware of all transactions. In the mint based model, the mint was aware of all transactions and decided which arrived first. To accomplish this without a trusted party, transactions must be publicly announced[^1], and we need a system for participants to agree on a single history of the order in which they were received. The payee needs proof that at the time of each transaction, the majority of nodes agreed it was the first received.
 
 
-我们需要一种方法，能让收款人确认之前的所有者没有在任何更早的交易上签过名。对我们来说，最早的那笔交易才算数，所以，我们不在乎后续的双重支付尝试。要确认一笔交易不存在，唯一办法是获悉所有的交易。在铸币厂模式下，铸币厂已然知悉所有的交易，并能决定他们的顺序。为了在没有可信第三方的情况下做到这一点，交易必须被公开宣布[^1]。进而，我们需要一个系统，能让参与者们一致认同他们接收到的唯一交易历史。收款人需要证明，在每笔交易发生时，大多数节点都认同它是第一个收到的。
+我们需要一种方法，让收款人能确认之前的所有者未曾签署过任何更早的交易。对我们而言，最早的那笔交易才算数，因此我们不关心后续的双重支付尝试。要确认某笔交易不存在，唯一的方法就是获悉所有交易。在铸币厂模式中，铸币厂已然知悉所有交易，并能决定他们的顺序。为了在没有可信第三方的情况下做到这一点，交易必须被公开宣布[^1]。进而，我们需要一个系统，使参与者们能够就交易的接收顺序，达成统一的历史共识。收款人需要证明，在每笔交易发生时，大多数节点都认同这笔交易是第一个被收到的。
 
 
 ## 3. 时间戳服务器 (Timestamp Server)
@@ -59,7 +107,7 @@ We need a way for the payee to know that the previous owners did not sign any ea
 The solution we propose begins with a timestamp server. A timestamp server works by taking a hash of a block of items to be timestamped and widely publishing the hash, such as in a newspaper or Usenet post[^2] [^3] [^4] [^5]. The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash. Each timestamp includes the previous timestamp in its hash, forming a chain, with each additional timestamp reinforcing the ones before it.
 
 
-我们的解决方案从一种“时间戳服务器”开始。它的做法是：为一组（block）记录（items）的哈希打上时间戳，然后把哈希广播出去，就像登在报纸上或发到新闻组（Usenet）的帖子上[^2] [^3] [^4] [^5]。显然，时间戳能证明这些数据在那个时间点之前就存在，否则也无法生成哈希。每个时间戳在其哈希中都包含之前的时间戳，因此形成了一条链；而每个新增的时间戳不断加固之前的记录。
+我们的解决方案，始于一种时间戳服务器。其工作原理是：为一组（block）记录（items）的哈希值打上时间戳，然后将该哈希值公之于众，就像是发布在报纸或新闻组（Usenet）的帖子上[^2] [^3] [^4] [^5]。显然，这个时间戳能证明数据在那个时间点之前就已经存在，否则哈希值本身也无从谈起。每一个时间戳的哈希值中，都包含着前一个时间戳的哈希值，由此连成一条链。而每一个新增的时间戳，都在不断加固其之前的所有记录。
 
 
 ![](images/timestamp-server.svg)
