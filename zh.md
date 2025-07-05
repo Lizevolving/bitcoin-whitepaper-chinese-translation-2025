@@ -8,15 +8,9 @@
 
 
 > **Abstract.** A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution. Digital signatures provide part of the solution, but the main benefits are lost if a trusted third party is still required to prevent double-spending. We propose a solution to the double-spending problem using a peer-to-peer network. The network timestamps transactions by hashing them into an ongoing chain of hash-based proof-of-work, forming a record that cannot be changed without redoing the proof-of-work. The longest chain not only serves as proof of the sequence of events witnessed, but proof that it came from the largest pool of CPU power. As long as a majority of CPU power is controlled by nodes that are not cooperating to attack the network, they'll generate the longest chain and outpace attackers. The network itself requires minimal structure. Messages are broadcast on a best effort basis, and nodes can leave and rejoin the network at will, accepting the longest proof-of-work chain as proof of what happened while they were gone. 
+> 
 >
-> **概要**：
-
-一个纯粹的点对点的电子现金系统，让任何人都能直接在线支付，无需金融机构。
-
-数字签名解决了部分问题，但如果还需要一个可信第三方来防止双重支付的话，其核心优势就被抵消了。我们提出了一个利用点对点网络来解决双重支付问题的方案。该网络通过以下方式为交易标记时间戳：将交易的哈希值打包，并录入一条持续延伸的、基于工作量证明的链中，由此形成一份不重做所有工作量证明便无法修改的记录。
-
-最长的链，既用于证明它所见证的一系列事件的时序，也证明它来自最大的 CPU 算力池。只要大部分 CPU 算力掌握在诚实节点手里（即，不与攻击网络的节点合作），他们将会生成最长链，并在速度上超越攻击者。网络自身的结构极其简单。信息以尽力而为的方式广播，节点可自由来去，重返时只需接受最长的工作量证明链，作为他们离线期间所发生之一切的证明。
-
+> **概要**：一个纯粹的点对点电子现金系统，能让用户间直接在线支付，无需通过金融机构。数字签名虽解决了部分问题，但如果还需要一个可信第三方来防止双重支付的话，其核心优势就被抵消了。我们提出了一个利用点对点网络来解决双重支付问题的方案。该网络通过以下方式为交易标记时间戳：将交易的哈希值打包，并录入一条持续延伸的、以哈希为基础的工作量证明链中，由此形成一份不重做所有工作量证明便无法修改的记录。最长的链，既用于证明其见证的一系列事件的时序，也表明它来自最大的 CPU 算力池。只要大部分 CPU 算力掌握在诚实节点手里（即，不与攻击网络的节点合作），他们将会生成最长链，并在速度上超越攻击者。网络自身的结构极其简单。信息尽力而为地广播，节点可自由来去，重返时只需接受最长的工作量证明链，作为他们离线期间所发生之一切的证明。
 
 
 -----

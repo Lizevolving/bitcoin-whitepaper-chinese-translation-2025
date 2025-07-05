@@ -40,6 +40,8 @@
 pandoc README.md -s --toc --css=style.css --metadata title="Bitcoin Whitepaper" -o index.html
 ```
 
+pandoc zh.md -s --toc --css=style.css --metadata title="Bitcoin Whitepaper" -o index.html
+
 同时，确保你的`README.md`已经用上面的 `:::` 语法标记好了中英文区块。
 
 **步骤 2：布局与样式 (style.css)**
