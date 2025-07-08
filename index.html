@@ -74,7 +74,7 @@ that cannot be changed without redoing the proof-of-work. The longest
 chain not only serves as proof of the sequence of events witnessed, but
 proof that it came from the largest pool of CPU power. As long as a
 majority of CPU power is controlled by nodes that are not cooperating to
-attack the network, they’ll generate the longest chain and outpace
+attack the network, they'll generate the longest chain and outpace
 attackers. The network itself requires minimal structure. Messages are
 broadcast on a best effort basis, and nodes can leave and rejoin the
 network at will, accepting the longest proof-of-work chain as proof of
@@ -101,7 +101,7 @@ would otherwise need. A certain percentage of fraud is accepted as
 unavoidable. These costs and payment uncertainties can be avoided in
 person by using physical currency, but no mechanism exists to make
 payments over a communications channel without a trusted party.</p>
-<p>当今的互联网商业，几乎完全依赖金融机构作为可信第三方来处理电子支付。这套系统在多数情况下都行之有效，但依然受制于“信任模式”的固有缺陷。例如，交易无法做到彻底不可逆，因为金融机构必须介入以调解争议。调解的成本推高了交易成本，既限制了实际可行的最小交易额度，也杜绝了小额临时交易的可能。此外，更大的成本在于：我们无法为不可逆的服务提供不可逆的支付。由于逆转始终可能，对信任的需求也因此无处不在。商家不得不提防顾客，麻烦他们提供本不必要的额外信息。一定比例的欺诈，也被当作无法避免的代价。这些成本与支付不确定性，在面对面交易时可通过使用实体货币避免；但在网络上，我们仍未有一种无需可信方参与，就能完成支付的机制。</p>
+<p>当今的互联网商业，几乎完全依赖金融机构作为可信第三方来处理电子支付。这套系统在多数情况下都行之有效，但依然受制于"信任模式"的固有缺陷。例如，交易无法做到彻底不可逆，因为金融机构必须介入以调解争议。调解的成本推高了交易成本，既限制了实际可行的最小交易额度，也杜绝了小额临时交易的可能。此外，更大的成本在于：我们无法为不可逆的服务提供不可逆的支付。由于逆转始终可能，对信任的需求也因此无处不在。商家不得不提防顾客，麻烦他们提供本不必要的额外信息。一定比例的欺诈，也被当作无法避免的代价。这些成本与支付不确定性，在面对面交易时可通过使用实体货币避免；但在网络上，我们仍未有一种无需可信方参与，就能完成支付的机制。</p>
 <p>What is needed is an electronic payment system based on cryptographic
 proof instead of trust, allowing any two willing parties to transact
 directly with each other without the need for a trusted third party.
@@ -120,9 +120,9 @@ owner transfers the coin to the next by digitally signing a hash of the
 previous transaction and the public key of the next owner and adding
 these to the end of the coin. A payee can verify the signatures to
 verify the chain of ownership.</p>
-<p>我们将一枚电子硬币定义为一条由数字签名串联而成的链。每位持有者在转交币时，会对前一笔交易的哈希值（hash，音译，亦翻译为“散列值”）和下一位持有者的公钥进行数字签名，然后将这些数据附加到这条链的末尾。收款人即可通过检验这一系列签名，来核实其所有权链。</p>
+<p>我们将一枚电子硬币定义为一条由数字签名串联而成的链。每位持有者在转交币时，会对前一笔交易的哈希值（hash，音译，亦翻译为"散列值"）和下一位持有者的公钥进行数字签名，然后将这些数据附加到这条链的末尾。收款人即可通过检验这一系列签名，来核实其所有权链。</p>
 <p><img src="images/transactions.svg" /></p>
-<p>The problem of course is the payee can’t verify that one of the
+<p>The problem of course is the payee can't verify that one of the
 owners did not double-spend the coin. A common solution is to introduce
 a trusted central authority, or mint, that checks every transaction for
 double spending. After each transaction, the coin must be returned to
@@ -131,11 +131,11 @@ mint are trusted not to be double-spent. The problem with this solution
 is that the fate of the entire money system depends on the company
 running the mint, with every transaction having to go through them, just
 like a bank.</p>
-<p>当然，问题在于收款人无法确认，之前的某位所有者没有“一币多花”。一个常见的解法，是引入一个可信的中央机构（或称“铸币厂”），由它来检查每笔交易是否重复。每次交易后，硬币都必须交还铸币厂，以便重新铸造并发行新的硬币。进而，只有铸币厂直接发行的硬币，才被认为是可信的、没有被双重支付的。但这种解法的问题是，整个货币体系的命运，都会取决于运营铸币厂的公司
+<p>当然，问题在于收款人无法确认，之前的某位所有者没有"一币多花"。一个常见的解法，是引入一个可信的中央机构（或称"铸币厂"），由它来检查每笔交易是否重复。每次交易后，硬币都必须交还铸币厂，以便重新铸造并发行新的硬币。进而，只有铸币厂直接发行的硬币，才被认为是可信的、没有被双重支付的。但这种解法的问题是，整个货币体系的命运，都会取决于运营铸币厂的公司
 —— 每笔交易都必须经过它，就像银行一样。</p>
 <p>We need a way for the payee to know that the previous owners did not
 sign any earlier transactions. For our purposes, the earliest
-transaction is the one that counts, so we don’t care about later
+transaction is the one that counts, so we don't care about later
 attempts to double-spend. The only way to confirm the absence of a
 transaction is to be aware of all transactions. In the mint based model,
 the mint was aware of all transactions and decided which arrived first.
@@ -173,7 +173,7 @@ role="doc-noteref"><sup>10</sup></a>。显然，这个时间戳能证明数据�
 <p><img src="images/timestamp-server.svg" /></p>
 <h2 id="工作量证明-proof-of-work">4. 工作量证明 (Proof-of-Work)</h2>
 <p>To implement a distributed timestamp server on a peer-to-peer basis,
-we will need to use a proof-of-work system similar to Adam Back’s
+we will need to use a proof-of-work system similar to Adam Back's
 Hashcash<a href="#fn11" class="footnote-ref" id="fnref11"
 role="doc-noteref"><sup>11</sup></a>, rather than newspaper or Usenet
 posts. The proof-of-work involves scanning for a value that when hashed,
@@ -187,7 +187,7 @@ SHA-256），所得结果以若干个 0
 开头。所需的平均工作量，会随着所要求的零位数的增加而呈指数级增长，但验证这项工作量只需一次哈希运算。</p>
 <p>For our timestamp network, we implement the proof-of-work by
 incrementing a nonce in the block until a value is found that gives the
-block’s hash the required zero bits. Once the CPU effort has been
+block's hash the required zero bits. Once the CPU effort has been
 expended to make it satisfy the proof-of-work, the block cannot be
 changed without redoing the work. As later blocks are chained after it,
 the work to change the block would include redoing all the blocks after
@@ -208,14 +208,14 @@ would have to redo the proof-of-work of the block and all blocks after
 it and then catch up with and surpass the work of the honest nodes. We
 will show later that the probability of a slower attacker catching up
 diminishes exponentially as subsequent blocks are added.</p>
-<p>工作量证明，也解决了集体决策中的“代表权”问题，也就是“如何决定谁能代表大多数来做决定”。如果“大多数”由“一个
-IP 地址一票”的方式来决定，那么任何能控制大量 IP
-的人都能操控结果。而工作量证明，本质是“一个 CPU
-一票”。在这里，“大多数”的决定，就体现在投入了最多工作量、因此也最长的那条链上。只要多数算力掌握在诚实节点手中，诚实链就增长得最快，速度上会远超任何竞争链。攻击者如果想要修改一个历史区块，就必须重做该区块以及其后所有区块的全部工作量证明，然后还要追上并反超诚实链的累积工作量。我们稍后会证明：随着后续区块不断增加，算力落后的攻击者成功追上的概率，会呈指数级下降。</p>
+<p>工作量证明，也解决了集体决策中的"代表权"问题，也就是"如何决定谁能代表大多数来做决定"。如果"大多数"由"一个
+IP 地址一票"的方式来决定，那么任何能控制大量 IP
+的人都能操控结果。而工作量证明，本质是"一个 CPU
+一票"。在这里，"大多数"的决定，就体现在投入了最多工作量、因此也最长的那条链上。只要多数算力掌握在诚实节点手中，诚实链就增长得最快，速度上会远超任何竞争链。攻击者如果想要修改一个历史区块，就必须重做该区块以及其后所有区块的全部工作量证明，然后还要追上并反超诚实链的累积工作量。我们稍后会证明：随着后续区块不断增加，算力落后的攻击者成功追上的概率，会呈指数级下降。</p>
 <p>To compensate for increasing hardware speed and varying interest in
 running nodes over time, the proof-of-work difficulty is determined by a
 moving average targeting an average number of blocks per hour. If
-they’re generated too fast, the difficulty increases.</p>
+they're generated too fast, the difficulty increases.</p>
 <p>为了应对硬件算力的持续提升，以及随着时间推移可能产生的节点参与数量的变化，工作量证明的难度由此决定：基于区块的每小时平均生成量的一个移动平均值。如果区块生成过快，难度就会提高。</p>
 <h2 id="网络-network">5. 网络 (Network)</h2>
 <p>The steps to run the network are as follows:</p>
@@ -292,12 +292,12 @@ and the validity of his own wealth.</p>
 Disk Space)</h2>
 <p>Once the latest transaction in a coin is buried under enough blocks,
 the spent transactions before it can be discarded to save disk space. To
-facilitate this without breaking the block’s hash, transactions are
+facilitate this without breaking the block's hash, transactions are
 hashed in a Merkle Tree<a href="#fn13" class="footnote-ref" id="fnref13"
 role="doc-noteref"><sup>13</sup></a><a href="#fn14" class="footnote-ref"
 id="fnref14" role="doc-noteref"><sup>14</sup></a><a href="#fn15"
 class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a>,
-with only the root included in the block’s hash. Old blocks can then be
+with only the root included in the block's hash. Old blocks can then be
 compacted by stubbing off branches of the tree. The interior hashes do
 not need to be stored.</p>
 <p>一旦一枚币最近发生的某笔交易被足够多的区块覆盖，其更早的交易记录便可被丢弃，以节省磁盘空间。为实现此功能且不破坏区块的整体哈希，区块内的所有交易将被组织成一棵默克尔树（Merkle
@@ -311,7 +311,7 @@ Root）计入该区块的哈希之中。这样，通过剪除树枝即可压缩�
 <p>A block header with no transactions would be about 80 bytes. If we
 suppose blocks are generated every 10 minutes, 80 bytes * 6 * 24 * 365 =
 4.2MB per year. With computer systems typically selling with 2GB of RAM
-as of 2008, and Moore’s Law predicting current growth of 1.2GB per year,
+as of 2008, and Moore's Law predicting current growth of 1.2GB per year,
 storage should not be a problem even if the block headers must be kept
 in memory.</p>
 <p>一个不含交易记录的区块头仅约 80 字节。即便按每 10
@@ -324,9 +324,9 @@ in memory.</p>
 <p>It is possible to verify payments without running a full network
 node. A user only needs to keep a copy of the block headers of the
 longest proof-of-work chain, which he can get by querying network nodes
-until he’s convinced he has the longest chain, and obtain the Merkle
-branch linking the transaction to the block it’s timestamped in. He
-can’t check the transaction for himself, but by linking it to a place in
+until he's convinced he has the longest chain, and obtain the Merkle
+branch linking the transaction to the block it's timestamped in. He
+can't check the transaction for himself, but by linking it to a place in
 the chain, he can see that a network node has accepted it, and blocks
 added after it further confirm the network has accepted it.</p>
 <p>用户无需运行一个完整的网络节点，也能验证支付。他只需保存一份最长工作量证明链的区块头副本，并通过查询在线节点来确保自己拥有的确实是最长链。然后，获取那条能将这笔交易与其所在区块链接起来的默克尔路径（Merkle
@@ -335,11 +335,11 @@ branch）即可。这样一来，他虽然不能亲自校验这笔交易，但�
 <p>As such, the verification is reliable as long as honest nodes control
 the network, but is more vulnerable if the network is overpowered by an
 attacker. While network nodes can verify transactions for themselves,
-the simplified method can be fooled by an attacker’s fabricated
+the simplified method can be fooled by an attacker's fabricated
 transactions for as long as the attacker can continue to overpower the
 network. One strategy to protect against this would be to accept alerts
 from network nodes when they detect an invalid block, prompting the
-user’s software to download the full block and alerted transactions to
+user's software to download the full block and alerted transactions to
 confirm the inconsistency. Businesses that receive frequent payments
 will probably still want to run their own nodes for more independent
 security and quicker verification.</p>
@@ -358,9 +358,9 @@ the change, if any, back to the sender.</p>
 <p>It should be noted that fan-out, where a transaction depends on
 several transactions, and those transactions depend on many more, is not
 a problem here. There is never the need to extract a complete standalone
-copy of a transaction’s history.</p>
-<p>值得注意的是，“扇出”在这里不成问题 ——
-所谓“扇出”，是指一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易。因为系统从来都没必要为任何交易提取完整、独立的历史副本。</p>
+copy of a transaction's history.</p>
+<p>值得注意的是，"扇出"在这里不成问题 ——
+所谓"扇出"，是指一笔交易依赖于多笔上游交易，而这些上游交易又依赖于更多交易。因为系统从来都没必要为任何交易提取完整、独立的历史副本。</p>
 <h2 id="隐私-privacy">10. 隐私 (Privacy)</h2>
 <p>The traditional banking model achieves a level of privacy by limiting
 access to information to the parties involved and the trusted third
@@ -370,9 +370,9 @@ information in another place: by keeping public keys anonymous. The
 public can see that someone is sending an amount to someone else, but
 without information linking the transaction to anyone. This is similar
 to the level of information released by stock exchanges, where the time
-and size of individual trades, the “tape”, is made public, but without
+and size of individual trades, the "tape", is made public, but without
 telling who the parties were.</p>
-<p>传统的银行模型，通过仅限交易各方和可信第三方接触信息来实现一定的隐私保护。而我们的系统要求将所有交易公开，因此这种方法被排除。但是，维持隐私可通过从另一个环节切断信息流来实现：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法把交易信息与任何人的真实身份对应。这种水平的信息发布，类似于股市交易的做法：交易的时间和规模（即所谓“行情记录”）被公布，但交易双方的身份保密。</p>
+<p>传统的银行模型，通过仅限交易各方和可信第三方接触信息来实现一定的隐私保护。而我们的系统要求将所有交易公开，因此这种方法被排除。但是，维持隐私可通过从另一个环节切断信息流来实现：保持公钥的匿名性。公众能看到有人向另一人转了一笔钱，但无法把交易信息与任何人的真实身份对应。这种水平的信息发布，类似于股市交易的做法：交易的时间和规模（即所谓"行情记录"）被公布，但交易双方的身份保密。</p>
 <p><img src="images/privacy.svg" /></p>
 <p>As an additional firewall, a new key pair should be used for each
 transaction to keep them from being linked to a common owner. Some
@@ -390,24 +390,24 @@ belonged to the attacker. Nodes are not going to accept an invalid
 transaction as payment, and honest nodes will never accept a block
 containing them. An attacker can only try to change one of his own
 transactions to take back money he recently spent.</p>
-<p>假设一个场景，某个攻击者正试图生成一条比诚实链增长更快的“伪链”（替代链）。即便成功，他也无法肆意篡改系统，比如凭空创造价值，或盗取从未属于他的钱。因为节点不会接受无效交易，而诚实节点更是绝不会认可包含这类交易的区块。攻击者充其量，只能尝试篡改自己的某笔交易，以拿回他刚花掉的钱。</p>
+<p>假设一个场景，某个攻击者正试图生成一条比诚实链增长更快的"伪链"（替代链）。即便成功，他也无法肆意篡改系统，比如凭空创造价值，或盗取从未属于他的钱。因为节点不会接受无效交易，而诚实节点更是绝不会认可包含这类交易的区块。攻击者充其量，只能尝试篡改自己的某笔交易，以拿回他刚花掉的钱。</p>
 <p>The race between the honest chain and an attacker chain can be
 characterized as a Binomial Random Walk. The success event is the honest
 chain being extended by one block, increasing its lead by +1, and the
-failure event is the attacker’s chain being extended by one block,
+failure event is the attacker's chain being extended by one block,
 reducing the gap by -1.</p>
-<p>诚实链与攻击者链之间的竞赛，可以被看作一个“二项式随机漫步”过程：每当诚实链成功添加一个新区块，它的领先优势就增加
+<p>诚实链与攻击者链之间的竞赛，可以被看作一个"二项式随机漫步"过程：每当诚实链成功添加一个新区块，它的领先优势就增加
 <span
-class="math inline">\(1\)</span>（即一次“成功”事件）；反之，如果攻击者成功添加一个区块，差距就减少
-<span class="math inline">\(1\)</span>（即一次“失败”事件）。</p>
+class="math inline">\(1\)</span>（即一次"成功"事件）；反之，如果攻击者成功添加一个区块，差距就减少
+<span class="math inline">\(1\)</span>（即一次"失败"事件）。</p>
 <p>The probability of an attacker catching up from a given deficit is
-analogous to a Gambler’s Ruin problem. Suppose a gambler with unlimited
+analogous to a Gambler's Ruin problem. Suppose a gambler with unlimited
 credit starts at a deficit and plays potentially an infinite number of
 trials to try to reach breakeven. We can calculate the probability he
 ever reaches breakeven, or that an attacker ever catches up with the
 honest chain, as follows<a href="#fn19" class="footnote-ref"
 id="fnref19" role="doc-noteref"><sup>19</sup></a>:</p>
-<p>攻击者能够从落后局面追平的概率，类似于经典的“赌徒破产问题”。假设，一个拥有无限筹码的赌徒，从亏空开始，允许他赌无限次，目标是填补上这笔亏空。我们可以计算出他最终填平亏空的概率——也就是攻击者最终能赶上诚实链的概率<a
+<p>攻击者能够从落后局面追平的概率，类似于经典的"赌徒破产问题"。假设，一个拥有无限筹码的赌徒，从亏空开始，允许他赌无限次，目标是填补上这笔亏空。我们可以计算出他最终填平亏空的概率——也就是攻击者最终能赶上诚实链的概率<a
 href="#fn20" class="footnote-ref" id="fnref20"
 role="doc-noteref"><sup>20</sup></a>，如下：</p>
 <p><span class="math display">\[
@@ -425,14 +425,14 @@ role="doc-noteref"><sup>20</sup></a>，如下：</p>
                 \end{Bmatrix}
 \]</span></p>
 <p>Given our assumption that <span class="math inline">\(p \gt
-q​\)</span>, the probability drops exponentially as the number of blocks
+q\)</span>, the probability drops exponentially as the number of blocks
 the attacker has to catch up with increases. With the odds against him,
-if he doesn’t make a lucky lunge forward early on, his chances become
+if he doesn't make a lucky lunge forward early on, his chances become
 vanishingly small as he falls further behind.</p>
 <p>基于我们 <span class="math inline">\(p &gt; q\)</span>
 的假设，攻击者需要追赶的区块越多，其成功概率便呈指数级下降。由于胜算本就不利，如果他不能在初期就幸运地大幅度追近，那么随着差距拉大，他成功的机会将变得微乎其微。</p>
 <p>We now consider how long the recipient of a new transaction needs to
-wait before being sufficiently certain the sender can’t change the
+wait before being sufficiently certain the sender can't change the
 transaction. We assume the sender is an attacker who wants to make the
 recipient believe he paid him for a while, then switch it to pay back to
 himself after some time has passed. The receiver will be alerted when
@@ -450,9 +450,9 @@ his transaction.</p>
 通过持续运算，并直到凭运气获得足够的领先时，再执行交易。一旦交易发出，这个不诚实的付款方就会立即秘密构建一条平行链，其中包含他那笔交易的替代版本。</p>
 <p>The recipient waits until the transaction has been added to a block
 and <span class="math inline">\(z\)</span> blocks have been linked after
-it. He doesn’t know the exact amount of progress the attacker has made,
+it. He doesn't know the exact amount of progress the attacker has made,
 but assuming the honest blocks took the average expected time per block,
-the attacker’s potential progress will be a Poisson distribution with
+the attacker's potential progress will be a Poisson distribution with
 expected value:</p>
 <p>收款人需要等待，直到此笔交易被打包进一个区块，且其后再链接上 <span
 class="math inline">\(z\)</span>
@@ -463,7 +463,7 @@ class="math inline">\(z\)</span>
 <p>To get the probability the attacker could still catch up now, we
 multiply the Poisson density for each amount of progress he could have
 made by the probability he could catch up from that point:</p>
-<p>为了计算出攻击者此刻依然能反超的概率，我们需要将以下两项相乘（<strong>然后将所有可能情况的概率求和</strong>）：其一，是攻击者取得每一种可能进展（k）的泊松概率；其二，是他从该进展（k）出发，最终能够反超的概率。</p>
+<p>为了计算出攻击者此刻依然能反超的概率，我们需要将以下两项相乘（然后将所有可能情况的概率求和）：其一，是攻击者取得每一种可能进展（k）的泊松概率；其二，是他从该进展（k）出发，最终能够反超的概率。</p>
 <p><span class="math display">\[
 \large \sum_{k=0}^{\infty} \frac{\lambda^k e^{-\lambda}}{k!} \cdot
                 \begin{Bmatrix}
@@ -554,7 +554,7 @@ happened while they were gone. They vote with their CPU power,
 expressing their acceptance of valid blocks by working on extending them
 and rejecting invalid blocks by refusing to work on them. Any needed
 rules and incentives can be enforced with this consensus mechanism.</p>
-<p>我们提出了一个无需信任的电子交易系统。我们从一种由数字签名铸造的货币框架出发，它能强力保障所有权，却缺少防止双重支付的机制。为此，我们提出了一个点对点网络，通过“工作量证明”来记录一部公开的交易历史。只要诚实节点控制着多数
+<p>我们提出了一个无需信任的电子交易系统。我们从一种由数字签名铸造的货币框架出发，它能强力保障所有权，却缺少防止双重支付的机制。为此，我们提出了一个点对点网络，通过"工作量证明"来记录一部公开的交易历史。只要诚实节点控制着多数
 CPU
 算力，攻击者在计算上就几乎不可能篡改这份记录。这个网络的强大，正在于其无结构的简洁。节点们无需太多协调便可同时工作。他们也无需身份识别，因为消息的路径不取决于特定的终点；消息只需尽力广播即可。节点可自由来去，重返时只需接受最长的工作量证明链，作为他们离线期间所发生之一切的证明。它们用算力投票：在有效区块上继续工作，即为赞同；拒绝在无效区块上工作，即为反对。一切必要的规则和激励，都可通过此共识机制得以强制实施。</p>
 <h2 id="参考文献-references">参考文献 (References)</h2>
@@ -591,7 +591,7 @@ href="https://doi.org/10.1007/978-1-4613-9323-8_24">10.1007/978-1-4613-9323-8_24
 href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p><strong>Secure names for bit-strings</strong> Stuart
 Haber, W. Scott Stornetta <em>Proceedings of the 4th ACM conference on
-Computer and communications security - CCS ’97</em>(1997) <a
+Computer and communications security - CCS '97</em>(1997) <a
 href="https://doi.org/dtnrf6" class="uri">https://doi.org/dtnrf6</a>
 DOI: <a
 href="https://doi.org/10.1145/266420.266430">10.1145/266420.266430</a><a
@@ -617,7 +617,7 @@ href="https://doi.org/10.1007/978-1-4613-9323-8_24">10.1007/978-1-4613-9323-8_24
 href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p><strong>Secure names for bit-strings</strong> Stuart
 Haber, W. Scott Stornetta <em>Proceedings of the 4th ACM conference on
-Computer and communications security - CCS ’97</em>(1997) <a
+Computer and communications security - CCS '97</em>(1997) <a
 href="https://doi.org/dtnrf6" class="uri">https://doi.org/dtnrf6</a>
 DOI: <a
 href="https://doi.org/10.1145/266420.266430">10.1145/266420.266430</a><a
@@ -641,7 +641,7 @@ class="uri">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.13.6228</a><
 href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p><strong>Secure names for bit-strings</strong> Stuart
 Haber, W. Scott Stornetta <em>Proceedings of the 4th ACM conference on
-Computer and communications security - CCS ’97</em>(1997) <a
+Computer and communications security - CCS '97</em>(1997) <a
 href="https://doi.org/dtnrf6" class="uri">https://doi.org/dtnrf6</a>
 DOI: <a
 href="https://doi.org/10.1145/266420.266430">10.1145/266420.266430</a><a
@@ -661,7 +661,7 @@ class="uri">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.13.6228</a><
 href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17"><p><strong>Secure names for bit-strings</strong> Stuart
 Haber, W. Scott Stornetta <em>Proceedings of the 4th ACM conference on
-Computer and communications security - CCS ’97</em>(1997) <a
+Computer and communications security - CCS '97</em>(1997) <a
 href="https://doi.org/dtnrf6" class="uri">https://doi.org/dtnrf6</a>
 DOI: <a
 href="https://doi.org/10.1145/266420.266430">10.1145/266420.266430</a><a
@@ -713,6 +713,18 @@ document.querySelectorAll('#TOC a').forEach(link => {
             body.classList.remove('nav-pinned');
         }
     });
+});
+
+// Close nav when clicking outside the sidebar
+document.addEventListener('click', function (e) {
+    const toc = document.getElementById('TOC');
+    const navToggle = document.querySelector('.nav-toggle');
+    if (toc && toc.classList.contains('pinned')) {
+        if (!toc.contains(e.target) && !navToggle.contains(e.target)) {
+            toc.classList.remove('pinned');
+            document.body.classList.remove('nav-pinned');
+        }
+    }
 });
 </script>
 </body>

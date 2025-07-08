@@ -295,7 +295,7 @@ $$
 To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
 
 
-为了计算出攻击者此刻依然能反超的概率，我们需要将以下两项相乘（**然后将所有可能情况的概率求和**）：其一，是攻击者取得每一种可能进展（k）的泊松概率；其二，是他从该进展（k）出发，最终能够反超的概率。
+为了计算出攻击者此刻依然能反超的概率，我们需要将以下两项相乘（然后将所有可能情况的概率求和）：其一，是攻击者取得每一种可能进展（k）的泊松概率；其二，是他从该进展（k）出发，最终能够反超的概率。
 
 
 $$

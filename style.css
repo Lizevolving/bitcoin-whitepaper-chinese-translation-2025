@@ -18,7 +18,7 @@ html {
 
 body {
     max-width: 750px;
-    font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     color: rgb(51, 51, 51);
     line-height: 1.6;
     margin: 0px auto;
@@ -49,8 +49,8 @@ body {
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
     position: relative;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
     font-weight: bold;
     line-height: 1.4;
     cursor: text;
@@ -64,6 +64,8 @@ h1 {
     font-size: 2.25em;
     line-height: 1.2;
     border-bottom: 1px solid #eee;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 h2 {
@@ -71,30 +73,50 @@ h2 {
     font-size: 1.75em;
     line-height: 1.225;
     border-bottom: 1px solid #eee;
+    margin-top: 2.5rem;
+    margin-bottom: 1.8rem;
 }
 
 h3 {
     font-size: 1.5em;
     line-height: 1.43;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 h4 {
     font-size: 1.25em;
+    margin-top: 1.8rem;
+    margin-bottom: 1.3rem;
 }
 
 h5 {
     font-size: 1em;
+    margin-top: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 h6 {
     font-size: 1em;
     color: #777;
+    margin-top: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 p {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
     orphans: 4;
+    line-height: 1.7;
+}
+
+/* Enhanced spacing for specific elements */
+p + h1, p + h2, p + h3, p + h4, p + h5, p + h6 {
+    margin-top: 2.5rem;
+}
+
+h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
+    margin-top: 1.5rem;
 }
 
 /* Links */
@@ -112,7 +134,7 @@ a:active, a:hover {
 ul, ol {
     padding-left: 30px;
     position: relative;
-    margin: 0.8em 0;
+    margin: 1.2rem 0;
 }
 
 ul:first-child, ol:first-child {
@@ -128,24 +150,27 @@ li > ol, li > ul {
 }
 
 li {
-    margin: 0px;
+    margin: 0.5rem 0;
     position: relative;
 }
 
-li p.first {
-    display: inline-block;
+li p {
+    margin: 0.3rem 0;
 }
 
 /* Blockquotes */
 blockquote {
     border-left: 4px solid #dfe2e5;
-    padding: 0 15px;
+    padding: 0 20px;
     color: #777777;
-    margin: 1rem 0px;
+    margin: 1.8rem 0px;
+    background-color: #f9f9f9;
+    font-style: italic;
 }
 
 blockquote blockquote {
     padding-right: 0;
+    margin: 1.2rem 0;
 }
 
 blockquote > :last-child {
@@ -154,6 +179,10 @@ blockquote > :last-child {
 
 blockquote > :first-child {
     margin-top: 0px;
+}
+
+blockquote p {
+    margin: 1rem 0;
 }
 
 /* Tables */
@@ -166,7 +195,7 @@ table {
     text-align: left;
     padding: 0;
     word-break: initial;
-    margin: 0.8em 0;
+    margin: 1.8rem 0;
 }
 
 table tr {
@@ -210,23 +239,45 @@ table tr td:last-child {
 }
 
 /* Code */
-code, pre, samp, tt {
+/* --- 变量定义：便于维护和主题切换 --- */
+:root {
+    --monospace: "Courier New", "Consolas", monospace;
+    --code-bg: #f6f8fa;
+    --border-color: #e7eaed;
+}
+
+/* --- 基础设定：统一等宽字体 --- */
+code, pre, samp, kbd {
     font-family: var(--monospace);
-}
-
-code {
-    border: 1px solid #e7eaed;
-    background-color: #f3f4f4;
-    border-radius: 3px;
-    padding: 0 4px 2px 4px;
     font-size: 0.9em;
-    text-align: left;
 }
 
+/* --- 1. 行内代码 `<code>`：轻量、融入文本 --- */
+/* 适用于单个函数名、变量名等场景 */
+code, samp {
+    background-color: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* --- 2. 代码块容器 `<pre>`：结构清晰、留白充足 --- */
+/* 作为代码块的“外框”，负责边距、背景、边框和滚动条 */
 pre {
-    white-space: pre-wrap;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow-x: auto; /* 关键：内容超出时，水平滚动 */
+    white-space: pre; /* 保持预格式化，不自动换行 */
+}
+
+/* --- 3. 重置 `<pre>` 内的 `<code>` 样式 --- */
+/* 代码块内的 <code> 不再需要独立的背景和内边距 */
+pre > code {
+    padding: 0;
+    background-color: transparent;
+    border: none;
 }
 
 .md-fences {
@@ -236,20 +287,43 @@ pre {
     text-align: left;
     overflow: visible;
     white-space: pre;
-    background-color: #f8f8f8;
-    border: 1px solid #e7eaed;
-    border-radius: 3px;
-    margin: 15px 0;
-    padding: 0.2em 1em;
-    padding-top: 8px;
-    padding-bottom: 6px;
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    line-height: 1.6;
+    color: #24292f;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.md-fences::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #e1e4e8;
+    color: #586069;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 0 8px 0 4px;
+    font-weight: 500;
+}
+
+/* Math expressions */
+.md-math-block {
+    margin: 1.8rem 0;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #e1e4e8;
 }
 
 /* Horizontal Rule */
 hr {
     height: 2px;
     padding: 0;
-    margin: 16px 0;
+    margin: 2.5rem 0;
     background-color: #e7e7e7;
     border: 0 none;
     overflow: hidden;
@@ -260,16 +334,19 @@ hr {
 img {
     max-width: 100%;
     vertical-align: middle;
+    margin: 2rem 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 p > img:only-child {
     display: block;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 figure {
     overflow-x: auto;
-    margin: 1.2em 0px;
+    margin: 2rem 0px;
     max-width: calc(100% + 16px);
     padding: 0px;
 }
@@ -415,18 +492,39 @@ figure > table {
     top: 0;
     left: 0;
     width: 280px;
-    height: 100vh;
+    height: 100vh; /* Fallback */
     background: var(--nav-bg-color);
     border-right: 1px solid var(--nav-border-color);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transform: translateX(-100%);
+    /* 默认隐藏但保留 20px 悬停区，桌面端可通过 hover 唤出 */
+    transform: translateX(calc(-100% + 20px));
     transition: transform 0.3s ease;
     z-index: 1000;
     overflow-y: auto;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* 使用支持的浏览器动态视口高度，避免 iOS 地址栏收缩导致的 100vh 失效 */
+@supports (height: 100dvh) {
+    #TOC {
+        height: 100dvh;
+    }
+}
+@supports (height: 100svh) {
+    #TOC {
+        height: 100svh;
+    }
+}
+
+/* 移动端展开后取消 transform，避免固定元素因 transform 失去跟随视口的问题 */
+@media screen and (max-width: 768px) {
+    #TOC.pinned {
+        transform: none !important;
+    }
+}
+
+/* Restore full reveal on hover / pinned */
 #TOC:hover,
 #TOC.pinned {
     transform: translateX(0);
@@ -449,20 +547,16 @@ figure > table {
     justify-content: center;
     padding: 10px;
     transition: all 0.3s ease;
-}
-
-.nav-toggle:hover {
-    transform: scale(1.1);
+    /* 始终可见，避免被其他脚本隐藏 */
+    opacity: 0.9 !important;
+    visibility: visible !important;
 }
 
 .nav-toggle::before {
-    content: "";
-    width: 20px;
-    height: 2px;
-    background: var(--text-color);
-    box-shadow: 
-        0 6px 0 var(--text-color),
-        0 12px 0 var(--text-color);
+    /* 半透明三横线 */
+    background: rgba(51, 51, 51, 0.6);
+    box-shadow: 0 6px 0 rgba(51, 51, 51, 0.6),
+                0 12px 0 rgba(51, 51, 51, 0.6);
     transition: all 0.3s ease;
 }
 
@@ -531,5 +625,18 @@ figure > table {
 body.nav-pinned #write {
     margin-left: 280px;
     transition: margin-left 0.3s ease;
+}
+
+/* Mobile Responsive Overrides */
+@media screen and (max-width: 768px) {
+    /* 完全隐藏导航栏，靠按钮显隐 */
+    #TOC {
+        transform: translateX(-100%);
+    }
+
+    /* 保持按钮样式与位置 */
+    .nav-toggle {
+        opacity: 0.9 !important;
+    }
 }
 
