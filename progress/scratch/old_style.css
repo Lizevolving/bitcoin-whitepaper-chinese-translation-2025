@@ -1,0 +1,642 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --select-text-bg-color: #B5D6FC;
+    --select-text-font-color: auto;
+    --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+    --nav-bg-color: rgba(255, 255, 255, 0.95);
+    --nav-border-color: #e1e4e8;
+    --nav-hover-color: #f6f8fa;
+}
+
+html {
+    font-size: 16px;
+    overflow-x: initial !important;
+}
+
+body {
+    max-width: 750px;
+    font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+    margin: 0px auto;
+    padding: 0px;
+    background-color: var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+}
+
+#write {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 30px;
+    padding-bottom: 100px;
+    height: auto;
+    width: inherit;
+    word-break: normal;
+    word-wrap: break-word;
+    position: relative;
+    white-space: normal;
+    overflow-x: visible;
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+    margin-top: 30px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+    break-after: avoid-page;
+    break-inside: avoid;
+    orphans: 2;
+}
+
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+    margin-top: 2.5rem;
+    margin-bottom: 1.8rem;
+}
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25em;
+    margin-top: 1.8rem;
+    margin-bottom: 1.3rem;
+}
+
+h5 {
+    font-size: 1em;
+    margin-top: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+h6 {
+    font-size: 1em;
+    color: #777;
+    margin-top: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+p {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    orphans: 4;
+    line-height: 1.7;
+}
+
+/* Enhanced spacing for specific elements */
+p + h1, p + h2, p + h3, p + h4, p + h5, p + h6 {
+    margin-top: 2.5rem;
+}
+
+h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
+    margin-top: 1.5rem;
+}
+
+/* Links */
+a {
+    color: #4183C4;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:active, a:hover {
+    outline: 0px;
+}
+
+/* Lists */
+ul, ol {
+    padding-left: 30px;
+    position: relative;
+    margin: 1.2rem 0;
+}
+
+ul:first-child, ol:first-child {
+    margin-top: 0;
+}
+
+ul:last-child, ol:last-child {
+    margin-bottom: 0;
+}
+
+li > ol, li > ul {
+    margin: 0 0;
+}
+
+li {
+    margin: 0.5rem 0;
+    position: relative;
+}
+
+li p {
+    margin: 0.3rem 0;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 20px;
+    color: #777777;
+    margin: 1.8rem 0px;
+    background-color: #f9f9f9;
+    font-style: italic;
+}
+
+blockquote blockquote {
+    padding-right: 0;
+    margin: 1.2rem 0;
+}
+
+blockquote > :last-child {
+    margin-bottom: 0px;
+}
+
+blockquote > :first-child {
+    margin-top: 0px;
+}
+
+blockquote p {
+    margin: 1rem 0;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 100%;
+    overflow: auto;
+    break-inside: auto;
+    text-align: left;
+    padding: 0;
+    word-break: initial;
+    margin: 1.8rem 0;
+}
+
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+    break-inside: avoid;
+    break-after: auto;
+}
+
+table tr:nth-child(2n), thead {
+    background-color: #f8f8f8;
+}
+
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+    min-width: 80px;
+}
+
+table tr td {
+    border: 1px solid #dfe2e5;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+    min-width: 80px;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+/* Code */
+/* --- 变量定义：便于维护和主题切换 --- */
+:root {
+    --monospace: "Courier New", "Consolas", monospace;
+    --code-bg: #f6f8fa;
+    --border-color: #e7eaed;
+}
+
+/* --- 基础设定：统一等宽字体 --- */
+code, pre, samp, kbd {
+    font-family: var(--monospace);
+    font-size: 0.9em;
+}
+
+/* --- 1. 行内代码 `<code>`：轻量、融入文本 --- */
+/* 适用于单个函数名、变量名等场景 */
+code, samp {
+    background-color: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* --- 2. 代码块容器 `<pre>`：结构清晰、留白充足 --- */
+/* 作为代码块的“外框”，负责边距、背景、边框和滚动条 */
+pre {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow-x: auto; /* 关键：内容超出时，水平滚动 */
+    white-space: pre; /* 保持预格式化，不自动换行 */
+}
+
+/* --- 3. 重置 `<pre>` 内的 `<code>` 样式 --- */
+/* 代码块内的 <code> 不再需要独立的背景和内边距 */
+pre > code {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.md-fences {
+    font-size: 0.9rem;
+    display: block;
+    break-inside: avoid;
+    text-align: left;
+    overflow: visible;
+    white-space: pre;
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    line-height: 1.6;
+    color: #24292f;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.md-fences::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #e1e4e8;
+    color: #586069;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 0 8px 0 4px;
+    font-weight: 500;
+}
+
+/* Math expressions */
+.md-math-block {
+    margin: 1.8rem 0;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #e1e4e8;
+}
+
+/* Horizontal Rule */
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 2.5rem 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    margin: 2rem 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+p > img:only-child {
+    display: block;
+    margin: 2rem auto;
+}
+
+figure {
+    overflow-x: auto;
+    margin: 2rem 0px;
+    max-width: calc(100% + 16px);
+    padding: 0px;
+}
+
+figure > table {
+    margin: 0px !important;
+}
+
+/* Selection */
+.in-text-selection, ::selection {
+    text-shadow: none;
+    background: var(--select-text-bg-color);
+    color: var(--select-text-font-color);
+}
+
+/* Print Styles */
+@media print {
+    html {
+        font-size: 13px;
+    }
+    
+    body, html {
+        border: 1px solid transparent;
+        height: 99%;
+        break-after: avoid-page;
+        break-before: avoid-page;
+    }
+    
+    #write {
+        margin-top: 0px;
+        border-color: transparent !important;
+        padding-left: 1cm;
+        padding-right: 1cm;
+        padding-bottom: 0px;
+        break-after: avoid-page;
+    }
+    
+    table, pre {
+        page-break-inside: avoid;
+    }
+    
+    pre {
+        word-wrap: break-word;
+    }
+    
+    @page {
+        margin: 20mm 0px;
+    }
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    body {
+        max-width: 100%;
+        margin: 0;
+        padding: 10px;
+    }
+    
+    #write {
+        max-width: 100%;
+        padding: 15px;
+        padding-bottom: 80px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+        line-height: 1.3;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+        line-height: 1.3;
+    }
+    
+    h3 {
+        font-size: 1.3em;
+    }
+    
+    h4 {
+        font-size: 1.1em;
+    }
+    
+    h5, h6 {
+        font-size: 1em;
+    }
+    
+    /* Mobile navigation adjustments */
+    .nav-toggle::before {
+        background: rgba(51, 51, 51, 0.7);
+        box-shadow: 
+            0 6px 0 rgba(51, 51, 51, 0.7),
+            0 12px 0 rgba(51, 51, 51, 0.7);
+    }
+    
+    #TOC {
+        width: 260px;
+    }
+    
+    body.nav-pinned #write {
+        margin-left: 0;
+    }
+    
+    /* Prevent horizontal overflow */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    img, figure, table, pre, .md-fences {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
+    /* Better table handling on mobile */
+    table {
+        font-size: 0.9em;
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    /* Code blocks responsive */
+    .md-fences, code {
+        font-size: 0.8em;
+        word-break: break-all;
+        overflow-wrap: break-word;
+    }
+    
+    /* Math expressions */
+    .math {
+        font-size: 0.9em;
+    }
+}
+
+/* Left Navigation Sidebar */
+#TOC {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh; /* Fallback */
+    background: var(--nav-bg-color);
+    border-right: 1px solid var(--nav-border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* 默认隐藏但保留 20px 悬停区，桌面端可通过 hover 唤出 */
+    transform: translateX(calc(-100% + 20px));
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 使用支持的浏览器动态视口高度，避免 iOS 地址栏收缩导致的 100vh 失效 */
+@supports (height: 100dvh) {
+    #TOC {
+        height: 100dvh;
+    }
+}
+@supports (height: 100svh) {
+    #TOC {
+        height: 100svh;
+    }
+}
+
+/* 移动端展开后取消 transform，避免固定元素因 transform 失去跟随视口的问题 */
+@media screen and (max-width: 768px) {
+    #TOC.pinned {
+        transform: none !important;
+    }
+}
+
+/* Restore full reveal on hover / pinned */
+#TOC:hover,
+#TOC.pinned {
+    transform: translateX(0);
+}
+
+/* Navigation Toggle Button */
+.nav-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: auto;
+    height: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+    /* 始终可见，避免被其他脚本隐藏 */
+    opacity: 0.9 !important;
+    visibility: visible !important;
+}
+
+.nav-toggle::before {
+    /* 半透明三横线 */
+    background: rgba(51, 51, 51, 0.6);
+    box-shadow: 0 6px 0 rgba(51, 51, 51, 0.6),
+                0 12px 0 rgba(51, 51, 51, 0.6);
+    transition: all 0.3s ease;
+}
+
+#TOC.pinned + .nav-toggle::before {
+    transform: rotate(45deg);
+    box-shadow: 
+        0 0 0 var(--text-color),
+        0 0 0 var(--text-color);
+}
+
+/* Navigation Content */
+#TOC > ul {
+    margin: 0;
+    padding: 60px 20px 20px 20px;
+    list-style: none;
+}
+
+#TOC ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#TOC li {
+    margin: 0;
+}
+
+#TOC > ul > li > ul {
+    padding-left: 15px;
+    margin-top: 8px;
+}
+
+#TOC a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+#TOC a:hover {
+    background: var(--nav-hover-color);
+    transform: translateX(2px);
+}
+
+#TOC > ul > li > a {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+#TOC > ul > li > ul > li > a {
+    font-size: 13px;
+    color: #666;
+    padding-left: 16px;
+}
+
+#TOC > ul > li > ul > li > a:hover {
+    color: var(--text-color);
+}
+
+/* Adjust main content when nav is pinned */
+body.nav-pinned #write {
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Mobile Responsive Overrides */
+@media screen and (max-width: 768px) {
+    /* 完全隐藏导航栏，靠按钮显隐 */
+    #TOC {
+        transform: translateX(-100%);
+    }
+
+    /* 保持按钮样式与位置 */
+    .nav-toggle {
+        opacity: 0.9 !important;
+    }
+}
+

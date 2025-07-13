@@ -1,38 +1,38 @@
 <!doctype html>
-<html style='font-size:16px !important'>
+<html>
 <head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Bitcoin-Whitepaper-EN-CN</title>
 
-<!-- ① 在 <head> 中引入 MathJax -->
+    <!-- 样式表 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+
+
+    <!-- 脚本 -->
     <script>
         window.MathJax = {
-          loader: { load: ['input/tex', 'output/svg'] },  // 强制 SVG 渲染
-          svg: {
-            fontCache: 'global',
-            scale: 0.9  // 微调缩放（可选）
-          },
-          tex: {
-            // 确保公式中的中文使用与原文一致的字体
-            packages: {'[+]': ['textmacros']}  // 支持 \text{} 中的中文
-          }
+            loader: { load: ['input/tex', 'output/svg'] },// 强制 SVG 渲染
+            svg: { fontCache: 'global', scale: 0.9 },
+            tex: { packages: {'[+]': ['textmacros']} }// 支持 \text{} 中的中文
         };
-      </script>
-      <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-
-    <!-- 4. Highlight.js 样式 -->
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-    <!-- 5. Highlight.js 核心库 -->
-
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <!-- 6. 初始化 Highlight.js -->
     <script>hljs.highlightAll();</script>
+</head>
+
+<!-- body部分不变... -->
 
 
-
-<title>Bitcoin-Whitepaper-EN-CN</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; }
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+
+
+
+
 body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+
 iframe { margin: auto; }
 a.url { word-break: break-all; }
 a:active, a:hover { outline: 0px; }

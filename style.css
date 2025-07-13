@@ -1,642 +1,658 @@
+/*
+ * 说明：
+ * 1. 已将 Google Fonts 的 link 标签转换为 @import 规则。
+ * 2. 合并了重复的 `html` 选择器。
+ * 3. 清理了 body 等元素中冗余的 `inherit` 和 `0px` 写法。
+ * 4. 优化了整体代码格式，提高可读性。
+ * 5. 样式展现与原始代码完全一致。
+ */
+
+ @import url('https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext');
+
+ :root {
+   --bg-color: #ffffff;
+   --text-color: #333333;
+   --select-text-bg-color: #B5D6FC;
+   --select-text-font-color: auto;
+   --monospace: "Lucida Console", Consolas, "Courier", monospace;
+ }
+ 
+ *, ::after, ::before {
+   box-sizing: border-box;
+ }
+ 
+ html {
+   overflow-x: initial !important;
+   font-size: 14px;
+   background-color: var(--bg-color);
+   color: var(--text-color);
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   -webkit-font-smoothing: antialiased;
+ }
+ 
+ body {
+   margin: 0;
+   padding: 0;
+   font-size: 1rem;
+   line-height: 1.42857143;
+   overflow-x: hidden;
+ }
+ 
+ body.typora-export {
+   padding: 0 30px;
+ }
+ 
+ #write {
+   margin: 0 auto;
+   width: inherit;
+   word-break: normal;
+   word-wrap: break-word;
+   white-space: normal;
+   overflow-x: visible;
+   position: relative;
+ }
+ 
+ /* 文本与标题 */
+ h1, h2, h3, h4, h5, h6 {
+   break-after: avoid-page;
+   break-inside: avoid;
+   orphans: 2;
+   margin: 1rem 0;
+ }
+ 
+ p {
+   orphans: 4;
+   margin: 1rem 0;
+ }
+ 
+ h1 { font-size: 2rem; }
+ h2 { font-size: 1.8rem; }
+ h3 { font-size: 1.6rem; }
+ h4 { font-size: 1.4rem; }
+ h5 { font-size: 1.2rem; }
+ h6 { font-size: 1rem; }
+ 
+ a {
+   cursor: pointer;
+ }
+ 
+ a:active, a:hover {
+   outline: 0;
+ }
+ 
+ a.url {
+   word-break: break-all;
+ }
+ 
+ /* 布局与组件 */
+ #write.first-line-indent p {
+   text-indent: 2em;
+ }
+ #write.first-line-indent li p,
+ #write.first-line-indent p * {
+   text-indent: 0;
+ }
+ #write.first-line-indent li {
+   margin-left: 2em;
+ }
+ .for-image #write {
+   padding: 0 8px;
+ }
+ 
+ .typora-export .footnote-line,
+ .typora-export p {
+   white-space: pre-wrap;
+ }
+ 
+ #write li > figure:first-child {
+   margin-top: -20px;
+ }
+ #write ol, #write ul {
+   position: relative;
+ }
+ 
+ img {
+   max-width: 100%;
+   vertical-align: middle;
+ }
+ 
+ button, input, select, textarea {
+   color: inherit;
+   font: inherit;
+   line-height: inherit;
+ }
+ 
+ input[type="checkbox"], input[type="radio"] {
+   line-height: normal;
+   padding: 0;
+ }
+ 
+ #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre {
+   width: inherit;
+ }
+ 
+ #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p {
+   position: relative;
+ }
+ 
+ .hidden {
+   display: none;
+ }
+ 
+ .md-blockmeta {
+   color: #ccc;
+   font-weight: 700;
+   font-style: italic;
+ }
+ 
+ sup.md-footnote {
+   padding: 2px 4px;
+   background-color: rgba(238, 238, 238, 0.7);
+   color: #555;
+   border-radius: 4px;
+   cursor: pointer;
+ }
+ sup.md-footnote a, sup.md-footnote a:hover {
+   color: inherit;
+   text-decoration: inherit;
+ }
+ 
+ #write input[type="checkbox"] {
+   cursor: pointer;
+   width: inherit;
+   height: inherit;
+ }
+ 
+ figure {
+   overflow-x: auto;
+   margin: 1.2em 0;
+   max-width: calc(100% + 16px);
+   padding: 0;
+ }
+ figure > table {
+   margin: 0 !important;
+ }
+ 
+ 
+ #write pre {
+   white-space: pre-wrap;
+ }
+ #write.fences-no-line-wrapping pre {
+   white-space: pre;
+ }
+ #write pre.ty-contain-cm {
+   white-space: normal;
+ }
+ .md-fences {
+   font-size: 0.9rem;
+   display: block;
+   break-inside: avoid;
+   text-align: left;
+   overflow: visible;
+   white-space: pre;
+   background: inherit;
+   position: relative !important;
+ }
+ .md-fences.md-fences-with-lineno {
+   padding-left: 0;
+ }
+ #write .md-fences.mock-cm {
+   white-space: pre-wrap;
+ }
+ #write.fences-no-line-wrapping .md-fences.mock-cm {
+   white-space: pre;
+   overflow-x: auto;
+ }
+ .md-fences.mock-cm.md-fences-with-lineno {
+   padding-left: 8px;
+ }
+ 
+ /* 列表与引用 */
+ li {
+   margin: 0;
+   position: relative;
+ }
+ li div {
+   padding-top: 0;
+ }
+ li .mathjax-block, li p {
+   margin: 0.5rem 0;
+ }
+ li > :first-child {
+   margin-top: 0;
+ }
+ 
+ blockquote {
+   margin: 1rem 0;
+ }
+ blockquote > :last-child {
+   margin-bottom: 0;
+ }
+ blockquote > :first-child {
+   margin-top: 0;
+ }
+ 
+ /* 脚注 */
+ .footnotes {
+   opacity: 0.8;
+   font-size: 0.9rem;
+   margin: 1em 0;
+ }
+ .footnotes + .footnotes {
+   margin-top: 0;
+ }
+ .footnotes-area {
+   color: #888;
+   margin-top: 0.714rem;
+   padding-bottom: 0.143rem;
+   white-space: normal;
+ }
+ #write .footnote-line {
+   white-space: pre-wrap;
+ }
+ .footnote-line {
+   margin-top: 0.714em;
+   font-size: 0.7em;
+ }
+ .footnote-line a:not(.reversefootnote) {
+   color: inherit;
+ }
+ .md-fn-count::after {
+   content: ".";
+ }
+ 
+ /* 数学公式 */
+ #write .MathJax_Display {
+   margin: 0.8em 0 0;
+ }
+ .md-math-block {
+   width: 100%;
+ }
+ .md-math-block:not(:empty)::after {
+   display: none;
+ }
+ .math {
+   font-size: 1rem;
+ }
+ 
+ /* 杂项 */
+ .in-text-selection, ::selection {
+   text-shadow: none;
+   background: var(--select-text-bg-color);
+   color: var(--select-text-font-color);
+ }
+ iframe {
+   margin: auto;
+ }
+ div.hr:focus {
+   cursor: none;
+ }
+ .md-reset {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   vertical-align: top;
+   text-decoration: none;
+   text-shadow: none;
+   float: none;
+   position: static;
+   width: auto;
+   height: auto;
+   white-space: nowrap;
+   cursor: inherit;
+   line-height: normal;
+   font-weight: 400;
+   text-align: left;
+   box-sizing: content-box;
+   direction: ltr;
+ }
+ a img, img a {
+   cursor: pointer;
+ }
+ pre.md-meta-block {
+   font-size: 0.8rem;
+   min-height: 0.8rem;
+   white-space: pre-wrap;
+   background-color: #ccc;
+   display: block;
+   overflow-x: hidden;
+ }
+ p > img:only-child {
+   display: block;
+   margin: auto;
+ }
+ p > .md-image:only-child {
+   display: inline-block;
+   width: 100%;
+   text-align: center;
+ }
+ [contenteditable="true"]:active, [contenteditable="true"]:focus {
+   outline: 0;
+   box-shadow: none;
+ }
+ 
+ /* 目录 (TOC) */
+ .md-toc {
+   min-height: 3.58rem;
+   position: relative;
+   font-size: 0.9rem;
+   border-radius: 10px;
+ }
+ .md-toc-content {
+   position: relative;
+   margin-left: 0;
+ }
+ .md-toc-content::after, .md-toc::after {
+   display: none;
+ }
+ .md-toc-item {
+   display: block;
+   color: #4183c4;
+ }
+ .md-toc-item a {
+   text-decoration: none;
+ }
+ a.md-toc-inner {
+   font-size: inherit;
+   font-style: inherit;
+   font-weight: inherit;
+   line-height: inherit;
+ }
+ .md-toc-inner {
+   display: inline-block;
+   cursor: pointer;
+ }
+ .md-toc-inner:hover {
+   text-decoration: underline;
+ }
+ .md-toc-h1 .md-toc-inner { margin-left: 0; font-weight: 700; }
+ .md-toc-h2 .md-toc-inner { margin-left: 2em; }
+ .md-toc-h3 .md-toc-inner { margin-left: 4em; }
+ .md-toc-h4 .md-toc-inner { margin-left: 6em; }
+ .md-toc-h5 .md-toc-inner { margin-left: 8em; }
+ .md-toc-h6 .md-toc-inner { margin-left: 10em; }
+ 
+ .md-attr {
+   display: none;
+ }
+ 
+ /* 响应式媒体查询 */
+ @media screen and (max-width: 500px) {
+   body.typora-export {
+     padding: 0;
+   }
+   .CodeMirror-sizer {
+     margin-left: 0 !important;
+   }
+   .CodeMirror-gutters {
+     display: none !important;
+   }
+ }
+ 
+ @media screen and (max-width: 48em) {
+   .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+   .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+   .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+   .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+ }
+ 
+ /* 打印样式 */
+ @media print {
+   body, html {
+     border: 1px solid transparent;
+     height: 99%;
+     break-after: avoid-page;
+     break-before: avoid-page;
+   }
+   #write {
+     margin-top: 0;
+     border-color: transparent !important;
+   }
+   .typora-export * {
+     -webkit-print-color-adjust: exact;
+   }
+   html.blink-to-pdf {
+     font-size: 13px;
+   }
+   .typora-export #write {
+     padding-left: 1cm;
+     padding-right: 1cm;
+     padding-bottom: 0;
+     break-after: avoid-page;
+   }
+   .typora-export #write::after {
+     height: 0;
+   }
+   @page {
+     margin: 20mm 0;
+   }
+ }
+ 
+/*
+ * 说明：
+ * 1. 移除了非标准的 @include-when-export 和所有本地文件路径的 @font-face。
+ *    你需要自行处理字体文件的托管和路径替换。
+ * 2. 合并了重复的选择器，如 :root, html, body, #write, h1-h6, table 等。
+ * 3. 简化了 h1-h6 下的 tt, code 规则。
+ * 4. 移除了注释掉的、无效的 background 规则。
+ * 5. 格式化了所有代码，增强可读性。
+ * 6. 样式展现与原始代码完全一致。
+ */
+
+
 :root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --select-text-bg-color: #B5D6FC;
-    --select-text-font-color: auto;
-    --monospace: "Lucida Console", Consolas, "Courier", monospace;
     --side-bar-bg-color: #fafafa;
     --control-text-color: #777;
-    --nav-bg-color: rgba(255, 255, 255, 0.95);
-    --nav-border-color: #e1e4e8;
-    --nav-hover-color: #f6f8fa;
-}
-
-html {
+  }
+  
+  html {
     font-size: 16px;
-    overflow-x: initial !important;
-}
-
-body {
-    max-width: 750px;
-    font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    color: rgb(51, 51, 51);
+  }
+  
+  body {
+    font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
     line-height: 1.6;
-    margin: 0px auto;
-    padding: 0px;
-    background-color: var(--bg-color);
-    -webkit-font-smoothing: antialiased;
-}
-
-#write {
-    max-width: 750px;
+  }
+  
+  #write {
+    max-width: 860px;
     margin: 0 auto;
     padding: 30px;
     padding-bottom: 100px;
-    height: auto;
-    width: inherit;
-    word-break: normal;
-    word-wrap: break-word;
-    position: relative;
-    white-space: normal;
-    overflow-x: visible;
-}
-
-#write > ul:first-child,
-#write > ol:first-child {
+  }
+  #write > ul:first-child,
+  #write > ol:first-child {
     margin-top: 30px;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
+  }
+  #write pre.md-meta-block {
+    padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777;
+    margin-top: 0 !important;
+  }
+  
+  /* 文本与标题 */
+  a {
+    color: #4183C4;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
     position: relative;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
+    margin: 1rem 0;
     font-weight: bold;
     line-height: 1.4;
     cursor: text;
-    break-after: avoid-page;
-    break-inside: avoid;
-    orphans: 2;
-}
-
-h1 {
-    padding-bottom: .3em;
-    font-size: 2.25em;
-    line-height: 1.2;
-    border-bottom: 1px solid #eee;
-    margin-top: 2.5rem;
-    margin-bottom: 2rem;
-}
-
-h2 {
-    padding-bottom: .3em;
-    font-size: 1.75em;
-    line-height: 1.225;
-    border-bottom: 1px solid #eee;
-    margin-top: 2.5rem;
-    margin-bottom: 1.8rem;
-}
-
-h3 {
-    font-size: 1.5em;
-    line-height: 1.43;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-h4 {
-    font-size: 1.25em;
-    margin-top: 1.8rem;
-    margin-bottom: 1.3rem;
-}
-
-h5 {
-    font-size: 1em;
-    margin-top: 1.5rem;
-    margin-bottom: 1.2rem;
-}
-
-h6 {
-    font-size: 1em;
-    color: #777;
-    margin-top: 1.5rem;
-    margin-bottom: 1.2rem;
-}
-
-p {
-    margin-top: 1.2rem;
-    margin-bottom: 1.2rem;
-    orphans: 4;
-    line-height: 1.7;
-}
-
-/* Enhanced spacing for specific elements */
-p + h1, p + h2, p + h3, p + h4, p + h5, p + h6 {
-    margin-top: 2.5rem;
-}
-
-h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
-    margin-top: 1.5rem;
-}
-
-/* Links */
-a {
-    color: #4183C4;
-    cursor: pointer;
+  }
+  h1:hover a.anchor,
+  h2:hover a.anchor,
+  h3:hover a.anchor,
+  h4:hover a.anchor,
+  h5:hover a.anchor,
+  h6:hover a.anchor {
     text-decoration: none;
-}
-
-a:active, a:hover {
-    outline: 0px;
-}
-
-/* Lists */
-ul, ol {
-    padding-left: 30px;
-    position: relative;
-    margin: 1.2rem 0;
-}
-
-ul:first-child, ol:first-child {
-    margin-top: 0;
-}
-
-ul:last-child, ol:last-child {
-    margin-bottom: 0;
-}
-
-li > ol, li > ul {
-    margin: 0 0;
-}
-
-li {
-    margin: 0.5rem 0;
-    position: relative;
-}
-
-li p {
-    margin: 0.3rem 0;
-}
-
-/* Blockquotes */
-blockquote {
-    border-left: 4px solid #dfe2e5;
-    padding: 0 20px;
-    color: #777777;
-    margin: 1.8rem 0px;
-    background-color: #f9f9f9;
-    font-style: italic;
-}
-
-blockquote blockquote {
-    padding-right: 0;
-    margin: 1.2rem 0;
-}
-
-blockquote > :last-child {
-    margin-bottom: 0px;
-}
-
-blockquote > :first-child {
-    margin-top: 0px;
-}
-
-blockquote p {
-    margin: 1rem 0;
-}
-
-/* Tables */
-table {
-    border-collapse: collapse;
-    border-spacing: 0px;
-    width: 100%;
-    overflow: auto;
-    break-inside: auto;
-    text-align: left;
-    padding: 0;
-    word-break: initial;
-    margin: 1.8rem 0;
-}
-
-table tr {
-    border-top: 1px solid #dfe2e5;
-    margin: 0;
-    padding: 0;
-    break-inside: avoid;
-    break-after: auto;
-}
-
-table tr:nth-child(2n), thead {
-    background-color: #f8f8f8;
-}
-
-table tr th {
-    font-weight: bold;
-    border: 1px solid #dfe2e5;
-    border-bottom: 0;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-    min-width: 80px;
-}
-
-table tr td {
-    border: 1px solid #dfe2e5;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-    min-width: 80px;
-}
-
-table tr th:first-child,
-table tr td:first-child {
-    margin-top: 0;
-}
-
-table tr th:last-child,
-table tr td:last-child {
-    margin-bottom: 0;
-}
-
-/* Code */
-/* --- 变量定义：便于维护和主题切换 --- */
-:root {
-    --monospace: "Courier New", "Consolas", monospace;
-    --code-bg: #f6f8fa;
-    --border-color: #e7eaed;
-}
-
-/* --- 基础设定：统一等宽字体 --- */
-code, pre, samp, kbd {
-    font-family: var(--monospace);
-    font-size: 0.9em;
-}
-
-/* --- 1. 行内代码 `<code>`：轻量、融入文本 --- */
-/* 适用于单个函数名、变量名等场景 */
-code, samp {
-    background-color: var(--code-bg);
-    padding: 2px 6px;
-    border-radius: 6px;
-}
-
-/* --- 2. 代码块容器 `<pre>`：结构清晰、留白充足 --- */
-/* 作为代码块的“外框”，负责边距、背景、边框和滚动条 */
-pre {
-    padding: 1rem;
-    margin: 1.5rem 0;
-    background-color: var(--code-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    overflow-x: auto; /* 关键：内容超出时，水平滚动 */
-    white-space: pre; /* 保持预格式化，不自动换行 */
-}
-
-/* --- 3. 重置 `<pre>` 内的 `<code>` 样式 --- */
-/* 代码块内的 <code> 不再需要独立的背景和内边距 */
-pre > code {
-    padding: 0;
-    background-color: transparent;
-    border: none;
-}
-
-.md-fences {
-    font-size: 0.9rem;
-    display: block;
-    break-inside: avoid;
-    text-align: left;
-    overflow: visible;
-    white-space: pre;
-    background-color: #f6f8fa;
-    border: 1px solid #e1e4e8;
-    border-radius: 8px;
-    margin: 2rem 0;
-    padding: 1rem 1.5rem;
-    line-height: 1.6;
-    color: #24292f;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.md-fences::before {
-    content: attr(data-lang);
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: #e1e4e8;
-    color: #586069;
-    font-size: 0.75rem;
-    padding: 4px 8px;
-    border-radius: 0 8px 0 4px;
-    font-weight: 500;
-}
-
-/* Math expressions */
-.md-math-block {
-    margin: 1.8rem 0;
-    padding: 1rem;
-    background-color: #f9f9f9;
-    border-radius: 6px;
-    border: 1px solid #e1e4e8;
-}
-
-/* Horizontal Rule */
-hr {
+  }
+  
+  h1, h2 {
+    padding-bottom: .3em;
+    border-bottom: 1px solid #eee;
+  }
+  h1 { font-size: 2.25em; line-height: 1.2; }
+  h2 { font-size: 1.75em; line-height: 1.225; }
+  h3 { font-size: 1.5em; line-height: 1.43; }
+  h4 { font-size: 1.25em; }
+  h5 { font-size: 1em; }
+  h6 { font-size: 1em; color: #777; }
+  
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code,
+  h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: inherit;
+  }
+  
+  p, blockquote, ul, ol, dl, table {
+    margin: 0.8em 0;
+  }
+  
+  hr {
     height: 2px;
     padding: 0;
-    margin: 2.5rem 0;
+    margin: 16px 0;
     background-color: #e7e7e7;
-    border: 0 none;
+    border: 0;
     overflow: hidden;
     box-sizing: content-box;
-}
-
-/* Images */
-img {
-    max-width: 100%;
+  }
+  
+  /* 列表与引用 */
+  ul, ol {
+    padding-left: 30px;
+  }
+  li > ol, li > ul {
+    margin: 0;
+  }
+  li p.first {
+    display: inline-block;
+  }
+  ul:first-child, ol:first-child {
+    margin-top: 0;
+  }
+  ul:last-child, ol:last-child {
+    margin-bottom: 0;
+  }
+  
+  blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777;
+  }
+  blockquote blockquote {
+    padding-right: 0;
+  }
+  
+  
+  /* 代码与高亮 */
+  code, pre, samp, tt {
+    font-family: var(--monospace);
+  }
+  code {
+    text-align: left;
+    background-color: #f3f4f4;
+    padding: 0 4px 2px 4px;
+  }
+  .md-fences, code, tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 2px 4px 0 4px;
+    font-size: 0.9em;
+  }
+  .md-fences {
+    margin: 15px;
+    padding: 0.8em 1em;
+    background-color: #f8f8f8; /* 合并重复规则 */
+  }
+  .md-comment {
+    color: rgb(162, 127, 3);
+    opacity: 0.8;
+    font-family: var(--monospace);
+  }
+  
+  kbd {
+    margin: 0 0.1em;
+    padding: 0.1em 0.6em;
+    font-size: 0.8em;
+    color: #242729;
+    background-color: #fff;
+    border: 1px solid #adb3b9;
+    border-radius: 3px;
+    box-shadow: rgba(12, 13, 14, 0.2) 0 1px 0, #fff 0 0 0 2px inset;
+    white-space: nowrap;
     vertical-align: middle;
-    margin: 2rem 0;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+  }
+  
+  .CodeMirror-lines {
+    padding-left: 4px;
+  }
+  .code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0, 28, 36, 0.3);
+    border-top: 1px solid #eef2f2;
+  }
+  
 
-p > img:only-child {
-    display: block;
-    margin: 2rem auto;
-}
 
-figure {
-    overflow-x: auto;
-    margin: 2rem 0px;
-    max-width: calc(100% + 16px);
-    padding: 0px;
-}
+  /* Typora特定UI与组件 */
+  .md-task-list-item > input { margin-left: -1.3em; }
+  .md-image > .md-meta { border-radius: 3px; padding: 2px 0 0 4px; font-size: 0.9em; color: inherit; }
+  .md-tag { color: #a7a7a7; opacity: 1; }
+  .md-toc { margin-top: 20px; padding-bottom: 20px; }
+  .md-lang { color: #b4654d; }
+  
+  #write > h3.md-focus:before { left: -1.5625rem; top: .375rem; }
+  #write > h4.md-focus:before { left: -1.5625rem; top: .285714286rem; }
+  #write > h5.md-focus:before { left: -1.5625rem; top: .285714286rem; }
+  #write > h6.md-focus:before { left: -1.5625rem; top: .285714286rem; }
+  
+  .on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.12); }
+  header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", "Arial", sans-serif; }
+  
+  .sidebar-tabs { border-bottom: none; }
+  #typora-quick-open { border: 1px solid #ddd; background-color: #f8f8f8; }
+  #typora-quick-open-item { background-color: #fafafa; border: 1px solid; border-color: #fefefe #e5e5e5 #e5e5e5 #eee; }
+  
+  .file-node-content:hover .file-node-icon,
+  .file-node-content:hover .file-node-open-state { visibility: visible; }
+  .mac-seamless-mode #typora-sidebar { background-color: var(--side-bar-bg-color); }
+  .html-for-mac .context-menu { --item-hover-bg-color: #E6F0FE; }
+  #md-notification .btn { border: 0; }
+  .dropdown-menu .divider { border-color: #e5e5e5; }
+  
 
-figure > table {
-    margin: 0px !important;
-}
-
-/* Selection */
-.in-text-selection, ::selection {
-    text-shadow: none;
-    background: var(--select-text-bg-color);
-    color: var(--select-text-font-color);
-}
-
-/* Print Styles */
-@media print {
-    html {
-        font-size: 13px;
-    }
-    
-    body, html {
-        border: 1px solid transparent;
-        height: 99%;
-        break-after: avoid-page;
-        break-before: avoid-page;
-    }
-    
-    #write {
-        margin-top: 0px;
-        border-color: transparent !important;
-        padding-left: 1cm;
-        padding-right: 1cm;
-        padding-bottom: 0px;
-        break-after: avoid-page;
-    }
-    
-    table, pre {
-        page-break-inside: avoid;
-    }
-    
-    pre {
-        word-wrap: break-word;
-    }
-    
-    @page {
-        margin: 20mm 0px;
-    }
-}
-
-/* Mobile Responsive */
-@media screen and (max-width: 768px) {
-    html {
-        font-size: 14px;
-    }
-    
-    body {
-        max-width: 100%;
-        margin: 0;
-        padding: 10px;
-    }
-    
-    #write {
-        max-width: 100%;
-        padding: 15px;
-        padding-bottom: 80px;
-    }
-    
-    h1 {
-        font-size: 1.8em;
-        line-height: 1.3;
-    }
-    
-    h2 {
-        font-size: 1.5em;
-        line-height: 1.3;
-    }
-    
-    h3 {
-        font-size: 1.3em;
-    }
-    
-    h4 {
-        font-size: 1.1em;
-    }
-    
-    h5, h6 {
-        font-size: 1em;
-    }
-    
-    /* Mobile navigation adjustments */
-    .nav-toggle::before {
-        background: rgba(51, 51, 51, 0.7);
-        box-shadow: 
-            0 6px 0 rgba(51, 51, 51, 0.7),
-            0 12px 0 rgba(51, 51, 51, 0.7);
-    }
-    
-    #TOC {
-        width: 260px;
-    }
-    
-    body.nav-pinned #write {
-        margin-left: 0;
-    }
-    
-    /* Prevent horizontal overflow */
-    * {
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-    
-    img, figure, table, pre, .md-fences {
-        max-width: 100%;
-        overflow-x: auto;
-    }
-    
-    /* Better table handling on mobile */
-    table {
-        font-size: 0.9em;
-        width: 100%;
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    
-    /* Code blocks responsive */
-    .md-fences, code {
-        font-size: 0.8em;
-        word-break: break-all;
-        overflow-wrap: break-word;
-    }
-    
-    /* Math expressions */
-    .math {
-        font-size: 0.9em;
-    }
-}
-
-/* Left Navigation Sidebar */
-#TOC {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 280px;
-    height: 100vh; /* Fallback */
-    background: var(--nav-bg-color);
-    border-right: 1px solid var(--nav-border-color);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    /* 默认隐藏但保留 20px 悬停区，桌面端可通过 hover 唤出 */
-    transform: translateX(calc(-100% + 20px));
-    transition: transform 0.3s ease;
-    z-index: 1000;
-    overflow-y: auto;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* 使用支持的浏览器动态视口高度，避免 iOS 地址栏收缩导致的 100vh 失效 */
-@supports (height: 100dvh) {
-    #TOC {
-        height: 100dvh;
-    }
-}
-@supports (height: 100svh) {
-    #TOC {
-        height: 100svh;
-    }
-}
-
-/* 移动端展开后取消 transform，避免固定元素因 transform 失去跟随视口的问题 */
-@media screen and (max-width: 768px) {
-    #TOC.pinned {
-        transform: none !important;
-    }
-}
-
-/* Restore full reveal on hover / pinned */
-#TOC:hover,
-#TOC.pinned {
-    transform: translateX(0);
-}
-
-/* Navigation Toggle Button */
-.nav-toggle {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: auto;
-    height: auto;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    transition: all 0.3s ease;
-    /* 始终可见，避免被其他脚本隐藏 */
-    opacity: 0.9 !important;
-    visibility: visible !important;
-}
-
-.nav-toggle::before {
-    /* 半透明三横线 */
-    background: rgba(51, 51, 51, 0.6);
-    box-shadow: 0 6px 0 rgba(51, 51, 51, 0.6),
-                0 12px 0 rgba(51, 51, 51, 0.6);
-    transition: all 0.3s ease;
-}
-
-#TOC.pinned + .nav-toggle::before {
-    transform: rotate(45deg);
-    box-shadow: 
-        0 0 0 var(--text-color),
-        0 0 0 var(--text-color);
-}
-
-/* Navigation Content */
-#TOC > ul {
-    margin: 0;
-    padding: 60px 20px 20px 20px;
-    list-style: none;
-}
-
-#TOC ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-#TOC li {
-    margin: 0;
-}
-
-#TOC > ul > li > ul {
-    padding-left: 15px;
-    margin-top: 8px;
-}
-
-#TOC a {
-    display: block;
-    padding: 8px 12px;
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 14px;
-    line-height: 1.4;
-    transition: all 0.2s ease;
-    border-left: 3px solid transparent;
-}
-
-#TOC a:hover {
-    background: var(--nav-hover-color);
-    transform: translateX(2px);
-}
-
-#TOC > ul > li > a {
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 4px;
-}
-
-#TOC > ul > li > ul > li > a {
-    font-size: 13px;
-    color: #666;
-    padding-left: 16px;
-}
-
-#TOC > ul > li > ul > li > a:hover {
-    color: var(--text-color);
-}
-
-/* Adjust main content when nav is pinned */
-body.nav-pinned #write {
-    margin-left: 280px;
-    transition: margin-left 0.3s ease;
-}
-
-/* Mobile Responsive Overrides */
-@media screen and (max-width: 768px) {
-    /* 完全隐藏导航栏，靠按钮显隐 */
-    #TOC {
-        transform: translateX(-100%);
-    }
-
-    /* 保持按钮样式与位置 */
-    .nav-toggle {
-        opacity: 0.9 !important;
-    }
-}
-
+  /* 杂项与媒体 */
+  a.md-print-anchor {
+    white-space: pre !important;
+    border: none !important;
+    display: inline-block !important;
+    position: absolute !important;
+    width: 1px !important;
+    right: 0 !important;
+    outline: 0 !important;
+    text-shadow: initial !important;
+    background: initial !important;
+  }
+  .os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+  video { max-width: 100%; display: block; margin: 0 auto; }
+  iframe { max-width: 100%; width: 100%; border: none; }
+  .highlight td, .highlight tr { border: 0; }
+  .typora-export p, .typora-export .footnote-line { white-space: normal; }
+  
+  /* 打印样式 */
+  @media print {
+    html { font-size: 13px; }
+    table, pre { page-break-inside: avoid; }
+    pre { word-wrap: break-word; }
+  }
