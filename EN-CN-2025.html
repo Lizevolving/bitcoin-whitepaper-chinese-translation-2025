@@ -42,6 +42,7 @@ a:active, a:hover { outline: 0px; }
 #write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
 #write.first-line-indent li { margin-left: 2em; }
 .for-image #write { padding-left: 8px; padding-right: 8px; }
+
 body.typora-export { padding-left: 30px; padding-right: 30px; }
 .typora-export .footnote-line, .typora-export p { white-space: pre-wrap; }
 
@@ -110,8 +111,10 @@ li .mathjax-block, li p { margin: 0.5rem 0px; }
 li { margin: 0px; position: relative; }
 blockquote > :last-child { margin-bottom: 0px; }
 blockquote > :first-child, li > :first-child { margin-top: 0px; }
+
 .footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
 #write .footnote-line { white-space: pre-wrap; }
+
 @media print { 
   body, html { border: 1px solid transparent; height: 99%; break-after: avoid-page; break-before: avoid-page; }
   #write { margin-top: 0px; border-color: transparent !important; }
@@ -795,7 +798,7 @@ header, .context-menu, .megamenu-content, footer{
     <p>Running some results, we can see the probability drop off exponentially with z.</p>
     <p class="zh">获取部分结果，我们可以看到概率随着 z 的增加指数级下降：</p>
         
-    <pre><cod class="language-plaintext">
+    <pre><code class="language-plaintext">
     q=0.1
     z=0    P=1.0000000
     z=1    P=0.2045873

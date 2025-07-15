@@ -23,7 +23,7 @@
  
  html {
    overflow-x: initial !important;
-   font-size: 14px;
+   font-size: 16px;
    background-color: var(--bg-color);
    color: var(--text-color);
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -51,6 +51,97 @@
    overflow-x: visible;
    position: relative;
  }
+
+/*
+======================================================================
+  CSS to Style Pandoc Bibliography like Typora's Footnotes
+======================================================================
+*/
+
+/* --- 1. In-Text Citation Styling (The [1] in the paragraph) --- */
+/* This emulates your 'sup.md-footnote' style */
+
+span.citation a, 
+span.citation a:link, 
+span.citation a:visited {
+  font-family: inherit; /* Use the same font as the body */
+  vertical-align: super; /* Make it a superscript */
+  font-size: 0.85em; /* Slightly smaller than text */
+  padding: 2px 4px;
+  background-color: rgba(238, 238, 238, 0.7);
+  color: #555 !important; /* Use !important to override defaults */
+  border-radius: 4px;
+  text-decoration: none; /* No underline */
+  cursor: pointer;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+}
+
+span.citation a:hover {
+  background-color: rgba(220, 220, 220, 1);
+  color: #333 !important;
+}
+
+
+/* --- 2. Bibliography Area Styling (The list at the bottom) --- */
+/* This emulates your '.footnotes-area' and '.footnotes' styles */
+
+div.references {
+  color: #888; /* The grey text color you wanted */
+  font-size: 0.9rem;
+  margin-top: 2em;
+  padding-top: 1em;
+  padding-bottom: 0.143rem;
+  border-top: 1px solid #eee; /* The <hr> line */
+}
+
+
+/* --- 3. Individual Reference Line Styling --- */
+/* This emulates your '.footnote-line' style */
+
+div.csl-entry {
+  margin-top: 0.714em;
+  line-height: 1.6;
+  /* Creates the clean hanging-indent effect */
+  padding-left: 2em; 
+  text-indent: -2em;
+}
+
+div.csl-entry a:not(.reversefootnote) {
+  color: inherit; /* Links inside the reference text are also grey */
+}
+
+
+/* --- 4. Reference Number Styling --- */
+/* This emulates your '.md-fn-count' style */
+
+/* Initialize a counter for our references */
+body {
+  counter-reset: ref-counter;
+}
+
+/* Target Pandoc's number container */
+.csl-left-margin {
+  font-size: 0; /* A trick to hide the original "[1]" from Pandoc */
+}
+
+/* Re-create the number using our counter, in your desired style */
+.csl-left-margin::before {
+  counter-increment: ref-counter; /* Increment the counter for each entry */
+  content: counter(ref-counter) ". "; /* Display it as "1. ", "2. ", etc. */
+  font-size: 0.9rem; /* Restore the font size to match parent */
+  font-weight: normal;
+  /* The space for the number is handled by the parent's padding/text-indent */
+}
+
+
+/* --- 5. Optional: Back-to-document Arrow Styling --- */
+
+.reversefootnote {
+  text-decoration: none;
+  margin-left: 0.5em;
+}
+
  
  /* 文本与标题 */
  h1, h2, h3, h4, h5, h6 {
@@ -98,11 +189,7 @@
  .for-image #write {
    padding: 0 8px;
  }
- 
- .typora-export .footnote-line,
- .typora-export p {
-   white-space: pre-wrap;
- }
+
  
  #write li > figure:first-child {
    margin-top: -20px;
@@ -143,18 +230,6 @@
    color: #ccc;
    font-weight: 700;
    font-style: italic;
- }
- 
- sup.md-footnote {
-   padding: 2px 4px;
-   background-color: rgba(238, 238, 238, 0.7);
-   color: #555;
-   border-radius: 4px;
-   cursor: pointer;
- }
- sup.md-footnote a, sup.md-footnote a:hover {
-   color: inherit;
-   text-decoration: inherit;
  }
  
  #write input[type="checkbox"] {
@@ -232,7 +307,26 @@
    margin-top: 0;
  }
  
+ 
  /* 脚注 */
+
+ .typora-export .footnote-line,
+ .typora-export p {
+   white-space: pre-wrap;
+ }
+ 
+ sup.md-footnote {
+   padding: 2px 4px;
+   background-color: rgba(238, 238, 238, 0.7);
+   color: #555;
+   border-radius: 4px;
+   cursor: pointer;
+ }
+ sup.md-footnote a, sup.md-footnote a:hover {
+   color: inherit;
+   text-decoration: inherit;
+ }
+
  .footnotes {
    opacity: 0.8;
    font-size: 0.9rem;
@@ -260,6 +354,7 @@
  .md-fn-count::after {
    content: ".";
  }
+
  
  /* 数学公式 */
  #write .MathJax_Display {
@@ -554,56 +649,6 @@
     padding-right: 0;
   }
   
-  
-  /* 代码与高亮 */
-  code, pre, samp, tt {
-    font-family: var(--monospace);
-  }
-  code {
-    text-align: left;
-    background-color: #f3f4f4;
-    padding: 0 4px 2px 4px;
-  }
-  .md-fences, code, tt {
-    border: 1px solid #e7eaed;
-    background-color: #f8f8f8;
-    border-radius: 3px;
-    padding: 2px 4px 0 4px;
-    font-size: 0.9em;
-  }
-  .md-fences {
-    margin: 15px;
-    padding: 0.8em 1em;
-    background-color: #f8f8f8; /* 合并重复规则 */
-  }
-  .md-comment {
-    color: rgb(162, 127, 3);
-    opacity: 0.8;
-    font-family: var(--monospace);
-  }
-  
-  kbd {
-    margin: 0 0.1em;
-    padding: 0.1em 0.6em;
-    font-size: 0.8em;
-    color: #242729;
-    background-color: #fff;
-    border: 1px solid #adb3b9;
-    border-radius: 3px;
-    box-shadow: rgba(12, 13, 14, 0.2) 0 1px 0, #fff 0 0 0 2px inset;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  
-  .CodeMirror-lines {
-    padding-left: 4px;
-  }
-  .code-tooltip {
-    box-shadow: 0 1px 1px 0 rgba(0, 28, 36, 0.3);
-    border-top: 1px solid #eef2f2;
-  }
-  
-
 
   /* Typora特定UI与组件 */
   .md-task-list-item > input { margin-left: -1.3em; }
