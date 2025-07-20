@@ -7,41 +7,66 @@
  * 5. 样式展现与原始代码完全一致。
  */
 
- @import url('https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext');
 
- :root {
-   --bg-color: #ffffff;
-   --text-color: #333333;
-   --select-text-bg-color: #B5D6FC;
-   --select-text-font-color: auto;
-   --monospace: "Lucida Console", Consolas, "Courier", monospace;
- }
+
+/* 1. @import 建议换成 <link> 标签放在 HTML 的 <head> 中，性能更好 */
+/* @import url('...'); */
+
+/* 2. 全局变量定义：保持不变，这是很好的实践 */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --select-text-bg-color: #B5D6FC;
+  --select-text-font-color: auto;
+  --monospace: "Lucida Console", Consolas, "Courier", monospace;
+  --base-font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --base-font-size: 16px;
+  --base-line-height: 1.5;
+}
+
  
- *, ::after, ::before {
-   box-sizing: border-box;
- }
+/* 3. 通用盒模型重置：保持不变，这是现代 CSS 的基石 */
+*, 
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
  
- html {
-   overflow-x: initial !important;
-   font-size: 16px;
-   background-color: var(--bg-color);
-   color: var(--text-color);
-   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   -webkit-font-smoothing: antialiased;
- }
+
+/* 4. HTML 全局基础：定义文档级的默认值，如字体、颜色、背景 */
+html {
+  font-family: var(--base-font-family);
+  font-size: var(--base-font-size);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; /* 兼容 Firefox */
+  text-rendering: optimizeLegibility;
+}
+
+/* 5. Body 基础重置：只负责清除浏览器默认边距 */
+body {
+  margin: 0;
+  line-height: var(--base-line-height);
+}
+
+/* 6. 内容布局容器：从 body 剥离出的核心布局样式 */
+.content-wrapper {
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto; /* 水平居中 */
+  padding: 45px;
+}
+
+
+/* 7. 响应式调整：只针对布局容器，不影响 body */
+@media (max-width: 767px) {
+  .content-wrapper {
+    padding: 15px;
+  }
+}
  
- body {
-   margin: 0;
-   padding: 0;
-   font-size: 1rem;
-   line-height: 1.42857143;
-   overflow-x: hidden;
- }
- 
- body.typora-export {
-   padding: 0 30px;
- }
- 
+
  #write {
    margin: 0 auto;
    width: inherit;
@@ -51,96 +76,6 @@
    overflow-x: visible;
    position: relative;
  }
-
-/*
-======================================================================
-  CSS to Style Pandoc Bibliography like Typora's Footnotes
-======================================================================
-*/
-
-/* --- 1. In-Text Citation Styling (The [1] in the paragraph) --- */
-/* This emulates your 'sup.md-footnote' style */
-
-span.citation a, 
-span.citation a:link, 
-span.citation a:visited {
-  font-family: inherit; /* Use the same font as the body */
-  vertical-align: super; /* Make it a superscript */
-  font-size: 0.85em; /* Slightly smaller than text */
-  padding: 2px 4px;
-  background-color: rgba(238, 238, 238, 0.7);
-  color: #555 !important; /* Use !important to override defaults */
-  border-radius: 4px;
-  text-decoration: none; /* No underline */
-  cursor: pointer;
-  -webkit-transition: background-color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out;
-}
-
-span.citation a:hover {
-  background-color: rgba(220, 220, 220, 1);
-  color: #333 !important;
-}
-
-
-/* --- 2. Bibliography Area Styling (The list at the bottom) --- */
-/* This emulates your '.footnotes-area' and '.footnotes' styles */
-
-div.references {
-  color: #888; /* The grey text color you wanted */
-  font-size: 0.9rem;
-  margin-top: 2em;
-  padding-top: 1em;
-  padding-bottom: 0.143rem;
-  border-top: 1px solid #eee; /* The <hr> line */
-}
-
-
-/* --- 3. Individual Reference Line Styling --- */
-/* This emulates your '.footnote-line' style */
-
-div.csl-entry {
-  margin-top: 0.714em;
-  line-height: 1.6;
-  /* Creates the clean hanging-indent effect */
-  padding-left: 2em; 
-  text-indent: -2em;
-}
-
-div.csl-entry a:not(.reversefootnote) {
-  color: inherit; /* Links inside the reference text are also grey */
-}
-
-
-/* --- 4. Reference Number Styling --- */
-/* This emulates your '.md-fn-count' style */
-
-/* Initialize a counter for our references */
-body {
-  counter-reset: ref-counter;
-}
-
-/* Target Pandoc's number container */
-.csl-left-margin {
-  font-size: 0; /* A trick to hide the original "[1]" from Pandoc */
-}
-
-/* Re-create the number using our counter, in your desired style */
-.csl-left-margin::before {
-  counter-increment: ref-counter; /* Increment the counter for each entry */
-  content: counter(ref-counter) ". "; /* Display it as "1. ", "2. ", etc. */
-  font-size: 0.9rem; /* Restore the font size to match parent */
-  font-weight: normal;
-  /* The space for the number is handled by the parent's padding/text-indent */
-}
-
-
-/* --- 5. Optional: Back-to-document Arrow Styling --- */
-
-.reversefootnote {
-  text-decoration: none;
-  margin-left: 0.5em;
-}
 
  
  /* 文本与标题 */
