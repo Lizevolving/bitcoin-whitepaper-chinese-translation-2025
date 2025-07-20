@@ -390,6 +390,7 @@
   <p>攻击者能够从落后局面追平的概率，类似于经典的"赌徒破产问题"。假设，一个拥有无限筹码的赌徒，从亏空开始，允许他赌无限次，目标是填补上这笔亏空。我们可以计算出他最终填平亏空的概率——也就是攻击者最终能赶上诚实链的概率<a
   href="#fn20" class="footnote-ref" id="fnref20"
   role="doc-noteref"><sup>20</sup></a>，如下：</p>
+  
   <p><span class="math display">\[
   \begin{eqnarray*}
         \large p &amp;=&amp; \text{ 诚实节点找到下一个区块的概率}\\
@@ -404,6 +405,7 @@
                   (q/p)^z &amp; \textit{if}\; p &gt; q
                   \end{Bmatrix}
   \]</span></p>
+
   <p>Given our assumption that <span class="math inline">\(p \gt
   q\)</span>, the probability drops exponentially as the number of blocks
   the attacker has to catch up with increases. With the odds against him,
@@ -437,9 +439,11 @@
   <p>收款人需要等待，直到此笔交易被打包进一个区块，且其后再链接上 <span
   class="math inline">\(z\)</span>
   个区块。尽管他不知道攻击者的确切进度，但我们可以假定：诚实网络正以其平均出块时间稳定运行（即，诚实区块按预期的平均时间生成）。基于此，攻击者的潜在进展便服从一个泊松分布，其期望值为：</p>
+  
   <p><span class="math display">\[
   \large \lambda = z \frac qp
   \]</span></p>
+
   <p>To get the probability the attacker could still catch up now, we
   multiply the Poisson density for each amount of progress he could have
   made by the probability he could catch up from that point:</p>
@@ -454,10 +458,13 @@
   <p>Rearranging to avoid summing the infinite tail of the
   distribution…</p>
   <p>为了便于计算，我们重新整理公式，以避免对分布的无限长尾进行求和：</p>
+
+  
   <p><span class="math display">\[
   \large 1 - \sum_{k=0}^{z} \frac{\lambda^k e^{-\lambda}}{k!}
                   \left ( 1-(q/p)^{(z-k)} \right )
   \]</span></p>
+
   <p>Converting to C code…</p>
   <p>将其转化为 C 语言代码…</p>
 

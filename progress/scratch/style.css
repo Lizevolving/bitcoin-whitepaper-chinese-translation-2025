@@ -65,7 +65,12 @@ body {
     padding: 15px;
   }
 }
- 
+
+
+.math.inline,
+.math.display {
+    display: none; /* 隐藏原始的数学字符串 */
+}
 
  #write {
    margin: 0 auto;
