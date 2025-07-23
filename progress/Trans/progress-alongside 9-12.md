@@ -1,5 +1,6 @@
 # 琢磨钻研：9. 价值的组合与分割 (Combining and Splitting Value)   -  12. 结论 (Conclusion)
 
+-----
 
 ## 9.
 
@@ -40,6 +41,9 @@ It should be noted that fan-out, where a transaction depends on several transact
 > 
 > “追溯”很好，但“提取...副本”更忠实于 `extract a...copy` 的计算机操作语境。
 
+
+-----
+-----
 
 
 ## 10.
@@ -97,7 +101,7 @@ As an additional firewall, a new key pair should be used for each transaction to
 
 
 
-##
+---
 
 
 We consider the scenario of an attacker trying to generate an alternate chain faster than the honest chain. Even if this is accomplished, it does not throw the system open to arbitrary changes, such as creating value out of thin air or taking money that never belonged to the attacker. Nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them. An attacker can only try to change one of his own transactions to take back money he recently spent.
@@ -229,6 +233,8 @@ The receiver generates a new key pair and gives the public key to the sender sho
 > 我知道，它这里是从working这里切出来，但我想更突出替代版本，所以在containing那里切出来。
 
 
+---
+
 6.21，Gemini：
 
 说得好。你的分析再次切中了要害：**在精确和流畅之间，庸译选其一，佳译求其全。**
@@ -270,7 +276,7 @@ The receiver generates a new key pair and gives the public key to the sender sho
 
 
 
-
+---
 
 
 The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
@@ -294,7 +300,7 @@ The recipient waits until the transaction has been added to a block and $z$ bloc
 > 这种“换句话说”并非多余，而是一次关键性的澄清。
 > 原句，对不熟悉区块链机制的读者来说，有点抽象，可能会把“网络运行”理解成其他层面的稳定（比如节点不掉线、没有拥堵）。而括号里的话则直接落在“区块按平均时间产出”这个核心事实上，让读者立刻抓住假设的数学含义。
 
-
+---
 
 好的，我们来深入剖析这几段文字。你的分析非常到位，精准指出了两个版本在“忠实原文”和“易于理解”之间的取舍与摇摆。这正是翻译，尤其是技术文档翻译中，最核心的矛盾。
 
@@ -332,6 +338,8 @@ The recipient waits until the transaction has been added to a block and $z$ bloc
 
 
 
+
+-----
 
 
 To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
@@ -378,6 +386,10 @@ To get the probability the attacker could still catch up now, we multiply the Po
 
 这个版本做到了庖丁解牛，将复杂的逻辑拆解成最简单、最清晰的单元，引导读者一步步完成思维构建，实现了“简洁，直接，朴素，有效，有力”。
 
+
+
+-----
+-----
 
 
 

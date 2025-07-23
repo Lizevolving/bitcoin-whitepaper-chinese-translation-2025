@@ -1,7 +1,7 @@
 
 # 琢磨钻研：3. 时间戳服务器 (Timestamp Server)  -  ## 4. 工作量证明 (Proof-of-Work)
 
-
+-----
 
 
 ## 3. 
@@ -38,6 +38,8 @@ The solution we propose begins with a timestamp server. A timestamp server works
 每个时间戳在其哈希中都包含之前的时间戳，因此形成了一条链；每个新增的时间戳不断加固之前的记录。”
 > 对比一下，你会发现这个新版本太棒了，更舒缓，连我自己都更好懂。
 
+
+---
 
 
 ## 6.13，最初
@@ -165,6 +167,8 @@ The timestamp proves that the data must have existed at the time, obviously, in 
 
 
 
+-----
+-----
 
 
 
@@ -409,9 +413,9 @@ To compensate for increasing hardware speed and varying interest in running node
 
 
 
-
-
 -----
+-----
+
 
 
 

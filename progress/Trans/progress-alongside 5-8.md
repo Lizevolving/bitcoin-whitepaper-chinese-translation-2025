@@ -1,7 +1,7 @@
 
 # 琢磨钻研：5. 网络 (Network)  -  8. 简化版支付确认 (Simplified Payment Verification)
 
-
+---
 
 ## 5. 
 
@@ -114,6 +114,8 @@ New transaction broadcasts do not necessarily need to reach all nodes. As long a
 > 有没有必要用，主动，这样的词来修饰呢？我觉得是锦上添花。虽然说原文里没有。
 
 
+-----
+-----
 
 
 
@@ -328,6 +330,8 @@ The incentive may help encourage nodes to stay honest. If a greedy attacker is a
 微调了你那个绝佳的意译：“**动摇自己财富的根基**”，它比“根基不保”更主动，更能体现`undermine`（从下方破坏）的动作感。
 
 
+-----
+-----
 
 
 ## 7. 
@@ -422,6 +426,10 @@ A block header with no transactions would be about 80 bytes. If we suppose block
 **版本一**：过于忠实于字面，像一份机械的计算报告。它陈述了事实，但没有传递出观点背后的**力量**。
 道：**将“陈述事实”和“表达观点”无缝结合。** 用事实来支撑观点，用观点来统领事实。
 ```
+
+
+-----
+-----
 
 
 ## 8.
