@@ -51,6 +51,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.9.0/github-markdown-light.css"
   />
+  <link rel="stylesheet" href="/assets/premium-one-pager.css" />
 
   <script>
     window.MathJax = {
@@ -214,6 +215,36 @@
     .top-link:hover {
       color: var(--accent);
       border-color: rgba(139, 67, 24, 0.45);
+    }
+
+    .top-link:focus-visible,
+    .state-actions a:focus-visible,
+    .markdown-body a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -48px;
+      z-index: 10000;
+      padding: 8px 12px;
+      color: #fff;
+      background: var(--accent-dark);
+      font-weight: 750;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      transition: top 120ms ease;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    .markdown-body h2[id],
+    .markdown-body h1[id] {
+      scroll-margin-top: 18px;
     }
 
     .doc {
@@ -423,6 +454,12 @@
       animation: blink 1s step-end infinite;
     }
 
+    .state .stage {
+      display: block;
+      margin-top: 8px;
+      min-height: 1.4em;
+    }
+
     .state-actions {
       margin-top: 18px;
       display: flex;
@@ -449,6 +486,20 @@
 
     @keyframes blink {
       50% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .state .cursor {
+        animation: none;
+      }
+
+      .skip-link {
+        transition: none;
+      }
     }
 
     @media (max-width: 760px) {
@@ -501,6 +552,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#content">跳到正文</a>
   <div class="shell">
     <header class="site-head">
       <div class="brand">
@@ -538,10 +590,11 @@
     <main class="doc">
       <div class="doc-badge">GENESIS-BLOCK-ARCHIVE // DECLASSIFIED</div>
 
-      <article id="content" class="markdown-body">
-        <div class="state">
+      <article id="content" class="markdown-body" aria-busy="true">
+        <div class="state" id="doc-loading">
           <strong>[ SYNCING WITH BLOCKCHAIN ]</strong>
-          DECRYPTING LOCAL ARCHIVE: zh.md <span class="cursor">█</span>
+          <span class="stage" id="doc-loading-stage">正在读取本地档案 zh.md…</span>
+          <span class="cursor" aria-hidden="true">█</span>
         </div>
       </article>
     </main>
@@ -581,24 +634,108 @@
       const content = document.getElementById("content");
 
       try {
+        setLoadingStage("正在检查渲染依赖…");
         assertDeps();
+        setLoadingStage("正在读取本地档案 zh.md…");
         const doc = await fetchMarkdown();
+        setLoadingStage("正在解析并渲染正文…");
         const source = preprocessMarkdown(doc.text);
-        content.innerHTML = renderMarkdown(source, doc.assetBase);
+        const html = renderMarkdown(source, doc.assetBase);
+        setLoadingStage("正在排版数学公式…");
+        // Yield so the last stage paint lands before we swap the DOM.
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+        content.innerHTML = html;
+        prepareCraftTargets(content);
         await typesetMath(content);
+        content.removeAttribute("aria-busy");
+        await initCraftChrome();
+        restoreHashTarget();
       } catch (error) {
         console.error(error);
+        content.removeAttribute("aria-busy");
+        const detail = error && error.message ? String(error.message) : "未知错误";
         content.innerHTML = `
-          <div class="state">
+          <div class="state" role="alert">
             <strong>[ SIGNAL LOST ]</strong>
-            未能读取 zh.md。请确认 <code>index.html</code> 与 <code>zh.md</code> 位于同一目录，
-            或直接访问备用节点。
+            未能读取或渲染 zh.md（${escapeHtml(detail)}）。
+            请确认本页与 <code>zh.md</code> 在同一目录，或改用下方备用入口。
             <div class="state-actions">
               <a href="${RAW_DOC_URL}" target="_blank" rel="noopener noreferrer">打开 Raw zh.md</a>
               <a class="alt" href="${REPO_URL}" target="_blank" rel="noopener noreferrer">打开 GitHub Repo</a>
             </div>
           </div>
         `;
+      }
+    }
+
+    function setLoadingStage(message) {
+      const stage = document.getElementById("doc-loading-stage");
+      if (stage) stage.textContent = message;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function slugifyHeading(text, index) {
+      const en = text.match(/\(([^)]+)\)/);
+      if (en) {
+        const slug = en[1]
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        if (slug) return slug;
+      }
+      const num = text.match(/^(\d+)\./);
+      if (num) return `section-${num[1]}`;
+      return `section-${index + 1}`;
+    }
+
+    function prepareCraftTargets(root) {
+      const used = new Set();
+      Array.from(root.querySelectorAll("h2")).forEach((h2, index) => {
+        const label = (h2.textContent || "").trim();
+        let id = slugifyHeading(label, index);
+        if (used.has(id)) id = `${id}-${index + 1}`;
+        used.add(id);
+        h2.id = id;
+
+        // Numbered whitepaper chapters drive the chapter rail (01–12).
+        if (/^\d+\./.test(label)) {
+          h2.dataset.chapter = label;
+        }
+
+        // Reveal below-fold section heads only — leave h1 as first paint.
+        h2.classList.add("pop-reveal");
+      });
+
+      root.querySelectorAll("img, blockquote, table").forEach((el) => {
+        el.classList.add("pop-reveal");
+      });
+    }
+
+    async function initCraftChrome() {
+      const { initPremiumOnePager } = await import("/assets/premium-one-pager.js");
+      initPremiumOnePager({
+        sectionSelector: "[data-chapter]",
+        maxChapters: 12,
+        enableChapters: true,
+        enableProgress: true,
+        enableReveal: true,
+        enableNoise: true,
+      });
+    }
+
+    function restoreHashTarget() {
+      const hash = location.hash.replace(/^#/, "");
+      if (!hash) return;
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
       }
     }
 

@@ -48,3 +48,9 @@
 
 /assets/og-image.svg
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/premium-one-pager.css
+  Cache-Control: public, max-age=86400
+
+/assets/premium-one-pager.js
+  Cache-Control: public, max-age=86400
