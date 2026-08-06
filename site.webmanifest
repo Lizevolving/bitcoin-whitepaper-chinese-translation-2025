@@ -1,7 +1,7 @@
 {
   "name": "比特币白皮书中文翻译 2025",
   "short_name": "Bitcoin Whitepaper 中文",
-  "description": "《Bitcoin: A Peer-to-Peer Electronic Cash System》中文翻译 2025 版，Liz 译。",
+  "description": "找可读可引用的比特币白皮书中文译本。Liz 译《Bitcoin: A Peer-to-Peer Electronic Cash System》（Satoshi Nakamoto, 2008）。",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

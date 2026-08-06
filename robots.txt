@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /progress/
 
 Sitemap: https://bitcoin-whitepaper.lizliz.xyz/sitemap.xml
