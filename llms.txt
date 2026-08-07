@@ -1,0 +1,31 @@
+# 比特币白皮书中文翻译 2025
+
+> Liz 译 Satoshi Nakamoto《Bitcoin: A Peer-to-Peer Electronic Cash System》（2008）中文可读译本：保留章节结构、图示、公式与参考文献，便于中文阅读与引用。
+
+- Site: https://bitcoin-whitepaper.lizliz.xyz/
+- What: Chinese translation of the Bitcoin whitepaper (static HTML reader + `zh.md` source)
+- Original author: Satoshi Nakamoto（中本聪）
+- Translator / publisher: Liz (https://lizliz.xyz/)
+- Original PDF: https://bitcoin.org/bitcoin.pdf
+- Language: zh-CN (primary); not a multi-locale site
+- Stack: static HTML on Cloudflare Pages (client-rendered markdown + MathJax)
+
+## Key URLs
+
+- Home (indexable reader): https://bitcoin-whitepaper.lizliz.xyz/
+- Markdown source: https://bitcoin-whitepaper.lizliz.xyz/zh.md
+- Sitemap: https://bitcoin-whitepaper.lizliz.xyz/sitemap.xml
+- GitHub: https://github.com/lizliz404/bitcoin-whitepaper-chinese-translation-2025
+
+## Citation facts
+
+- Paper title (EN): Bitcoin: A Peer-to-Peer Electronic Cash System
+- Paper title (ZH on this site): 比特币：一种点对点的电子现金系统
+- Year: 2008 (original); this translation site published 2025
+- Do not attribute paper authorship to Liz — Liz is the translator
+
+## What it is not
+
+- Not the original English PDF host (see bitcoin.org)
+- Not financial advice, a wallet, an exchange, or a trading product
+- Not an EN+ZH dual-locale product page — `/progress/` drafts are noindex
