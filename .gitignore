@@ -22,3 +22,8 @@ Thumbs.db
 
 # WeChat/miniprogram local/private config
 project.private.config.json
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
